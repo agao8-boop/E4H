@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Partner With E4H Energy</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --navy: #0B1D3A;
+    --navy-light: #132B52;
+    --amber: #F5A623;
+    --off-white: #F7F5F0;
+    --text-dark: #1A1A1A;
+    --text-mid: #555555;
+    --card-shadow: 0 8px 40px rgba(11,29,58,0.08);
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    color: var(--text-dark);
+    background: var(--off-white);
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+  }
+
+  nav {
+    padding: 1.5rem 2.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    max-width: 1200px;
+    margin: 0 auto;
+    width: 100%;
+  }
+
+  .logo {
+    font-family: 'DM Serif Display', serif;
+    font-size: 1.55rem;
+    color: var(--navy);
+    text-decoration: none;
+  }
+  .logo span { color: var(--amber); }
+
+  .back-link {
+    text-decoration: none;
+    font-size: 0.92rem;
+    font-weight: 600;
+    color: var(--text-mid);
+  }
+
+  .signup-container {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 2rem 1.5rem;
+  }
+
+  .signup-card {
+    background: #fff;
+    width: 100%;
+    max-width: 480px;
+    padding: 3.5rem 2.5rem;
+    border-radius: 24px;
+    box-shadow: var(--card-shadow);
+    text-align: center;
+  }
+
+  h1 {
+    font-family: 'DM Serif Display', serif;
+    font-size: 2.2rem;
+    color: var(--navy);
+    margin-bottom: 1rem;
+  }
+
+  p {
+    color: var(--text-mid);
+    margin-bottom: 2.5rem;
+    line-height: 1.6;
+  }
+
+  form { text-align: left; }
+
+  label {
+    display: block;
+    font-size: 0.75rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--navy);
+    margin-bottom: 0.6rem;
+  }
+
+  input[type="email"] {
+    width: 100%;
+    padding: 1.1rem;
+    border-radius: 12px;
+    border: 2px solid #E8E4DD;
+    font-size: 1rem;
+    margin-bottom: 2rem;
+    outline: none;
+    transition: border-color 0.2s;
+  }
+
+  input[type="email"]:focus { border-color: var(--navy); }
+
+  .btn-submit {
+    width: 100%;
+    background: var(--navy);
+    color: #fff;
+    padding: 1.1rem;
+    border-radius: 12px;
+    font-size: 1rem;
+    font-weight: 700;
+    border: none;
+    cursor: pointer;
+    transition: transform 0.2s, background 0.2s;
+  }
+
+  .btn-submit:hover {
+    background: var(--navy-light);
+    transform: translateY(-2px);
+  }
+
+  #successMessage { display: none; }
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="LandingPageB.html" class="logo">E4<span>H</span> Partners</a>
+  <a href="LandingPageB.html" class="back-link">← Back</a>
+</nav>
+
+<main class="signup-container">
+  <div class="signup-card">
+    
+    <div id="formContainer">
+      <h1>Strategic Partnership</h1>
+      <p>Submit your organizational email to receive our deployment roadmap and pilot program specifications.</p>
+      
+      <form id="signupForm">
+        <div class="form-group">
+          <label for="email">Institutional Email</label>
+          <input type="email" id="email" name="email" placeholder="director@organization.org" required>
+        </div>
+        <button type="submit" id="submitBtn" class="btn-submit">Request Partnership Deck →</button>
+      </form>
+    </div>
+
+    <div id="successMessage">
+      <div style="font-size: 3rem; margin-bottom: 1rem;">🤝</div>
+      <h1>Request Received</h1>
+      <p>Thank you for your interest. Our institutional team will review your request and reach out within 48 hours.</p>
+      <a href="LandingPageB.html" style="color: var(--navy); font-weight: bold; text-decoration: none; border-bottom: 2px solid var(--amber);">Return to Portal</a>
+    </div>
+
+  </div>
+</main>
+
+<script>
+  // UPDATED B2B ENDPOINT
+  const scriptURL = 'https://script.google.com/macros/s/AKfycbx40jANhPp1ZTRIQx8R0EzXRjjJRmvzitG_AbI5qI322j57uxqjaKSvgp_vwUIlAleLzw/exec';
+
+  const form = document.getElementById('signupForm');
+  const btn = document.getElementById('submitBtn');
+  const formContainer = document.getElementById('formContainer');
+  const successMsg = document.getElementById('successMessage');
+
+  form.addEventListener('submit', e => {
+    e.preventDefault();
+    btn.disabled = true;
+    btn.innerText = 'Sending Request...';
+
+    fetch(scriptURL, { 
+      method: 'POST', 
+      body: new FormData(form),
+      mode: 'no-cors' 
+    })
+    .then(() => {
+      formContainer.style.display = 'none';
+      successMsg.style.display = 'block';
+    })
+    .catch(error => {
+      alert('Error connecting to server. Please try again.');
+      btn.disabled = false;
+      btn.innerText = 'Request Partnership Deck →';
+    });
+  });
+</script>
+
+</body>
+</html>
