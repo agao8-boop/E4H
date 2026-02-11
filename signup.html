@@ -49,8 +49,8 @@
       <input type="hidden" name="url" id="pageUrl">
       
       <div class="input-group">
-        <label class="field-label">Email Address</label>
-        <input type="email" name="email" placeholder="name@email.com" required>
+        <label class="field-label" for="email">Email Address</label>
+        <input type="email" id="email" name="email" placeholder="name@email.com" required>
       </div>
 
       <div class="input-group">
@@ -80,10 +80,10 @@
 </div>
 
 <script>
-  // Capture current URL automatically
+  // 1. Capture current URL (Website URL column)
   document.getElementById('pageUrl').value = window.location.href;
 
-  // New Methodology Script URL
+  // 2. Consistent Script URL (Matches the first HTML)
   const scriptURL = 'https://script.google.com/macros/s/AKfycbxOqfFuqTr0tcxawTEDb49uqD4f8waVV7fY2uMZBAFBNUwkFw9nNrAl4ZG54QhsqWwM2A/exec';
   
   const form = document.getElementById('signupForm');
@@ -94,10 +94,11 @@
   form.addEventListener('submit', e => {
     e.preventDefault();
     
-    // Disable button to prevent double clicks
+    // UI Feedback
     btn.disabled = true;
     btn.innerText = 'Processing...';
     
+    // 3. Post to Google Sheet
     fetch(scriptURL, { 
       method: 'POST', 
       body: new FormData(form), 
@@ -108,6 +109,7 @@
       successMsg.style.display = 'block';
     })
     .catch(error => {
+      console.error('Error!', error.message);
       alert('Error connecting to server. Please try again.');
       btn.disabled = false;
       btn.innerText = 'Get Started →';
