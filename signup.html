@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Partner With E4H Energy</title>
+<title>Join the Community | E4H Energy</title>
 <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&display=swap" rel="stylesheet">
 <style>
   :root { --navy: #0B1D3A; --navy-light: #132B52; --amber: #F5A623; --off-white: #F7F5F0; --text-dark: #1A1A1A; --text-mid: #555555; --card-shadow: 0 8px 40px rgba(11,29,58,0.08); }
@@ -36,6 +36,7 @@
     <h1>Join the Community</h1>
     <p>Sign up to receive updates on clean energy resilience programs in your area.</p>
     <form id="signupForm">
+      <input type="hidden" name="source" value="Customer Website">
       <label for="email">Your Email</label>
       <input type="email" id="email" name="email" placeholder="name@email.com" required>
       <button type="submit" id="submitBtn" class="btn-submit">Get Started →</button>
@@ -51,18 +52,15 @@
 </div>
 
 <script>
-  const scriptURL = 'PASTE_YOUR_NEW_DEPLOYMENT_URL_HERE';
+  // PASTE YOUR NEW DEPLOYMENT URL HERE
+  const scriptURL = 'https://script.google.com/macros/s/AKfycbxOqfFuqTr0tcxawTEDb49uqD4f8waVV7fY2uMZBAFBNUwkFw9nNrAl4ZG54QhsqWwM2A/exec';
   const form = document.getElementById('signupForm');
   
   form.addEventListener('submit', e => {
     e.preventDefault();
     document.getElementById('submitBtn').innerText = 'Processing...';
     
-    const params = new URLSearchParams();
-    params.append('email', document.getElementById('email').value);
-    params.append('sheetName', 'Sheet1'); // <--- DIRECTS TO SHEET 1
-
-    fetch(scriptURL, { method: 'POST', body: params, mode: 'no-cors' })
+    fetch(scriptURL, { method: 'POST', body: new FormData(form), mode: 'no-cors' })
       .then(() => {
         document.getElementById('formContainer').style.display = 'none';
         document.getElementById('successMessage').style.display = 'block';
