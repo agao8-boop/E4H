@@ -83,7 +83,7 @@
   // Capture current URL
   document.getElementById('pageUrl').value = window.location.href;
 
-  // SAME save method as Partner page
+  // UPDATED WEB APP URL
   const scriptURL = 'https://script.google.com/macros/s/AKfycbxOqfFuqTr0tcxawTEDb49uqD4f8waVV7fY2uMZBAFBNUwkFw9nNrAl4ZG54QhsqWwM2A/exec';
 
   const form = document.getElementById('signupForm');
@@ -94,18 +94,18 @@
   form.addEventListener('submit', e => {
     e.preventDefault();
     btn.disabled = true;
-    btn.innerText = 'Processing...';
+    btn.innerText = 'Sending Request...';
 
-    fetch(scriptURL, {
-      method: 'POST',
+    fetch(scriptURL, { 
+      method: 'POST', 
       body: new FormData(form),
-      mode: 'no-cors'
+      mode: 'no-cors' 
     })
     .then(() => {
       formContainer.style.display = 'none';
       successMsg.style.display = 'block';
     })
-    .catch(() => {
+    .catch(error => {
       alert('Error connecting to server. Please try again.');
       btn.disabled = false;
       btn.innerText = 'Get Started →';
