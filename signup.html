@@ -80,36 +80,32 @@
 </div>
 
 <script>
-  // 1. Capture current URL (Website URL column)
+  // Capture current URL
   document.getElementById('pageUrl').value = window.location.href;
 
-  // 2. Consistent Script URL (Matches the first HTML)
+  // SAME save method as Partner page
   const scriptURL = 'https://script.google.com/macros/s/AKfycbxOqfFuqTr0tcxawTEDb49uqD4f8waVV7fY2uMZBAFBNUwkFw9nNrAl4ZG54QhsqWwM2A/exec';
-  
+
   const form = document.getElementById('signupForm');
   const btn = document.getElementById('submitBtn');
   const formContainer = document.getElementById('formContainer');
   const successMsg = document.getElementById('successMessage');
-  
+
   form.addEventListener('submit', e => {
     e.preventDefault();
-    
-    // UI Feedback
     btn.disabled = true;
     btn.innerText = 'Processing...';
-    
-    // 3. Post to Google Sheet
-    fetch(scriptURL, { 
-      method: 'POST', 
-      body: new FormData(form), 
-      mode: 'no-cors' 
+
+    fetch(scriptURL, {
+      method: 'POST',
+      body: new FormData(form),
+      mode: 'no-cors'
     })
     .then(() => {
       formContainer.style.display = 'none';
       successMsg.style.display = 'block';
     })
-    .catch(error => {
-      console.error('Error!', error.message);
+    .catch(() => {
       alert('Error connecting to server. Please try again.');
       btn.disabled = false;
       btn.innerText = 'Get Started →';
