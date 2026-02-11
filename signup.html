@@ -6,20 +6,30 @@
 <title>Join the Community | E4H Energy</title>
 <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&display=swap" rel="stylesheet">
 <style>
-  :root { --navy: #0B1D3A; --navy-light: #132B52; --amber: #F5A623; --off-white: #F7F5F0; --text-dark: #1A1A1A; --text-mid: #555555; --card-shadow: 0 8px 40px rgba(11,29,58,0.08); }
+  :root { --navy: #0B1D3A; --navy-light: #132B52; --amber: #F5A623; --off-white: #F7F5F0; --text-mid: #555555; --card-shadow: 0 8px 40px rgba(11,29,58,0.08); }
   body { font-family: 'DM Sans', sans-serif; background: var(--off-white); display: flex; flex-direction: column; min-height: 100vh; margin: 0; }
   nav { padding: 2rem; display: flex; justify-content: space-between; max-width: 1200px; margin: 0 auto; width: 100%; box-sizing: border-box; }
   .logo { font-family: 'DM Serif Display', serif; font-size: 1.55rem; color: var(--navy); text-decoration: none; }
   .logo span { color: var(--amber); }
-  .back-link { text-decoration: none; font-size: 0.92rem; font-weight: 600; color: var(--text-mid); }
   .signup-card { background: #fff; width: 100%; max-width: 480px; margin: auto; padding: 3.5rem 2.5rem; border-radius: 24px; box-shadow: var(--card-shadow); text-align: center; box-sizing: border-box; }
   h1 { font-family: 'DM Serif Display', serif; color: var(--navy); font-size: 2.2rem; margin-bottom: 1rem; }
-  p { color: var(--text-mid); margin-bottom: 2.5rem; }
+  p { color: var(--text-mid); margin-bottom: 2rem; font-size: 0.95rem; }
+  
+  /* Form Styling */
   form { text-align: left; }
-  label { display: block; font-size: 0.75rem; font-weight: 700; text-transform: uppercase; color: var(--navy); margin-bottom: 0.6rem; }
-  input { width: 100%; padding: 1.1rem; border: 2px solid #E8E4DD; border-radius: 12px; margin-bottom: 2rem; outline: none; box-sizing: border-box; }
+  .input-group { margin-bottom: 1.5rem; }
+  label.field-label { display: block; font-size: 0.75rem; font-weight: 700; text-transform: uppercase; color: var(--navy); margin-bottom: 0.6rem; letter-spacing: 0.05em; }
+  input[type="email"] { width: 100%; padding: 1.1rem; border: 2px solid #E8E4DD; border-radius: 12px; outline: none; box-sizing: border-box; font-family: inherit; }
   input:focus { border-color: var(--navy); }
-  .btn-submit { width: 100%; background: var(--navy); color: #fff; padding: 1.1rem; border-radius: 12px; font-weight: 700; border: none; cursor: pointer; transition: 0.2s; }
+
+  /* Radio Button Styling */
+  .radio-group { display: flex; flex-direction: column; gap: 0.8rem; margin-bottom: 2rem; }
+  .radio-option { display: flex; align-items: center; padding: 1rem; border: 2px solid #E8E4DD; border-radius: 12px; cursor: pointer; transition: 0.2s; }
+  .radio-option:hover { border-color: var(--amber); background: #FFFBF5; }
+  .radio-option input { margin-right: 12px; accent-color: var(--navy); width: 18px; height: 18px; }
+  .radio-option span { font-size: 0.92rem; font-weight: 500; color: var(--text-dark); }
+
+  .btn-submit { width: 100%; background: var(--navy); color: #fff; padding: 1.1rem; border-radius: 12px; font-weight: 700; border: none; cursor: pointer; transition: 0.2s; font-size: 1rem; }
   .btn-submit:hover { background: var(--navy-light); transform: translateY(-2px); }
   #successMessage { display: none; }
 </style>
@@ -28,46 +38,70 @@
 
 <nav>
   <a href="index.html" class="logo">E4<span>H</span> Energy</a>
-  <a href="index.html" class="back-link">← Back</a>
+  <a href="index.html" style="text-decoration:none; color:var(--text-mid); font-weight:600;">← Back</a>
 </nav>
 
 <div class="signup-card">
   <div id="formContainer">
-    <h1>Join the Community</h1>
-    <p>Sign up to receive updates on clean energy resilience programs in your area.</p>
+    <h1>Get Started</h1>
+    <p>Join the movement toward decentralized energy resilience.</p>
+    
     <form id="signupForm">
       <input type="hidden" name="url" id="pageUrl">
       
-      <label for="email">Your Email</label>
-      <input type="email" id="email" name="email" placeholder="name@email.com" required>
-      <button type="submit" id="submitBtn" class="btn-submit">Get Started →</button>
+      <div class="input-group">
+        <label class="field-label" for="email">Email Address</label>
+        <input type="email" id="email" name="email" placeholder="name@email.com" required>
+      </div>
+
+      <div class="input-group">
+        <label class="field-label">I am interested in:</label>
+        <div class="radio-group">
+          <label class="radio-option">
+            <input type="radio" name="user_type" value="Individual Customer" checked>
+            <span>Personal use for my home</span>
+          </label>
+          <label class="radio-option">
+            <input type="radio" name="user_type" value="Organization/Batch">
+            <span>Organization or batch procurement</span>
+          </label>
+        </div>
+      </div>
+
+      <button type="submit" id="submitBtn" class="btn-submit">Join the Waitlist →</button>
     </form>
   </div>
 
   <div id="successMessage">
-    <div style="font-size: 3rem; margin-bottom: 1rem;">✨</div>
-    <h1>You're In!</h1>
-    <p>We've added you to our community list. Stay tuned for updates.</p>
+    <div style="font-size: 3rem; margin-bottom: 1rem;">⚡</div>
+    <h1>You're on the list!</h1>
+    <p>Thank you for choosing E4H. We'll be in touch with the next steps shortly.</p>
     <a href="index.html" style="color: var(--navy); font-weight: bold; text-decoration: none; border-bottom: 2px solid var(--amber);">Return Home</a>
   </div>
 </div>
 
 <script>
-  // Fill the hidden input with the current URL
   document.getElementById('pageUrl').value = window.location.href;
 
   // IMPORTANT: Replace the URL below with your NEW Deployment URL
-  const scriptURL = 'https://script.google.com/macros/s/AKfycbxOqfFuqTr0tcxawTEDb49uqD4f8waVV7fY2uMZBAFBNUwkFw9nNrAl4ZG54QhsqWwM2A/exec';
+  const scriptURL = 'REPLACE_WITH_YOUR_NEW_DEPLOY_URL';
   const form = document.getElementById('signupForm');
   
   form.addEventListener('submit', e => {
     e.preventDefault();
+    document.getElementById('submitBtn').disabled = true;
     document.getElementById('submitBtn').innerText = 'Processing...';
     
     fetch(scriptURL, { method: 'POST', body: new FormData(form), mode: 'no-cors' })
       .then(() => {
         document.getElementById('formContainer').style.display = 'none';
         document.getElementById('successMessage').style.display = 'block';
+      })
+      .catch(error => {
+        console.error('Error!', error.message);
+        alert('Something went wrong. Please try again.');
+        document.getElementById('submitBtn').disabled = false;
+        document.getElementById('submitBtn').innerText = 'Join the Waitlist →';
       });
   });
 </script>
