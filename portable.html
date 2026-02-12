@@ -1,0 +1,363 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Perfect for Renters | E4H Energy</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --primary: #2D6F5E; --primary-light: #3D8F7E; --accent: #E87461; --accent-light: #FF9B88;
+    --purple: #9B6B9E; --purple-light: #C499C6;
+    --off-white: #F7F5F0;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--off-white);
+    color: #1A1A1A;
+    overflow-x: hidden;
+  }
+
+  nav {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 100;
+    padding: 1rem 2.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: rgba(247,245,240,0.95);
+    backdrop-filter: blur(16px);
+    border-bottom: 1px solid rgba(0,0,0,0.05);
+  }
+  .logo {
+    font-family: 'DM Serif Display', serif;
+    font-size: 1.55rem;
+    color: var(--primary);
+    text-decoration: none;
+  }
+  .logo span { color: var(--accent); }
+
+  .nav-links {
+    display: flex;
+    gap: 1.5rem;
+    align-items: center;
+  }
+  .nav-links a {
+    color: var(--primary);
+    text-decoration: none;
+    font-weight: 600;
+    transition: 0.3s;
+  }
+  .nav-links a:hover { color: var(--accent); }
+
+  .hero-banner {
+    background: linear-gradient(135deg, var(--purple) 0%, var(--purple-light) 100%);
+    padding: 10rem 2.5rem 5rem;
+    text-align: center;
+    color: #fff;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .hero-banner::before {
+    content: '';
+    position: absolute;
+    top: -100px;
+    right: -100px;
+    width: 400px;
+    height: 400px;
+    background: rgba(255,255,255,0.1);
+    border-radius: 50%;
+    animation: float 6s ease-in-out infinite;
+  }
+
+  .hero-banner::after {
+    content: '';
+    position: absolute;
+    bottom: -80px;
+    left: -80px;
+    width: 300px;
+    height: 300px;
+    background: rgba(255,255,255,0.08);
+    border-radius: 50%;
+    animation: float 8s ease-in-out infinite reverse;
+  }
+
+  @keyframes float {
+    0%, 100% { transform: translate(0, 0); }
+    50% { transform: translate(30px, -30px); }
+  }
+
+  .hero-content {
+    position: relative;
+    z-index: 1;
+    max-width: 800px;
+    margin: 0 auto;
+  }
+
+  .hero-icon {
+    font-size: 7rem;
+    display: inline-block;
+    animation: moveBox 4s ease-in-out infinite;
+    filter: drop-shadow(0 10px 40px rgba(0,0,0,0.2));
+  }
+
+  @keyframes moveBox {
+    0%, 100% { transform: translateX(0) rotate(0deg); }
+    25% { transform: translateX(20px) rotate(5deg); }
+    75% { transform: translateX(-20px) rotate(-5deg); }
+  }
+
+  .hero-banner h1 {
+    font-family: 'DM Serif Display', serif;
+    font-size: clamp(2.5rem, 6vw, 4rem);
+    margin: 2rem 0 1rem;
+  }
+
+  .hero-banner p {
+    font-size: 1.3rem;
+    opacity: 0.95;
+    line-height: 1.6;
+  }
+
+  .content-area {
+    max-width: 1100px;
+    margin: -3rem auto 4rem;
+    padding: 0 2.5rem;
+    position: relative;
+    z-index: 10;
+  }
+
+  .card-stack {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+  }
+
+  .info-card {
+    background: #fff;
+    padding: 3rem;
+    border-radius: 24px;
+    box-shadow: 0 20px 60px rgba(0,0,0,0.08);
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    border: 2px solid transparent;
+  }
+
+  .info-card:hover {
+    transform: translateX(20px);
+    box-shadow: 0 30px 80px rgba(155,107,158,0.15);
+    border-color: var(--purple-light);
+  }
+
+  .card-header {
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .card-icon {
+    width: 70px;
+    height: 70px;
+    background: linear-gradient(135deg, var(--purple-light) 0%, var(--purple) 100%);
+    border-radius: 18px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 2.2rem;
+    flex-shrink: 0;
+  }
+
+  .card-title {
+    font-family: 'DM Serif Display', serif;
+    font-size: 1.8rem;
+    color: var(--primary);
+  }
+
+  .card-body {
+    font-size: 1.05rem;
+    line-height: 1.8;
+    color: #333;
+  }
+
+  .highlight-box {
+    background: linear-gradient(135deg, #f9f9f9 0%, #fff 100%);
+    border-left: 5px solid var(--accent);
+    padding: 2rem;
+    margin: 2rem 0;
+    border-radius: 12px;
+  }
+
+  .highlight-box strong {
+    color: var(--accent);
+    font-size: 1.1rem;
+  }
+
+  .features-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 1.5rem;
+    margin: 2rem 0;
+  }
+
+  .feature-badge {
+    background: linear-gradient(135deg, var(--primary-light) 0%, var(--primary) 100%);
+    color: #fff;
+    padding: 1.5rem;
+    border-radius: 16px;
+    text-align: center;
+    transition: 0.3s;
+  }
+
+  .feature-badge:hover {
+    transform: translateY(-8px) rotate(2deg);
+    box-shadow: 0 12px 40px rgba(45,111,94,0.3);
+  }
+
+  .feature-badge .emoji {
+    font-size: 2.5rem;
+    display: block;
+    margin-bottom: 0.75rem;
+  }
+
+  .feature-badge .text {
+    font-weight: 600;
+    font-size: 1rem;
+  }
+
+  .cta-bottom {
+    text-align: center;
+    margin: 4rem 0 3rem;
+  }
+
+  .btn {
+    display: inline-block;
+    padding: 1.2rem 3rem;
+    border-radius: 12px;
+    font-weight: 700;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    font-size: 1.1rem;
+    margin: 0.5rem;
+  }
+
+  .btn-primary {
+    background: var(--accent);
+    color: #fff;
+    box-shadow: 0 8px 30px rgba(232,116,97,0.3);
+  }
+
+  .btn-primary:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 12px 40px rgba(232,116,97,0.5);
+  }
+
+  .btn-secondary {
+    background: var(--primary);
+    color: #fff;
+    box-shadow: 0 8px 30px rgba(45,111,94,0.3);
+  }
+
+  .btn-secondary:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 12px 40px rgba(45,111,94,0.5);
+  }
+
+  @media (max-width: 768px) {
+    .hero-banner { padding: 8rem 1.5rem 4rem; }
+    .hero-icon { font-size: 5rem; }
+    .content-area { padding: 0 1.5rem; }
+    .info-card { padding: 2rem 1.5rem; }
+    .info-card:hover { transform: translateX(10px); }
+    .features-grid { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="index.html" class="logo">E4<span>H</span> Energy</a>
+  <div class="nav-links">
+    <a href="index.html">← Back</a>
+    <a href="signup.html">Join Waitlist</a>
+  </div>
+</nav>
+
+<section class="hero-banner">
+  <div class="hero-content">
+    <div class="hero-icon">🏘️</div>
+    <h1>Freedom for Renters</h1>
+    <p>No landlord permission. No permanent installation. Your power, your way.</p>
+  </div>
+</section>
+
+<div class="content-area">
+  <div class="card-stack">
+    <div class="info-card">
+      <div class="card-header">
+        <div class="card-icon">🚫</div>
+        <h2 class="card-title">The Renter's Dilemma</h2>
+      </div>
+      <div class="card-body">
+        <p>
+          As a renter, you're stuck with whatever power setup your landlord provides. Want solar panels? Forget it. Considering a home battery system? That requires permanent installation and landlord approval—which rarely comes. You're left paying high electricity bills with zero control over your energy future, all while knowing you might move in a year.
+        </p>
+      </div>
+    </div>
+
+    <div class="info-card">
+      <div class="card-header">
+        <div class="card-icon">✨</div>
+        <h2 class="card-title">Your Portable Power Solution</h2>
+      </div>
+      <div class="card-body">
+        <p>
+          E4H appliances change everything. They're plug-and-play devices that require zero installation—just plug them into any standard outlet. No drilling, no wiring, no landlord approval needed. They're yours to take when you move, making them the perfect energy solution for renters.
+        </p>
+        <div class="highlight-box">
+          <strong>Moving? No problem.</strong> Simply unplug your E4H appliance and take it with you. Your investment in energy independence moves with you, protecting you from outages and high bills no matter where you live.
+        </div>
+      </div>
+    </div>
+
+    <div class="info-card">
+      <div class="card-header">
+        <div class="card-icon">🎯</div>
+        <h2 class="card-title">Why Renters Love E4H</h2>
+      </div>
+      <div class="card-body">
+        <div class="features-grid">
+          <div class="feature-badge">
+            <span class="emoji">📦</span>
+            <span class="text">100% Portable</span>
+          </div>
+          <div class="feature-badge">
+            <span class="emoji">🔌</span>
+            <span class="text">Plug & Play</span>
+          </div>
+          <div class="feature-badge">
+            <span class="emoji">👍</span>
+            <span class="text">No Approval Needed</span>
+          </div>
+          <div class="feature-badge">
+            <span class="emoji">🏠</span>
+            <span class="text">Moves With You</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="cta-bottom">
+    <a href="signup.html" class="btn btn-primary">Get Early Access →</a>
+    <a href="index.html" class="btn btn-secondary">Explore Features</a>
+  </div>
+</div>
+
+</body>
+</html>

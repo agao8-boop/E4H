@@ -1,0 +1,349 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Energy Savings Solution | E4H Energy</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --primary: #2D6F5E; --primary-light: #3D8F7E; --accent: #E87461; --accent-light: #FF9B88;
+    --yellow: #FFD166; --yellow-light: #FFE499;
+    --off-white: #F7F5F0;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: linear-gradient(135deg, var(--yellow-light) 0%, var(--yellow) 50%, var(--accent-light) 100%);
+    color: #1A1A1A;
+    overflow-x: hidden;
+    min-height: 100vh;
+  }
+
+  nav {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 100;
+    padding: 1rem 2.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: rgba(255,255,255,0.95);
+    backdrop-filter: blur(16px);
+    box-shadow: 0 2px 20px rgba(0,0,0,0.05);
+  }
+  .logo {
+    font-family: 'DM Serif Display', serif;
+    font-size: 1.55rem;
+    color: var(--primary);
+    text-decoration: none;
+  }
+  .logo span { color: var(--accent); }
+
+  .nav-links {
+    display: flex;
+    gap: 1.5rem;
+    align-items: center;
+  }
+  .nav-links a {
+    color: var(--primary);
+    text-decoration: none;
+    font-weight: 600;
+    transition: 0.3s;
+  }
+  .nav-links a:hover { color: var(--accent); }
+
+  .container {
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 10rem 2.5rem 4rem;
+  }
+
+  .hero-section {
+    text-align: center;
+    margin-bottom: 4rem;
+  }
+
+  .money-icon {
+    font-size: 8rem;
+    display: inline-block;
+    animation: bounce 2s ease-in-out infinite;
+    filter: drop-shadow(0 10px 30px rgba(232,116,97,0.3));
+  }
+
+  @keyframes bounce {
+    0%, 100% { transform: translateY(0) scale(1); }
+    50% { transform: translateY(-30px) scale(1.1); }
+  }
+
+  h1 {
+    font-family: 'DM Serif Display', serif;
+    font-size: clamp(2.5rem, 6vw, 4.5rem);
+    margin: 2rem 0 1rem;
+    color: #fff;
+    text-shadow: 2px 4px 8px rgba(0,0,0,0.2);
+    animation: slideDown 1s ease-out;
+  }
+
+  @keyframes slideDown {
+    from { opacity: 0; transform: translateY(-30px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .tagline {
+    font-size: 1.5rem;
+    color: var(--primary);
+    font-weight: 700;
+    margin-bottom: 2rem;
+  }
+
+  .content-split {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 3rem;
+    margin: 3rem 0;
+  }
+
+  .problem-box, .solution-box {
+    background: #fff;
+    padding: 3rem;
+    border-radius: 24px;
+    box-shadow: 0 20px 60px rgba(0,0,0,0.1);
+    animation: fadeInUp 1s ease-out;
+  }
+
+  @keyframes fadeInUp {
+    from { opacity: 0; transform: translateY(40px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .problem-box {
+    border-left: 6px solid var(--accent);
+  }
+
+  .solution-box {
+    border-left: 6px solid var(--primary);
+    background: linear-gradient(135deg, #fff 0%, #f0f9f7 100%);
+  }
+
+  .box-title {
+    font-family: 'DM Serif Display', serif;
+    font-size: 1.8rem;
+    margin-bottom: 1.5rem;
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+  }
+
+  .problem-box .box-title { color: var(--accent); }
+  .solution-box .box-title { color: var(--primary); }
+
+  .box-icon {
+    font-size: 2rem;
+  }
+
+  .box-content {
+    font-size: 1.05rem;
+    line-height: 1.8;
+    color: #333;
+    margin-bottom: 1.5rem;
+  }
+
+  .savings-calculator {
+    background: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 100%);
+    color: #fff;
+    padding: 3rem;
+    border-radius: 24px;
+    text-align: center;
+    margin: 3rem 0;
+    box-shadow: 0 20px 60px rgba(45,111,94,0.3);
+    animation: pulse 3s ease-in-out infinite;
+  }
+
+  @keyframes pulse {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.02); }
+  }
+
+  .savings-amount {
+    font-family: 'DM Serif Display', serif;
+    font-size: 5rem;
+    margin: 1rem 0;
+    color: var(--yellow);
+    text-shadow: 2px 4px 8px rgba(0,0,0,0.2);
+  }
+
+  .savings-label {
+    font-size: 1.3rem;
+    margin-bottom: 1rem;
+  }
+
+  .breakdown {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1.5rem;
+    margin-top: 2rem;
+  }
+
+  .breakdown-item {
+    background: rgba(255,255,255,0.15);
+    padding: 1.5rem;
+    border-radius: 16px;
+    backdrop-filter: blur(10px);
+  }
+
+  .breakdown-number {
+    font-size: 2rem;
+    font-weight: 700;
+    color: var(--yellow);
+  }
+
+  .breakdown-text {
+    font-size: 0.9rem;
+    margin-top: 0.5rem;
+    opacity: 0.9;
+  }
+
+  .benefits-list {
+    list-style: none;
+    margin: 2rem 0;
+  }
+
+  .benefits-list li {
+    padding: 1rem 0;
+    padding-left: 2.5rem;
+    position: relative;
+    font-size: 1.05rem;
+    color: #333;
+  }
+
+  .benefits-list li::before {
+    content: '✓';
+    position: absolute;
+    left: 0;
+    font-size: 1.5rem;
+    color: var(--primary);
+    font-weight: 700;
+  }
+
+  .cta-section {
+    text-align: center;
+    margin-top: 4rem;
+  }
+
+  .btn {
+    display: inline-block;
+    padding: 1.2rem 3rem;
+    border-radius: 12px;
+    font-weight: 700;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    font-size: 1.1rem;
+    margin: 0.5rem;
+  }
+
+  .btn-primary {
+    background: var(--accent);
+    color: #fff;
+    box-shadow: 0 8px 30px rgba(232,116,97,0.3);
+  }
+
+  .btn-primary:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 12px 40px rgba(232,116,97,0.5);
+  }
+
+  .btn-secondary {
+    background: #fff;
+    color: var(--primary);
+    box-shadow: 0 8px 30px rgba(0,0,0,0.1);
+  }
+
+  .btn-secondary:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 12px 40px rgba(0,0,0,0.15);
+  }
+
+  @media (max-width: 768px) {
+    .content-split { grid-template-columns: 1fr; }
+    .container { padding: 8rem 1.5rem 3rem; }
+    .money-icon { font-size: 5rem; }
+    .savings-amount { font-size: 3.5rem; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="index.html" class="logo">E4<span>H</span> Energy</a>
+  <div class="nav-links">
+    <a href="index.html">← Back</a>
+    <a href="signup.html">Join Waitlist</a>
+  </div>
+</nav>
+
+<div class="container">
+  <div class="hero-section">
+    <div class="money-icon">💰</div>
+    <h1>Stop Overpaying for Energy</h1>
+    <p class="tagline">Take control of your electricity costs</p>
+  </div>
+
+  <div class="savings-calculator">
+    <div class="savings-label">Average Annual Savings</div>
+    <div class="savings-amount">$200+</div>
+    <div class="breakdown">
+      <div class="breakdown-item">
+        <div class="breakdown-number">30%</div>
+        <div class="breakdown-text">Bill Reduction</div>
+      </div>
+      <div class="breakdown-item">
+        <div class="breakdown-number">$17+</div>
+        <div class="breakdown-text">Monthly Savings</div>
+      </div>
+      <div class="breakdown-item">
+        <div class="breakdown-number">24/7</div>
+        <div class="breakdown-text">Smart Optimization</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="content-split">
+    <div class="problem-box">
+      <h2 class="box-title">
+        <span class="box-icon">📈</span>
+        The Problem
+      </h2>
+      <div class="box-content">
+        Electricity rates are climbing every year, and peak-time charges can double or triple your costs. You're stuck paying whatever the utility demands, with no control over when you use power. Traditional energy management requires constant monitoring and manual adjustments—exhausting and ineffective for busy households.
+      </div>
+    </div>
+
+    <div class="solution-box">
+      <h2 class="box-title">
+        <span class="box-icon">💡</span>
+        The Solution
+      </h2>
+      <div class="box-content">
+        E4H appliances automatically shift energy consumption to off-peak hours when rates are lowest. Our smart system learns your usage patterns and optimizes charging times without any effort from you. Store cheap energy during low-demand periods and use it during expensive peak hours.
+      </div>
+      <ul class="benefits-list">
+        <li>Automatic optimization—no manual scheduling needed</li>
+        <li>Reduce peak-time charges by up to 30%</li>
+        <li>Real-time cost tracking in the mobile app</li>
+        <li>Monthly savings reports and insights</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="cta-section">
+    <a href="signup.html" class="btn btn-primary">Start Saving Today →</a>
+    <a href="index.html" class="btn btn-secondary">Learn More</a>
+  </div>
+</div>
+
+</body>
+</html>
