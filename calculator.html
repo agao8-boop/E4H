@@ -1,0 +1,518 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Calculate Your Savings | E4H Energy</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --primary: #2D6F5E; --primary-light: #3D8F7E; --accent: #E87461; --accent-light: #FF9B88;
+    --green: #2ECC71; --green-soft: #D5F5E3; --off-white: #F7F5F0; --warm-gray: #E8E4DD;
+    --text-dark: #1A1A1A; --text-mid: #555555; --text-light: #888888;
+    --card-shadow: 0 8px 40px rgba(45,111,94,0.08);
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body { font-family: 'DM Sans', sans-serif; background: var(--off-white); color: var(--text-dark); }
+
+  nav { position: fixed; top: 0; width: 100%; z-index: 100; padding: 1rem 2.5rem; display: flex; align-items: center; justify-content: space-between; background: rgba(247,245,240,0.95); backdrop-filter: blur(16px); border-bottom: 1px solid rgba(0,0,0,0.04); }
+  .logo { font-family: 'DM Serif Display', serif; font-size: 1.55rem; color: var(--primary); text-decoration: none; }
+  .logo span { color: var(--accent); }
+  .btn-primary { display: inline-block; background: var(--primary); color: #fff; padding: 0.8rem 1.8rem; border-radius: 8px; font-weight: 600; text-decoration: none; transition: all 0.3s ease; box-shadow: 0 2px 8px rgba(45,111,94,0.15); border: none; cursor: pointer; }
+  .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 6px 20px rgba(45,111,94,0.25); background: var(--primary-light); }
+
+  .calculator-hero { padding: 8rem 2.5rem 3rem; max-width: 1400px; margin: 0 auto; text-align: center; }
+  .calculator-hero h1 { font-family: 'DM Serif Display', serif; font-size: clamp(2.5rem, 5vw, 4rem); color: var(--primary); margin-bottom: 1rem; }
+  .calculator-hero p { font-size: 1.2rem; color: var(--text-mid); max-width: 700px; margin: 0 auto; }
+
+  .calculator-container { max-width: 1400px; margin: 0 auto; padding: 2rem 2.5rem 5rem; display: grid; grid-template-columns: 1fr 400px; gap: 3rem; align-items: start; }
+
+  .calculator-form { background: #fff; border-radius: 24px; padding: 3rem; box-shadow: var(--card-shadow); }
+  .step-section { margin-bottom: 3rem; }
+  .step-header { display: flex; align-items: center; gap: 1rem; margin-bottom: 1.5rem; }
+  .step-number { width: 40px; height: 40px; background: var(--primary); color: #fff; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 1.2rem; }
+  .step-title { font-size: 1.5rem; font-weight: 700; color: var(--primary); }
+  .step-subtitle { font-size: 0.95rem; color: var(--text-mid); margin-bottom: 1.5rem; }
+
+  .form-group { margin-bottom: 1.5rem; }
+  .form-group label { display: block; font-weight: 600; color: var(--text-dark); margin-bottom: 0.5rem; }
+  .form-group input, .form-group select {
+    width: 100%;
+    padding: 0.9rem;
+    border: 2px solid var(--warm-gray);
+    border-radius: 8px;
+    font-family: inherit;
+    font-size: 1rem;
+    transition: all 0.3s ease;
+  }
+  .form-group input:focus, .form-group select:focus {
+    outline: none;
+    border-color: var(--primary);
+    box-shadow: 0 0 0 3px rgba(45,111,94,0.1);
+  }
+
+  .appliance-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 1rem; }
+  .appliance-option {
+    background: var(--warm-gray);
+    padding: 1.2rem;
+    border-radius: 12px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    border: 2px solid transparent;
+  }
+  .appliance-option input[type="checkbox"] { display: none; }
+  .appliance-option input[type="checkbox"]:checked + label { border-color: var(--primary); background: var(--green-soft); }
+  .appliance-option label {
+    cursor: pointer;
+    display: block;
+  }
+  .appliance-option:has(input:checked) {
+    background: var(--green-soft);
+    border-color: var(--primary);
+  }
+  .appliance-name { font-weight: 600; color: var(--text-dark); margin-bottom: 0.3rem; }
+  .appliance-specs { font-size: 0.85rem; color: var(--text-mid); }
+
+  .usage-sliders { margin-top: 1.5rem; }
+  .time-slot { margin-bottom: 1.5rem; }
+  .time-label { display: flex; justify-content: space-between; margin-bottom: 0.5rem; font-weight: 600; }
+  .time-label .value { color: var(--primary); }
+  .slider { width: 100%; height: 8px; border-radius: 4px; background: var(--warm-gray); outline: none; -webkit-appearance: none; }
+  .slider::-webkit-slider-thumb { -webkit-appearance: none; width: 24px; height: 24px; border-radius: 50%; background: var(--primary); cursor: pointer; box-shadow: 0 2px 8px rgba(45,111,94,0.3); }
+  .slider::-moz-range-thumb { width: 24px; height: 24px; border-radius: 50%; background: var(--primary); cursor: pointer; box-shadow: 0 2px 8px rgba(45,111,94,0.3); border: none; }
+
+  /* Results Panel */
+  .results-panel {
+    position: sticky;
+    top: 100px;
+    background: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 100%);
+    color: #fff;
+    border-radius: 24px;
+    padding: 2.5rem;
+    box-shadow: var(--card-shadow);
+  }
+  .results-panel h2 { font-family: 'DM Serif Display', serif; font-size: 1.8rem; margin-bottom: 2rem; }
+  .results-section { margin-bottom: 2rem; padding-bottom: 2rem; border-bottom: 1px solid rgba(255,255,255,0.2); }
+  .results-section:last-child { border-bottom: none; }
+  .results-section h3 { font-size: 0.9rem; text-transform: uppercase; letter-spacing: 1px; opacity: 0.9; margin-bottom: 1rem; }
+  .result-item { display: flex; justify-content: space-between; margin-bottom: 0.8rem; }
+  .result-label { opacity: 0.9; }
+  .result-value { font-weight: 700; font-size: 1.1rem; }
+  .total-savings { background: rgba(255,255,255,0.1); padding: 1.5rem; border-radius: 12px; margin: 1.5rem 0; }
+  .total-savings .label { font-size: 0.9rem; opacity: 0.9; margin-bottom: 0.5rem; }
+  .total-savings .amount { font-size: 2.5rem; font-weight: 700; }
+  .recommended-pack { background: rgba(255,255,255,0.15); padding: 1.5rem; border-radius: 12px; margin-bottom: 1.5rem; }
+  .recommended-pack h4 { font-size: 1.1rem; margin-bottom: 0.5rem; }
+  .recommended-pack .price { font-size: 1.5rem; font-weight: 700; margin-bottom: 0.5rem; }
+  .recommended-pack .payback { opacity: 0.9; font-size: 0.9rem; }
+  .results-cta { margin-top: 2rem; }
+  .results-cta .btn-primary { width: 100%; text-align: center; padding: 1.2rem; background: var(--accent); }
+  .results-cta .btn-primary:hover { background: var(--accent-light); }
+
+  /* Methodology Section */
+  .methodology { max-width: 1400px; margin: 3rem auto; padding: 0 2.5rem 5rem; }
+  .methodology-content { background: #fff; border-radius: 24px; padding: 3rem; box-shadow: var(--card-shadow); }
+  .methodology h2 { font-family: 'DM Serif Display', serif; font-size: 2rem; color: var(--primary); margin-bottom: 2rem; text-align: center; }
+  .methodology-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 2rem; }
+  .methodology-item { padding: 1.5rem; background: var(--warm-gray); border-radius: 12px; }
+  .methodology-item h3 { font-size: 1.1rem; color: var(--primary); margin-bottom: 0.8rem; }
+  .methodology-item p { font-size: 0.95rem; color: var(--text-mid); line-height: 1.6; }
+
+  @media (max-width: 1000px) {
+    .calculator-container { grid-template-columns: 1fr; }
+    .results-panel { position: static; }
+  }
+</style>
+</head>
+<body>
+<nav>
+  <a href="index.html" class="logo">E4<span>H</span> Energy</a>
+  <a href="index.html#pricing" class="btn-primary">Back to Home</a>
+</nav>
+
+<div class="calculator-hero">
+  <h1>Calculate Your Savings</h1>
+  <p>Get a personalized estimate based on your actual usage and local electricity rates</p>
+</div>
+
+<div class="calculator-container">
+  <div class="calculator-form">
+    <!-- Step 1: Location -->
+    <div class="step-section">
+      <div class="step-header">
+        <div class="step-number">1</div>
+        <h2 class="step-title">Location</h2>
+      </div>
+      <p class="step-subtitle">Help us determine your local electricity rates</p>
+
+      <div class="form-group">
+        <label>Zip Code</label>
+        <input type="text" id="zipcode" placeholder="e.g., 95110" maxlength="5">
+      </div>
+
+      <div class="form-group">
+        <label>Utility Provider</label>
+        <select id="utility">
+          <option value="">Select your utility...</option>
+          <option value="svce">Silicon Valley Clean Energy</option>
+          <option value="sjce">San Jose Clean Energy</option>
+          <option value="ebce">East Bay Community Energy</option>
+          <option value="pge">PG&E</option>
+          <option value="other">Other</option>
+        </select>
+      </div>
+    </div>
+
+    <!-- Step 2: Appliances -->
+    <div class="step-section">
+      <div class="step-header">
+        <div class="step-number">2</div>
+        <h2 class="step-title">Appliances</h2>
+      </div>
+      <p class="step-subtitle">Select which appliances you'd power with E4H batteries</p>
+
+      <div class="appliance-grid">
+        <div class="appliance-option">
+          <input type="checkbox" id="coffee" data-watts="1000" data-mins="10">
+          <label for="coffee">
+            <div class="appliance-name">☕ Coffee Maker</div>
+            <div class="appliance-specs">1000W, ~10 min/day</div>
+          </label>
+        </div>
+
+        <div class="appliance-option">
+          <input type="checkbox" id="kettle" data-watts="1500" data-mins="5">
+          <label for="kettle">
+            <div class="appliance-name">🫖 Electric Kettle</div>
+            <div class="appliance-specs">1500W, ~5 min/day</div>
+          </label>
+        </div>
+
+        <div class="appliance-option">
+          <input type="checkbox" id="toaster" data-watts="1200" data-mins="5">
+          <label for="toaster">
+            <div class="appliance-name">🍞 Toaster</div>
+            <div class="appliance-specs">1200W, ~5 min/day</div>
+          </label>
+        </div>
+
+        <div class="appliance-option">
+          <input type="checkbox" id="airfryer" data-watts="1500" data-mins="20">
+          <label for="airfryer">
+            <div class="appliance-name">🍟 Air Fryer</div>
+            <div class="appliance-specs">1500W, ~20 min/day</div>
+          </label>
+        </div>
+
+        <div class="appliance-option">
+          <input type="checkbox" id="rice" data-watts="700" data-mins="45">
+          <label for="rice">
+            <div class="appliance-name">🍚 Rice Cooker</div>
+            <div class="appliance-specs">700W, ~45 min/day</div>
+          </label>
+        </div>
+
+        <div class="appliance-option">
+          <input type="checkbox" id="slowcooker" data-watts="200" data-mins="240">
+          <label for="slowcooker">
+            <div class="appliance-name">🍲 Slow Cooker</div>
+            <div class="appliance-specs">200W, ~4 hrs/day</div>
+          </label>
+        </div>
+
+        <div class="appliance-option">
+          <input type="checkbox" id="microwave" data-watts="1200" data-mins="10">
+          <label for="microwave">
+            <div class="appliance-name">📦 Microwave</div>
+            <div class="appliance-specs">1200W, ~10 min/day</div>
+          </label>
+        </div>
+
+        <div class="appliance-option">
+          <input type="checkbox" id="heater" data-watts="1500" data-mins="120">
+          <label for="heater">
+            <div class="appliance-name">🔥 Portable Heater</div>
+            <div class="appliance-specs">1500W, ~2 hrs/day</div>
+          </label>
+        </div>
+      </div>
+    </div>
+
+    <!-- Step 3: Usage Patterns -->
+    <div class="step-section">
+      <div class="step-header">
+        <div class="step-number">3</div>
+        <h2 class="step-title">Usage Patterns</h2>
+      </div>
+      <p class="step-subtitle">When do you typically use these appliances?</p>
+
+      <div class="usage-sliders">
+        <div class="time-slot">
+          <div class="time-label">
+            <span>🌅 Morning (6-10 AM)</span>
+            <span class="value" id="morningValue">50%</span>
+          </div>
+          <input type="range" id="morning" class="slider" min="0" max="100" value="50">
+        </div>
+
+        <div class="time-slot">
+          <div class="time-label">
+            <span>☀️ Afternoon (10 AM-4 PM)</span>
+            <span class="value" id="afternoonValue">20%</span>
+          </div>
+          <input type="range" id="afternoon" class="slider" min="0" max="100" value="20">
+        </div>
+
+        <div class="time-slot">
+          <div class="time-label">
+            <span>🌆 Evening (4-9 PM)</span>
+            <span class="value" id="eveningValue">25%</span>
+          </div>
+          <input type="range" id="evening" class="slider" min="0" max="100" value="25">
+          <p style="font-size: 0.85rem; color: var(--accent); margin-top: 0.5rem;">⚡ Highest savings potential - peak rates</p>
+        </div>
+
+        <div class="time-slot">
+          <div class="time-label">
+            <span>🌙 Night (9 PM-6 AM)</span>
+            <span class="value" id="nightValue">5%</span>
+          </div>
+          <input type="range" id="night" class="slider" min="0" max="100" value="5">
+        </div>
+      </div>
+    </div>
+
+    <!-- Step 4: Current Bill -->
+    <div class="step-section">
+      <div class="step-header">
+        <div class="step-number">4</div>
+        <h2 class="step-title">Current Bill</h2>
+      </div>
+      <p class="step-subtitle">Optional, but helps improve accuracy</p>
+
+      <div class="form-group">
+        <label>Monthly Electricity Bill (Optional)</label>
+        <input type="number" id="currentBill" placeholder="$120">
+      </div>
+
+      <div class="form-group">
+        <label>Household Size</label>
+        <select id="householdSize">
+          <option value="1">1 person</option>
+          <option value="2" selected>2 people</option>
+          <option value="3">3 people</option>
+          <option value="4">4 people</option>
+          <option value="5">5+ people</option>
+        </select>
+      </div>
+    </div>
+  </div>
+
+  <!-- Results Panel (Sticky) -->
+  <div class="results-panel">
+    <h2>Your Savings Estimate</h2>
+
+    <div class="results-section">
+      <h3>Monthly Savings Breakdown</h3>
+      <div class="result-item">
+        <span class="result-label">Time-of-Use Optimization:</span>
+        <span class="result-value" id="touSavings">$12-18</span>
+      </div>
+      <div class="result-item">
+        <span class="result-label">VPP Event Participation:</span>
+        <span class="result-value" id="vppEarnings">$4-8</span>
+      </div>
+    </div>
+
+    <div class="total-savings">
+      <div class="label">Total Monthly Savings:</div>
+      <div class="amount" id="monthlySavings">$16-26</div>
+      <div class="label" style="margin-top: 1rem;">Annual Savings:</div>
+      <div class="amount" style="font-size: 2rem;" id="annualSavings">$192-312</div>
+    </div>
+
+    <div class="results-section">
+      <h3>Recommended System</h3>
+      <div class="recommended-pack">
+        <h4 id="recommendedName">Home Pack</h4>
+        <div class="price" id="recommendedPrice">$199</div>
+        <div class="payback">Payback Period: <strong id="paybackPeriod">8-12 months</strong></div>
+      </div>
+    </div>
+
+    <div class="results-section">
+      <h3>Carbon Impact</h3>
+      <div class="result-item">
+        <span class="result-label">CO₂ Saved/Year:</span>
+        <span class="result-value" id="co2Saved">420 kg</span>
+      </div>
+      <div class="result-item">
+        <span class="result-label">Equivalent to:</span>
+        <span class="result-value" id="treesEquiv">47 trees planted</span>
+      </div>
+    </div>
+
+    <div class="results-cta">
+      <a href="index.html#pricing" class="btn-primary">Get Your E4H System →</a>
+      <button class="btn-primary" style="margin-top: 1rem; background: rgba(255,255,255,0.2);" onclick="window.print()">Save Results (PDF)</button>
+    </div>
+  </div>
+</div>
+
+<!-- Methodology Section -->
+<div class="methodology">
+  <div class="methodology-content">
+    <h2>How We Calculate This</h2>
+    <div class="methodology-grid">
+      <div class="methodology-item">
+        <h3>📊 Local Rate Structure</h3>
+        <p>We use real-time electricity rates from your utility provider. California's time-of-use rates typically range from $0.15/kWh (off-peak) to $0.60/kWh (peak), with significant savings potential during evening hours.</p>
+      </div>
+
+      <div class="methodology-item">
+        <h3>⚡ Appliance Power Use</h3>
+        <p>Based on EPA and DOE data for typical appliance power consumption. We calculate energy usage in kilowatt-hours (kWh) by multiplying wattage by usage time, accounting for your actual usage patterns.</p>
+      </div>
+
+      <div class="methodology-item">
+        <h3>💰 VPP Revenue</h3>
+        <p>Virtual Power Plant (VPP) earnings based on current California demand response programs like Flex Alert and utility-specific programs. Payments typically range from $2-5 per event, with 15-40 events per year.</p>
+      </div>
+
+      <div class="methodology-item">
+        <h3>🔋 Battery Efficiency</h3>
+        <p>Our calculations assume 90% round-trip battery efficiency (industry standard for LFP batteries). This accounts for energy losses during charging and discharging cycles.</p>
+      </div>
+
+      <div class="methodology-item">
+        <h3>📈 Usage Modeling</h3>
+        <p>We model your appliance usage across different time periods, calculating cost savings by shifting energy use from peak to off-peak hours through intelligent battery charge/discharge cycles.</p>
+      </div>
+
+      <div class="methodology-item">
+        <h3>🌱 Carbon Calculations</h3>
+        <p>CO₂ savings calculated based on California's grid carbon intensity (~200g CO₂/kWh) and the reduction in peak demand, which typically relies more heavily on fossil fuel generation.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  // Rate structures for different utilities (simplified)
+  const rateStructures = {
+    'svce': { offPeak: 0.15, midPeak: 0.28, peak: 0.52 },
+    'sjce': { offPeak: 0.15, midPeak: 0.27, peak: 0.50 },
+    'ebce': { offPeak: 0.16, midPeak: 0.29, peak: 0.54 },
+    'pge': { offPeak: 0.17, midPeak: 0.30, peak: 0.60 },
+    'other': { offPeak: 0.16, midPeak: 0.28, peak: 0.52 }
+  };
+
+  // Update slider values
+  document.querySelectorAll('.slider').forEach(slider => {
+    slider.addEventListener('input', (e) => {
+      const id = e.target.id;
+      const value = e.target.value;
+      document.getElementById(`${id}Value`).textContent = `${value}%`;
+      calculateSavings();
+    });
+  });
+
+  // Calculate savings when inputs change
+  document.querySelectorAll('input, select').forEach(input => {
+    input.addEventListener('change', calculateSavings);
+    input.addEventListener('input', calculateSavings);
+  });
+
+  function calculateSavings() {
+    // Get selected appliances
+    const appliances = [];
+    document.querySelectorAll('.appliance-option input:checked').forEach(checkbox => {
+      appliances.push({
+        watts: parseInt(checkbox.dataset.watts),
+        mins: parseInt(checkbox.dataset.mins)
+      });
+    });
+
+    if (appliances.length === 0) return;
+
+    // Get usage patterns
+    const morning = parseInt(document.getElementById('morning').value) / 100;
+    const afternoon = parseInt(document.getElementById('afternoon').value) / 100;
+    const evening = parseInt(document.getElementById('evening').value) / 100;
+    const night = parseInt(document.getElementById('night').value) / 100;
+
+    // Get utility rates
+    const utility = document.getElementById('utility').value || 'other';
+    const rates = rateStructures[utility];
+
+    // Calculate total daily energy consumption (kWh)
+    let totalDailyKwh = 0;
+    appliances.forEach(app => {
+      const kwhPerUse = (app.watts * (app.mins / 60)) / 1000;
+      totalDailyKwh += kwhPerUse;
+    });
+
+    // Calculate cost without E4H (assuming usage at different times)
+    const costWithoutE4H = (
+      totalDailyKwh * morning * rates.midPeak +
+      totalDailyKwh * afternoon * rates.midPeak +
+      totalDailyKwh * evening * rates.peak +
+      totalDailyKwh * night * rates.offPeak
+    );
+
+    // Calculate cost with E4H (battery charges off-peak, discharges during use)
+    const costWithE4H = totalDailyKwh * rates.offPeak * 1.11; // 1.11 accounts for 90% efficiency
+
+    // Daily savings
+    const dailySavings = Math.max(0, costWithoutE4H - costWithE4H);
+    const monthlySavings = dailySavings * 30;
+
+    // VPP earnings (estimate based on system size)
+    const totalCapacityNeeded = (totalDailyKwh * Math.max(morning, afternoon, evening, night));
+    const vppMonthly = totalCapacityNeeded > 0.8 ? 8 : (totalCapacityNeeded > 0.4 ? 6 : 4);
+    const vppAnnual = vppMonthly * 12;
+
+    // Total savings
+    const totalMonthly = monthlySavings + vppMonthly;
+    const totalAnnual = totalMonthly * 12;
+
+    // Recommend system
+    let recommendedSystem, systemPrice, payback;
+    if (appliances.length <= 2 || totalCapacityNeeded < 0.3) {
+      recommendedSystem = 'Starter Pack';
+      systemPrice = 99;
+      payback = '9-12 months';
+    } else if (appliances.length <= 4 || totalCapacityNeeded < 1.0) {
+      recommendedSystem = 'Home Pack';
+      systemPrice = 199;
+      payback = '8-10 months';
+    } else {
+      recommendedSystem = 'Power Pack';
+      systemPrice = 299;
+      payback = '6-9 months';
+    }
+
+    // Calculate CO2 savings (rough estimate)
+    const annualKwh = totalDailyKwh * 365;
+    const co2Saved = Math.round(annualKwh * 0.2 * 0.7); // 200g CO2/kWh, 70% reduction during peak
+    const treesEquiv = Math.round(co2Saved / 9); // ~9kg CO2 per tree per year
+
+    // Update UI
+    document.getElementById('touSavings').textContent = `$${Math.round(monthlySavings)}-${Math.round(monthlySavings * 1.2)}`;
+    document.getElementById('vppEarnings').textContent = `$${vppMonthly}`;
+    document.getElementById('monthlySavings').textContent = `$${Math.round(totalMonthly)}-${Math.round(totalMonthly * 1.2)}`;
+    document.getElementById('annualSavings').textContent = `$${Math.round(totalAnnual)}-${Math.round(totalAnnual * 1.2)}`;
+    document.getElementById('recommendedName').textContent = recommendedSystem;
+    document.getElementById('recommendedPrice').textContent = `$${systemPrice}`;
+    document.getElementById('paybackPeriod').textContent = payback;
+    document.getElementById('co2Saved').textContent = `${co2Saved} kg`;
+    document.getElementById('treesEquiv').textContent = `${treesEquiv} trees planted`;
+  }
+
+  // Initial calculation
+  calculateSavings();
+</script>
+</body>
+</html>

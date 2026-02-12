@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>E4H Energy | Power That Never Quits</title>
+<title>E4H Energy | Stop Overpaying for Electricity. Start Making Money From It.</title>
 <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&display=swap" rel="stylesheet">
 <style>
   :root {
@@ -22,8 +22,11 @@
   .logo { font-family: 'DM Serif Display', serif; font-size: 1.55rem; color: var(--primary); text-decoration: none; transition: 0.3s; }
   .logo:hover { transform: scale(1.05); }
   .logo span { color: var(--accent); }
+  .nav-links { display: flex; gap: 2rem; align-items: center; }
+  .nav-links a { color: var(--text-dark); text-decoration: none; font-weight: 500; transition: 0.3s; }
+  .nav-links a:hover { color: var(--primary); }
 
-  .btn-primary { display: inline-block; background: var(--primary); color: #fff; padding: 0.8rem 1.8rem; border-radius: 8px; font-weight: 600; text-decoration: none; transition: all 0.3s ease; box-shadow: 0 2px 8px rgba(45,111,94,0.15); }
+  .btn-primary { display: inline-block; background: var(--primary); color: #fff; padding: 0.8rem 1.8rem; border-radius: 8px; font-weight: 600; text-decoration: none; transition: all 0.3s ease; box-shadow: 0 2px 8px rgba(45,111,94,0.15); border: none; cursor: pointer; }
   .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 6px 20px rgba(45,111,94,0.25); background: var(--primary-light); }
   .btn-primary:active { transform: translateY(0); }
 
@@ -32,71 +35,138 @@
 
   /* HERO SECTION */
   .hero { padding: 10rem 2.5rem 6rem; max-width: 1200px; margin: 0 auto; display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: center; min-height: 95vh; }
-  .hero-text h1 { font-family: 'DM Serif Display', serif; font-size: clamp(2.8rem, 5.5vw, 4.2rem); line-height: 1.1; color: var(--primary); margin-bottom: 1.5rem; }
+  .hero-text h1 { font-family: 'DM Serif Display', serif; font-size: clamp(2.5rem, 5vw, 3.8rem); line-height: 1.1; color: var(--primary); margin-bottom: 1.5rem; }
   .hero-text h1 em { font-style: italic; color: var(--accent); }
-  .tagline { font-size: 1.25rem; color: var(--accent); font-weight: 700; margin-bottom: 1rem; letter-spacing: 0.5px; text-transform: uppercase; }
-  .subtitle { font-size: 1.2rem; color: var(--text-mid); line-height: 1.65; margin-bottom: 2.5rem; }
+  .tagline { font-size: 1.1rem; color: var(--accent); font-weight: 700; margin-bottom: 1rem; letter-spacing: 0.5px; text-transform: uppercase; }
+  .subtitle { font-size: 1.15rem; color: var(--text-mid); line-height: 1.65; margin-bottom: 2rem; }
+
+  /* CALCULATOR WIDGET */
+  .calculator-widget { background: linear-gradient(135deg, #fff 0%, #f8f8f8 100%); padding: 1.5rem; border-radius: 16px; box-shadow: var(--card-shadow); margin-bottom: 2rem; border: 2px solid var(--green-soft); }
+  .calculator-widget h3 { font-size: 0.85rem; color: var(--text-mid); text-transform: uppercase; letter-spacing: 1px; margin-bottom: 1rem; font-weight: 600; }
+  .slider-container { margin-bottom: 1.5rem; }
+  .slider-label { display: flex; justify-content: space-between; margin-bottom: 0.5rem; font-size: 0.9rem; color: var(--text-dark); font-weight: 600; }
+  .slider { width: 100%; height: 8px; border-radius: 4px; background: var(--warm-gray); outline: none; -webkit-appearance: none; }
+  .slider::-webkit-slider-thumb { -webkit-appearance: none; appearance: none; width: 24px; height: 24px; border-radius: 50%; background: var(--primary); cursor: pointer; box-shadow: 0 2px 8px rgba(45,111,94,0.3); transition: 0.2s; }
+  .slider::-webkit-slider-thumb:hover { transform: scale(1.15); background: var(--primary-light); }
+  .slider::-moz-range-thumb { width: 24px; height: 24px; border-radius: 50%; background: var(--primary); cursor: pointer; box-shadow: 0 2px 8px rgba(45,111,94,0.3); border: none; }
+  .savings-display { background: var(--green-soft); padding: 1.2rem; border-radius: 12px; text-align: center; }
+  .savings-display .amount { font-size: 2rem; font-weight: 700; color: var(--green); margin-bottom: 0.3rem; }
+  .savings-display .label { font-size: 0.85rem; color: var(--text-mid); }
+  .calculator-cta { text-align: center; margin-top: 1rem; }
+  .calculator-cta a { font-size: 0.9rem; color: var(--primary); text-decoration: none; font-weight: 600; }
+  .calculator-cta a:hover { text-decoration: underline; }
+
   .hero-cta { display: flex; gap: 1rem; flex-wrap: wrap; align-items: center; }
 
-  /* CIRCULAR IMAGE WITH INTERACTIVE ELEMENTS */
+  /* HERO VISUAL - ILLUSTRATION */
   .hero-visual { position: relative; display: flex; justify-content: center; align-items: center; }
-  .product-bubble {
-    position: relative;
-    width: 510px;
-    height: 510px;
-    border-radius: 50%;
-    background: linear-gradient(135deg, #fff 0%, #f8f8f8 100%);
-    padding: 10px;
-    box-shadow: var(--card-shadow), 0 0 0 1px rgba(45,111,94,0.04);
-    animation: floatMain 6s ease-in-out infinite;
+  .product-illustration { position: relative; width: 500px; height: 500px; }
+
+  /* Battery Pack - Center */
+  .battery-pack {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 180px;
+    height: 220px;
+    background: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 100%);
+    border-radius: 20px;
+    box-shadow: 0 20px 60px rgba(45,111,94,0.3);
+    cursor: pointer;
+    transition: all 0.4s ease;
+    z-index: 10;
+  }
+  .battery-pack:hover { transform: translate(-50%, -50%) scale(1.1); box-shadow: 0 30px 80px rgba(45,111,94,0.4); }
+
+  .battery-top { width: 60px; height: 15px; background: linear-gradient(135deg, var(--primary-light) 0%, var(--primary) 100%); border-radius: 8px 8px 0 0; margin: 0 auto; position: relative; top: -8px; }
+
+  .battery-face { padding: 20px; color: #fff; text-align: center; }
+  .battery-logo { font-family: 'DM Serif Display', serif; font-size: 2.5rem; font-weight: 700; margin-bottom: 0.5rem; }
+  .battery-logo span { color: var(--accent-light); }
+  .battery-status { font-size: 0.75rem; opacity: 0.9; margin-bottom: 1rem; text-transform: uppercase; letter-spacing: 1px; }
+
+  .battery-indicator { background: rgba(255,255,255,0.2); height: 60px; border-radius: 8px; margin-bottom: 0.8rem; overflow: hidden; position: relative; }
+  .battery-level { background: linear-gradient(180deg, var(--green) 0%, #27AE60 100%); height: 100%; width: 85%; border-radius: 8px; animation: pulse 2s ease-in-out infinite; }
+
+  .battery-capacity { font-size: 0.7rem; opacity: 0.8; margin-top: 0.5rem; }
+
+  /* Battery Cutaway Overlay */
+  .battery-cutaway {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0.9);
+    border-radius: 20px;
+    padding: 15px;
+    opacity: 0;
+    transition: opacity 0.4s ease;
+    pointer-events: none;
+    color: #fff;
+    font-size: 0.7rem;
+  }
+  .battery-pack:hover .battery-cutaway { opacity: 1; }
+  .cutaway-label { margin: 8px 0; padding: 6px; background: rgba(255,255,255,0.1); border-radius: 4px; border-left: 3px solid var(--accent-light); }
+
+  /* Appliances */
+  .appliance {
+    position: absolute;
+    width: 100px;
+    height: 100px;
+    background: #fff;
+    border-radius: 16px;
+    box-shadow: 0 10px 40px rgba(45,111,94,0.15);
     display: flex;
     align-items: center;
     justify-content: center;
+    font-size: 3rem;
     cursor: pointer;
-    transition: transform 0.3s ease;
+    transition: all 0.4s ease;
+    animation: floatAppliance 6s ease-in-out infinite;
   }
-  .product-bubble:hover { transform: scale(1.02) translateY(-10px); }
-  .product-image {
-    width: 100%;
-    height: 100%;
-    border-radius: 50%;
-    object-fit: cover;
-    display: block;
-    transition: 0.3s;
-  }
-  .product-bubble:hover .product-image { filter: brightness(1.05); }
+  .appliance:hover { transform: scale(1.15) rotate(-5deg); box-shadow: 0 15px 50px rgba(45,111,94,0.25); }
 
-  .float-badge {
+  .appliance-1 { top: 10%; right: 15%; animation-delay: 0s; }
+  .appliance-2 { top: 55%; left: 5%; animation-delay: 2s; }
+  .appliance-3 { bottom: 10%; right: 20%; animation-delay: 4s; }
+
+  /* Connection Lines */
+  .connection-line {
     position: absolute;
-    background: #fff;
-    border-radius: 16px;
-    padding: 0.85rem 1.2rem;
-    box-shadow: 0 10px 40px rgba(45,111,94,0.12);
-    display: flex;
-    align-items: center;
-    gap: 0.7rem;
-    font-size: 0.85rem;
-    font-weight: 600;
-    z-index: 10;
-    animation: floatBadge 5s ease-in-out infinite;
-    cursor: pointer;
-    transition: all 0.3s ease;
-    border: 1px solid rgba(0,0,0,0.04);
-    text-decoration: none;
-    color: var(--text-dark);
+    height: 2px;
+    background: linear-gradient(90deg, var(--primary) 0%, transparent 100%);
+    transform-origin: left;
+    opacity: 0.4;
+    animation: energyFlow 2s ease-in-out infinite;
   }
-  .float-badge:hover { transform: translateY(-5px) scale(1.05); box-shadow: 0 15px 50px rgba(45,111,94,0.18); }
-  .float-badge .icon { width: 36px; height: 36px; border-radius: 10px; display: flex; align-items: center; justify-content: center; font-size: 1.1rem; }
+  .line-1 { top: 28%; left: 50%; width: 150px; transform: rotate(-25deg); }
+  .line-2 { top: 50%; left: 25%; width: 120px; transform: rotate(15deg); }
+  .line-3 { bottom: 28%; left: 50%; width: 130px; transform: rotate(25deg); }
 
-  .badge-1 { top: 5%; right: -8%; animation-delay: 0s; }
-  .badge-1 .icon { background: linear-gradient(135deg, var(--green-soft) 0%, #B8E8CC 100%); }
-  .badge-2 { bottom: 15%; left: -12%; animation-delay: 1.5s; }
-  .badge-2 .icon { background: linear-gradient(135deg, #FFE8D6 0%, #FFD4A3 100%); }
-  .badge-3 { bottom: -5%; right: 10%; animation-delay: 3s; }
-  .badge-3 .icon { background: linear-gradient(135deg, #E8DAEF 0%, #D4BEE4 100%); }
+  /* Appliance Popup */
+  .appliance-popup {
+    position: absolute;
+    bottom: -40px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: var(--primary);
+    color: #fff;
+    padding: 6px 12px;
+    border-radius: 8px;
+    font-size: 0.7rem;
+    white-space: nowrap;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    pointer-events: none;
+    font-weight: 600;
+  }
+  .appliance:hover .appliance-popup { opacity: 1; }
 
-  @keyframes floatMain { 0%, 100% { transform: translateY(0) rotate(0deg); } 50% { transform: translateY(-25px) rotate(2deg); } }
-  @keyframes floatBadge { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-12px); } }
+  @keyframes floatAppliance { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-15px); } }
+  @keyframes energyFlow { 0%, 100% { opacity: 0.2; } 50% { opacity: 0.6; } }
+  @keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.8; } }
 
   /* SECTION STYLING */
   section { padding: 5rem 2.5rem; max-width: 1200px; margin: 0 auto; }
@@ -107,7 +177,7 @@
 
   /* PROBLEM SECTION */
   .problem-section { background: linear-gradient(135deg, #f9f9f9 0%, #fff 100%); border-radius: 32px; padding: 4rem 3rem; margin: 3rem auto; box-shadow: var(--card-shadow); }
-  .problem-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 2rem; margin-top: 3rem; }
+  .problem-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2rem; margin-top: 3rem; }
   .problem-card {
     text-align: left;
     padding: 3rem 2.5rem;
@@ -117,9 +187,6 @@
     cursor: pointer;
     border: 2px solid transparent;
     box-shadow: 0 4px 20px rgba(45,111,94,0.06);
-    text-decoration: none;
-    color: inherit;
-    display: block;
   }
   .problem-card:hover {
     transform: translateY(-10px);
@@ -129,7 +196,27 @@
   .problem-icon { font-size: 3.5rem; margin-bottom: 1.5rem; filter: grayscale(0.2); transition: 0.3s; }
   .problem-card:hover .problem-icon { filter: grayscale(0); transform: scale(1.15) rotate(-5deg); }
   .problem-title { font-weight: 700; font-size: 1.3rem; color: var(--primary); margin-bottom: 1rem; }
-  .problem-desc { font-size: 1rem; color: var(--text-mid); line-height: 1.6; }
+  .problem-desc { font-size: 1rem; color: var(--text-mid); line-height: 1.6; margin-bottom: 1.5rem; }
+
+  /* Rate Chart */
+  .rate-chart { margin-top: 1.5rem; }
+  .rate-bar { display: flex; align-items: center; margin-bottom: 0.8rem; font-size: 0.85rem; }
+  .rate-bar .bar { height: 24px; border-radius: 4px; margin-right: 0.8rem; display: flex; align-items: center; padding: 0 0.8rem; color: #fff; font-weight: 600; }
+  .bar-green { background: var(--green); width: 30%; }
+  .bar-yellow { background: #F39C12; width: 55%; }
+  .bar-red { background: #E74C3C; width: 100%; }
+
+  /* Comparison Visual */
+  .comparison-visual { margin-top: 1.5rem; display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+  .comparison-item { text-align: center; padding: 1rem; border-radius: 8px; }
+  .comparison-item.negative { background: #FADBD8; }
+  .comparison-item.positive { background: var(--green-soft); }
+  .comparison-amount { font-size: 1.5rem; font-weight: 700; margin-bottom: 0.3rem; }
+  .comparison-amount.negative { color: #C0392B; }
+  .comparison-amount.positive { color: var(--green); }
+  .comparison-label { font-size: 0.75rem; color: var(--text-mid); }
+
+  .section-footer { text-align: center; margin-top: 3rem; font-size: 1.4rem; font-weight: 700; color: var(--primary); }
 
   /* FEATURES SECTION */
   .features-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 2rem; margin-top: 3rem; }
@@ -214,7 +301,114 @@
     box-shadow: 0 4px 20px rgba(232,116,97,0.4);
   }
   .step-title { font-size: 1.3rem; font-weight: 700; margin: 2rem 0 1rem; }
-  .step-desc { color: rgba(255,255,255,0.85); line-height: 1.6; }
+  .step-desc { color: rgba(255,255,255,0.85); line-height: 1.6; margin-bottom: 1.5rem; }
+  .step-visual { background: rgba(255,255,255,0.05); padding: 1rem; border-radius: 12px; font-size: 0.85rem; }
+
+  /* PRICING SECTION */
+  .pricing-section { padding: 5rem 2.5rem; max-width: 1400px; margin: 0 auto; }
+  .pricing-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 2.5rem; margin-top: 3rem; }
+
+  .pricing-card {
+    background: #fff;
+    border-radius: 24px;
+    padding: 3rem 2.5rem;
+    box-shadow: var(--card-shadow);
+    transition: all 0.4s ease;
+    border: 3px solid transparent;
+    position: relative;
+  }
+  .pricing-card:hover { transform: translateY(-10px); box-shadow: 0 20px 60px rgba(45,111,94,0.2); }
+  .pricing-card.featured {
+    border-color: var(--accent);
+    transform: scale(1.05);
+  }
+  .pricing-card.featured:hover { transform: scale(1.05) translateY(-10px); }
+
+  .pricing-badge {
+    position: absolute;
+    top: -15px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: var(--accent);
+    color: #fff;
+    padding: 0.5rem 1.5rem;
+    border-radius: 20px;
+    font-size: 0.8rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+  }
+
+  .pricing-header { text-align: center; margin-bottom: 2rem; }
+  .pricing-name { font-size: 1.8rem; font-weight: 700; color: var(--primary); margin-bottom: 0.5rem; }
+  .pricing-tagline { font-size: 0.9rem; color: var(--text-mid); margin-bottom: 1.5rem; }
+  .pricing-price { font-size: 3.5rem; font-weight: 700; color: var(--text-dark); }
+  .pricing-price sup { font-size: 1.5rem; vertical-align: super; }
+
+  .pricing-features { margin: 2rem 0; }
+  .pricing-features h4 { font-size: 0.85rem; text-transform: uppercase; letter-spacing: 1px; color: var(--text-mid); margin-bottom: 1rem; }
+  .pricing-features ul { list-style: none; }
+  .pricing-features li { padding: 0.6rem 0; display: flex; align-items: flex-start; gap: 0.7rem; color: var(--text-dark); }
+  .pricing-features li::before { content: '✓'; color: var(--green); font-weight: 700; flex-shrink: 0; }
+
+  .pricing-bestfor { margin: 1.5rem 0; padding: 1rem; background: var(--warm-gray); border-radius: 12px; }
+  .pricing-bestfor h4 { font-size: 0.85rem; text-transform: uppercase; letter-spacing: 1px; color: var(--text-mid); margin-bottom: 0.8rem; }
+  .pricing-bestfor ul { list-style: none; font-size: 0.9rem; color: var(--text-dark); }
+  .pricing-bestfor li { padding: 0.3rem 0; padding-left: 1rem; position: relative; }
+  .pricing-bestfor li::before { content: '•'; position: absolute; left: 0; color: var(--primary); }
+
+  .pricing-savings { margin: 1.5rem 0; padding: 1.2rem; background: var(--green-soft); border-radius: 12px; }
+  .pricing-savings .savings-row { display: flex; justify-content: space-between; margin-bottom: 0.5rem; font-size: 0.9rem; }
+  .savings-row .label { color: var(--text-mid); }
+  .savings-row .amount { font-weight: 700; color: var(--green); }
+
+  .pricing-highlight {
+    background: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 100%);
+    color: #fff;
+    padding: 0.8rem;
+    border-radius: 8px;
+    text-align: center;
+    font-weight: 600;
+    font-size: 0.9rem;
+    margin-top: 1.5rem;
+  }
+
+  .pricing-cta { margin-top: 2rem; }
+  .pricing-cta .btn-primary { width: 100%; text-align: center; padding: 1.2rem; font-size: 1.05rem; }
+  .pricing-availability { text-align: center; margin-top: 1rem; font-size: 0.85rem; color: var(--text-light); }
+
+  /* Add-ons Section */
+  .addons-section {
+    margin-top: 4rem;
+    padding: 3rem;
+    background: linear-gradient(135deg, #f9f9f9 0%, #fff 100%);
+    border-radius: 24px;
+    box-shadow: var(--card-shadow);
+  }
+  .addons-section h3 { font-size: 1.8rem; color: var(--primary); margin-bottom: 2rem; text-align: center; }
+  .addons-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.5rem; }
+  .addon-card {
+    background: #fff;
+    padding: 1.5rem;
+    border-radius: 16px;
+    border: 2px solid var(--warm-gray);
+    transition: all 0.3s ease;
+  }
+  .addon-card:hover { border-color: var(--accent); box-shadow: 0 8px 30px rgba(45,111,94,0.1); }
+  .addon-name { font-weight: 700; color: var(--primary); margin-bottom: 0.5rem; font-size: 1.1rem; }
+  .addon-price { font-size: 1.5rem; font-weight: 700; color: var(--accent); margin-bottom: 0.5rem; }
+  .addon-desc { font-size: 0.9rem; color: var(--text-mid); line-height: 1.5; }
+
+  /* Financing Callout */
+  .financing-callout {
+    margin-top: 3rem;
+    padding: 2.5rem;
+    background: linear-gradient(135deg, #E3F2FD 0%, #BBDEFB 100%);
+    border-radius: 20px;
+    border-left: 6px solid #2196F3;
+  }
+  .financing-callout h3 { font-size: 1.6rem; color: var(--primary); margin-bottom: 1rem; }
+  .financing-callout p { font-size: 1.05rem; color: var(--text-dark); line-height: 1.6; margin-bottom: 1.5rem; }
 
   /* CTA SECTION */
   .cta-section {
@@ -254,56 +448,249 @@
     box-shadow: 0 12px 40px rgba(232,116,97,0.4);
   }
 
+  /* MODAL */
+  .modal {
+    display: none;
+    position: fixed;
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0.6);
+    backdrop-filter: blur(8px);
+    animation: fadeIn 0.3s ease;
+  }
+  .modal.active { display: flex; align-items: center; justify-content: center; }
+
+  .modal-content {
+    background: #fff;
+    border-radius: 24px;
+    padding: 3rem;
+    max-width: 600px;
+    width: 90%;
+    max-height: 85vh;
+    overflow-y: auto;
+    position: relative;
+    animation: slideUp 0.4s ease;
+    box-shadow: 0 20px 80px rgba(0,0,0,0.3);
+  }
+
+  .modal-close {
+    position: absolute;
+    top: 1.5rem;
+    right: 1.5rem;
+    font-size: 2rem;
+    color: var(--text-light);
+    cursor: pointer;
+    background: none;
+    border: none;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    transition: all 0.3s ease;
+  }
+  .modal-close:hover { background: var(--warm-gray); color: var(--text-dark); }
+
+  .modal-header { margin-bottom: 2rem; }
+  .modal-header h2 { font-family: 'DM Serif Display', serif; font-size: 2rem; color: var(--primary); margin-bottom: 0.5rem; }
+  .modal-header p { font-size: 1rem; color: var(--text-mid); line-height: 1.5; }
+
+  .form-group { margin-bottom: 1.5rem; }
+  .form-group label { display: block; font-weight: 600; color: var(--text-dark); margin-bottom: 0.5rem; font-size: 0.9rem; }
+  .form-group input, .form-group select, .form-group textarea {
+    width: 100%;
+    padding: 0.9rem;
+    border: 2px solid var(--warm-gray);
+    border-radius: 8px;
+    font-family: inherit;
+    font-size: 1rem;
+    transition: all 0.3s ease;
+  }
+  .form-group input:focus, .form-group select:focus, .form-group textarea:focus {
+    outline: none;
+    border-color: var(--primary);
+    box-shadow: 0 0 0 3px rgba(45,111,94,0.1);
+  }
+  .form-group textarea { resize: vertical; min-height: 80px; }
+
+  .form-group.required label::after { content: ' *'; color: var(--accent); }
+
+  .checkbox-group { margin-bottom: 1.5rem; }
+  .checkbox-group label { display: block; font-weight: 600; color: var(--text-dark); margin-bottom: 1rem; font-size: 0.9rem; }
+  .checkbox-item { display: flex; align-items: center; margin-bottom: 0.8rem; }
+  .checkbox-item input[type="checkbox"] {
+    width: 20px;
+    height: 20px;
+    margin-right: 0.7rem;
+    cursor: pointer;
+  }
+  .checkbox-item label { margin-bottom: 0; font-weight: 400; cursor: pointer; }
+
+  .modal-success {
+    display: none;
+    text-align: center;
+    padding: 2rem;
+  }
+  .modal-success.active { display: block; }
+  .modal-success .icon { font-size: 4rem; margin-bottom: 1rem; }
+  .modal-success h3 { font-size: 1.8rem; color: var(--green); margin-bottom: 1rem; }
+  .modal-success p { font-size: 1.05rem; color: var(--text-mid); line-height: 1.6; }
+
+  /* FOOTER */
+  footer { background: var(--primary); color: #fff; padding: 4rem 2.5rem 2rem; }
+  .footer-content { max-width: 1200px; margin: 0 auto; display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 3rem; margin-bottom: 3rem; }
+  .footer-column h3 { font-size: 1.2rem; margin-bottom: 1.5rem; font-weight: 700; }
+  .footer-column p { font-size: 0.95rem; line-height: 1.6; opacity: 0.9; margin-bottom: 1rem; }
+  .footer-column ul { list-style: none; }
+  .footer-column ul li { margin-bottom: 0.8rem; }
+  .footer-column ul li a { color: #fff; text-decoration: none; opacity: 0.9; transition: 0.3s; }
+  .footer-column ul li a:hover { opacity: 1; text-decoration: underline; }
+
+  .footer-signup { display: flex; gap: 0.5rem; margin-top: 1rem; }
+  .footer-signup input { flex: 1; padding: 0.8rem; border: none; border-radius: 8px; font-size: 0.9rem; }
+  .footer-signup button { padding: 0.8rem 1.5rem; background: var(--accent); border: none; border-radius: 8px; color: #fff; font-weight: 600; cursor: pointer; transition: 0.3s; }
+  .footer-signup button:hover { background: var(--accent-light); }
+
+  .social-links { display: flex; gap: 1rem; margin-top: 1rem; }
+  .social-links a { display: inline-block; width: 40px; height: 40px; background: rgba(255,255,255,0.1); border-radius: 50%; display: flex; align-items: center; justify-content: center; text-decoration: none; color: #fff; transition: 0.3s; }
+  .social-links a:hover { background: rgba(255,255,255,0.2); transform: translateY(-3px); }
+
+  .footer-bottom {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding-top: 2rem;
+    border-top: 1px solid rgba(255,255,255,0.2);
+  }
+
+  .footer-disclaimer {
+    background: rgba(232,116,97,0.2);
+    padding: 1.5rem;
+    border-radius: 12px;
+    margin-bottom: 2rem;
+    border-left: 4px solid var(--accent);
+  }
+  .footer-disclaimer h4 { font-size: 0.9rem; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 0.8rem; display: flex; align-items: center; gap: 0.5rem; }
+  .footer-disclaimer p { font-size: 0.85rem; line-height: 1.6; opacity: 0.95; }
+
+  .footer-legal { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem; font-size: 0.85rem; opacity: 0.8; }
+  .footer-legal a { color: #fff; text-decoration: none; margin-left: 1.5rem; }
+  .footer-legal a:hover { text-decoration: underline; }
+
   /* ANIMATIONS */
   .fade-up { opacity: 0; transform: translateY(40px); transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1); }
   .fade-up.visible { opacity: 1; transform: translateY(0); }
-  .fade-in { opacity: 0; transition: opacity 0.8s ease; }
-  .fade-in.visible { opacity: 1; }
+  @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+  @keyframes slideUp { from { transform: translateY(50px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
 
   /* RESPONSIVE */
   @media (max-width: 900px) {
+    .nav-links { display: none; }
     .hero { grid-template-columns: 1fr; text-align: center; padding: 8rem 1.5rem 4rem; }
     .hero-cta { justify-content: center; }
-    .product-bubble { width: 420px; height: 420px; margin: 0 auto; }
-    .float-badge { font-size: 0.7rem; padding: 0.6rem 0.8rem; }
+    .product-illustration { width: 400px; height: 400px; margin: 0 auto; }
+    .battery-pack { width: 140px; height: 180px; }
+    .appliance { width: 80px; height: 80px; font-size: 2.5rem; }
     .problem-grid { grid-template-columns: 1fr; }
+    .pricing-grid { grid-template-columns: 1fr; }
+    .pricing-card.featured { transform: scale(1); }
     section { padding: 3rem 1.5rem; }
     .problem-section, .how-it-works, .cta-section { padding: 3rem 1.5rem; }
+    .footer-content { grid-template-columns: 1fr; }
   }
 </style>
 </head>
 <body>
 <nav id="navbar">
   <a href="#" class="logo">E4<span>H</span> Energy</a>
-  <a href="signup.html" class="btn-primary">Join Waitlist</a>
+  <div class="nav-links">
+    <a href="#how-it-works">How It Works</a>
+    <a href="#benefits">Benefits</a>
+    <a href="#pricing">Pricing</a>
+    <a href="calculator.html">Calculator</a>
+  </div>
+  <div style="display: flex; gap: 1rem; align-items: center;">
+    <a href="#" class="btn-primary" onclick="openModal(); return false;">I'm Interested</a>
+  </div>
 </nav>
 
 <!-- HERO SECTION -->
 <section class="hero">
   <div class="hero-text fade-up">
-    <div class="tagline">Energy Independence for Everyone</div>
-    <h1>Power that stays on when the grid <em>doesn't.</em></h1>
-    <p class="subtitle">Smart appliances with built-in battery backup. Cook, stay cool, and keep the lights on through every outage—no landlord permission needed.</p>
+    <div class="tagline">Stop Overpaying for Electricity</div>
+    <h1>Stop Overpaying for Electricity. Start <em>Making Money</em> From It.</h1>
+    <p class="subtitle">Universal battery packs that plug into your existing appliances, automatically saving you money every day</p>
+
+    <!-- Calculator Widget -->
+    <div class="calculator-widget">
+      <h3>Quick Savings Preview</h3>
+      <div class="slider-container">
+        <div class="slider-label">
+          <span>Number of appliances</span>
+          <span id="applianceCount">3</span>
+        </div>
+        <input type="range" min="1" max="10" value="3" class="slider" id="applianceSlider">
+      </div>
+      <div class="savings-display">
+        <div class="amount" id="savingsAmount">$16-26</div>
+        <div class="label">Estimated monthly savings</div>
+      </div>
+      <p style="font-size: 0.8rem; color: var(--text-mid); text-align: center; margin-top: 0.8rem;">Based on Santa Clara County average rates</p>
+      <div class="calculator-cta">
+        <a href="calculator.html">Calculate My Full Savings →</a>
+      </div>
+    </div>
+
     <div class="hero-cta">
-      <a href="signup.html" class="btn-primary" style="padding: 1.2rem 2.5rem;">Get Early Access →</a>
+      <a href="#" class="btn-primary" style="padding: 1.2rem 2.5rem;" onclick="openModal(); return false;">Get Early Access →</a>
       <a href="#how-it-works" class="btn-secondary">See How It Works</a>
     </div>
   </div>
+
   <div class="hero-visual fade-up">
-    <div class="product-bubble">
-      <img src="combo.png" alt="E4H Energy System" class="product-image">
-      <a href="outages.html" class="float-badge badge-1">
-        <div class="icon">⚡</div>
-        <div><div style="font-size:0.7rem; opacity:0.7;">Backup Power</div><div>4-8 Hours</div></div>
-      </a>
-      <a href="savings.html" class="float-badge badge-2">
-        <div class="icon">💰</div>
-        <div><div style="font-size:0.7rem; opacity:0.7;">Save Annually</div><div>$200+/year</div></div>
-      </a>
-      <a href="portable.html" class="float-badge badge-3">
-        <div class="icon">📦</div>
-        <div><div style="font-size:0.7rem; opacity:0.7;">100% Portable</div><div>Move Anytime</div></div>
-      </a>
+    <div class="product-illustration">
+      <!-- Battery Pack (Center) -->
+      <div class="battery-pack">
+        <div class="battery-top"></div>
+        <div class="battery-face">
+          <div class="battery-logo">E4<span>H</span></div>
+          <div class="battery-status">Smart Battery System</div>
+          <div class="battery-indicator">
+            <div class="battery-level"></div>
+          </div>
+          <div class="battery-capacity">1 kWh Capacity</div>
+        </div>
+        <!-- Cutaway View (visible on hover) -->
+        <div class="battery-cutaway">
+          <h4 style="margin-bottom: 1rem; font-size: 0.9rem;">Inside the Battery:</h4>
+          <div class="cutaway-label">⚡ LFP Battery Cells</div>
+          <div class="cutaway-label">🧠 Smart Microcontroller</div>
+          <div class="cutaway-label">🤖 AI Dispatch System</div>
+          <div class="cutaway-label">🔌 Universal Plug Interface</div>
+        </div>
+      </div>
+
+      <!-- Appliances -->
+      <div class="appliance appliance-1">
+        ☕
+        <div class="appliance-popup">Works with Coffee Maker</div>
+      </div>
+      <div class="appliance appliance-2">
+        🍳
+        <div class="appliance-popup">Works with Air Fryer</div>
+      </div>
+      <div class="appliance appliance-3">
+        💡
+        <div class="appliance-popup">Works with Any Appliance</div>
+      </div>
+
+      <!-- Connection Lines -->
+      <div class="connection-line line-1"></div>
+      <div class="connection-line line-2"></div>
+      <div class="connection-line line-3"></div>
     </div>
   </div>
 </section>
@@ -311,77 +698,111 @@
 <!-- PROBLEM SECTION -->
 <section class="problem-section fade-up">
   <div class="section-header">
-    <div class="section-label">Your Power Challenges</div>
-    <h2 class="section-title">Tired of Being Left in the Dark?</h2>
-    <p class="section-subtitle">We understand the frustrations of unreliable power and rising energy costs. You deserve better.</p>
+    <div class="section-label">Your Daily Energy Challenges</div>
+    <h2 class="section-title">You're Throwing Money Away Every Day</h2>
+    <p class="section-subtitle">Without realizing it, you're paying 3-4x more for electricity at the worst times</p>
   </div>
   <div class="problem-grid">
-    <a href="outages.html" class="problem-card">
-      <div class="problem-icon">🌩️</div>
-      <h3 class="problem-title">Frequent Outages</h3>
-      <p class="problem-desc">Grid failures leave you vulnerable. Food spoils, comfort disappears, work stops.</p>
-    </a>
-    <a href="savings.html" class="problem-card">
-      <div class="problem-icon">💸</div>
-      <h3 class="problem-title">Rising Energy Bills</h3>
-      <p class="problem-desc">Peak-time rates drain your wallet. You need control over your energy costs.</p>
-    </a>
-    <a href="portable.html" class="problem-card">
-      <div class="problem-icon">🏘️</div>
-      <h3 class="problem-title">Renting Restrictions</h3>
-      <p class="problem-desc">Can't install permanent solar? Stuck with the landlord's choices? Not anymore.</p>
-    </a>
-    <a href="installation.html" class="problem-card">
-      <div class="problem-icon">🔧</div>
-      <h3 class="problem-title">Complex Installations</h3>
-      <p class="problem-desc">Traditional backup systems require permits, contractors, and thousands upfront.</p>
-    </a>
+    <div class="problem-card">
+      <div class="problem-icon">📊</div>
+      <h3 class="problem-title">Peak Hour Penalty</h3>
+      <p class="problem-desc">Every time you cook dinner, run the dishwasher, or charge devices between 4-9 PM, you're paying $0.45-0.60 per kWh instead of $0.15.</p>
+      <div class="rate-chart">
+        <div class="rate-bar">
+          <div class="bar bar-green">$0.15</div>
+          <span>Off-peak (11PM-7AM)</span>
+        </div>
+        <div class="rate-bar">
+          <div class="bar bar-yellow">$0.28</div>
+          <span>Mid-peak (7AM-4PM)</span>
+        </div>
+        <div class="rate-bar">
+          <div class="bar bar-red">$0.45-0.60</div>
+          <span>Peak (4-9PM)</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="problem-card">
+      <div class="problem-icon">🏠</div>
+      <h3 class="problem-title">The Renter Trap</h3>
+      <p class="problem-desc">Landlords won't upgrade your appliances. Traditional efficiency programs require building modifications you can't make.</p>
+      <div class="comparison-visual">
+        <div class="comparison-item negative">
+          <div class="comparison-amount negative">❌</div>
+          <div class="comparison-label">Old Inefficient<br>Appliances</div>
+        </div>
+        <div class="comparison-item positive">
+          <div class="comparison-amount positive">✓</div>
+          <div class="comparison-label">E4H Battery Pack<br>No Permission Needed</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="problem-card">
+      <div class="problem-icon">⚡</div>
+      <h3 class="problem-title">Wasted Energy Potential</h3>
+      <p class="problem-desc">Your appliances can't talk to the grid. They miss opportunities to charge cheap and discharge expensive, leaving hundreds of dollars on the table.</p>
+      <div class="comparison-visual">
+        <div class="comparison-item negative">
+          <div class="comparison-amount negative">-$200</div>
+          <div class="comparison-label">Missed Savings/Year</div>
+        </div>
+        <div class="comparison-item positive">
+          <div class="comparison-amount positive">+$250</div>
+          <div class="comparison-label">With E4H System</div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="section-footer">
+    E4H Batteries Fix All Three Problems Automatically
   </div>
 </section>
 
-<!-- FEATURES SECTION -->
-<section class="fade-up">
+<!-- BENEFITS SECTION -->
+<section class="fade-up" id="benefits">
   <div class="section-header">
-    <div class="section-label">What Makes Us Different</div>
-    <h2 class="section-title">Power Solutions Built for Your Life</h2>
-    <p class="section-subtitle">Smart appliances with integrated battery backup—no installation, no landlord approval, just plug in and go.</p>
+    <div class="section-label">More Than Just Savings</div>
+    <h2 class="section-title">How E4H Improves Your Daily Life</h2>
+    <p class="section-subtitle">Smart appliances with integrated battery backup—no installation, no landlord approval, just plug in and go</p>
   </div>
   <div class="features-grid">
     <div class="feature-card">
-      <div class="feature-icon">⚡</div>
-      <h3 class="feature-title">Built-In Battery Backup</h3>
-      <p class="feature-desc">Keep cooking, cooling, and powering your essentials for 4-8 hours during outages. Seamless transition—you won't even notice.</p>
-      <div class="feature-benefit">✓ Zero downtime during grid failures</div>
+      <div class="feature-icon">💵</div>
+      <h3 class="feature-title">$150-250 Back in Your Pocket</h3>
+      <p class="feature-desc">Average household saves $15-25 per month on electricity bills through automatic time-of-use optimization. That's $180-300 per year, per battery.</p>
+      <div class="feature-benefit">✓ Pays for itself in 12-18 months</div>
     </div>
     <div class="feature-card">
-      <div class="feature-icon">💰</div>
-      <h3 class="feature-title">Smart Energy Savings</h3>
-      <p class="feature-desc">Automatically shift energy use to off-peak hours. Save $200+ annually on electricity without changing your lifestyle.</p>
-      <div class="feature-benefit">✓ Reduce bills by up to 30%</div>
+      <div class="feature-icon">🏦</div>
+      <h3 class="feature-title">Make Money While You Sleep</h3>
+      <p class="feature-desc">Earn $50-200 per year per battery by automatically participating in utility demand response programs. No effort required.</p>
+      <div class="feature-benefit">✓ Payments appear as bill credits automatically</div>
     </div>
     <div class="feature-card">
-      <div class="feature-icon">🎯</div>
-      <h3 class="feature-title">No Installation Required</h3>
-      <p class="feature-desc">Plug-and-play design. Perfect for renters and homeowners alike. Take it with you when you move.</p>
-      <div class="feature-benefit">✓ No landlord permission needed</div>
+      <div class="feature-icon">💡</div>
+      <h3 class="feature-title">Essential Power When You Need It</h3>
+      <p class="feature-desc">Keep critical appliances running during outages. Each 1kWh battery provides 2-4 hours of backup power for essential devices.</p>
+      <div class="feature-benefit">✓ System maintains 30% reserve for emergencies</div>
     </div>
     <div class="feature-card">
-      <div class="feature-icon">📱</div>
-      <h3 class="feature-title">Smart App Control</h3>
-      <p class="feature-desc">Monitor energy usage, track savings, and get outage alerts. Control everything from your phone.</p>
-      <div class="feature-benefit">✓ Real-time insights & notifications</div>
+      <div class="feature-icon">🍳</div>
+      <h3 class="feature-title">Ditch Gas, Keep Flexibility</h3>
+      <p class="feature-desc">Our induction conversion kit lets renters switch to clean electric cooking without landlord approval. Healthier air, no combustion pollutants.</p>
+      <div class="feature-benefit">✓ Zero emissions, 90% efficiency</div>
+    </div>
+    <div class="feature-card">
+      <div class="feature-icon">📦</div>
+      <h3 class="feature-title">Move? Take It With You</h3>
+      <p class="feature-desc">No installation means no landlord permission needed. Portable to your next apartment. Full savings in every home.</p>
+      <div class="feature-benefit">✓ Perfect for renters</div>
     </div>
     <div class="feature-card">
       <div class="feature-icon">🌱</div>
-      <h3 class="feature-title">Eco-Friendly Power</h3>
-      <p class="feature-desc">Reduce your carbon footprint while saving money. Use stored clean energy during peak grid demand.</p>
+      <h3 class="feature-title">Clean Energy Multiplier</h3>
+      <p class="feature-desc">Store cheap solar energy, reduce peak demand on grid, support renewable integration. Save 500-1,000 kg CO2 per year.</p>
       <div class="feature-benefit">✓ Lower emissions, greener future</div>
-    </div>
-    <div class="feature-card">
-      <div class="feature-icon">🔒</div>
-      <h3 class="feature-title">Energy Independence</h3>
-      <p class="feature-desc">Stop being at the mercy of the grid. Store power when rates are low, use it when you need it.</p>
-      <div class="feature-benefit">✓ Take control of your power</div>
     </div>
   </div>
 </section>
@@ -390,25 +811,229 @@
 <section class="how-it-works fade-up" id="how-it-works">
   <div class="section-header">
     <div class="section-label">Simple Setup</div>
-    <h2 class="section-title">Get Started in Minutes</h2>
-    <p class="section-subtitle">No electricians, no permits, no hassle. Just three simple steps to energy independence.</p>
+    <h2 class="section-title">Set It and Forget It</h2>
+    <p class="section-subtitle">Three simple steps to start saving money every day</p>
   </div>
   <div class="steps-grid">
     <div class="step-card">
       <div class="step-number">1</div>
       <h3 class="step-title">Plug It In</h3>
-      <p class="step-desc">Simply plug your E4H appliance into any standard outlet. It works like any regular appliance—but smarter.</p>
+      <p class="step-desc">Simply plug your E4H appliance into any standard outlet. It works like any regular appliance—but smarter. Takes 2 minutes, no tools, no landlord permission.</p>
+      <div class="step-visual">
+        <p><strong>✓ Universal 120V/240V compatibility</strong></p>
+        <p>Works with: kettles, air fryers, coffee makers, slow cookers, rice cookers, toaster ovens, electric grills, portable heaters</p>
+      </div>
     </div>
     <div class="step-card">
       <div class="step-number">2</div>
-      <h3 class="step-title">Connect the App</h3>
-      <p class="step-desc">Download the E4H app and connect your device. Customize settings, track savings, and monitor your energy.</p>
+      <h3 class="step-title">Smart Charging Happens Automatically</h3>
+      <p class="step-desc">Our AI learns your schedule and local electricity rates. It charges the battery during cheap off-peak hours (usually 11 PM-7 AM) and uses stored power during expensive peak times.</p>
+      <div class="step-visual">
+        <p><strong>What makes it smart:</strong></p>
+        <p>• Real-time utility rate monitoring<br>
+        • Weather forecast integration<br>
+        • Usage pattern learning<br>
+        • Automatic grid event participation</p>
+      </div>
     </div>
     <div class="step-card">
       <div class="step-number">3</div>
-      <h3 class="step-title">Enjoy Reliable Power</h3>
-      <p class="step-desc">Use your appliances normally. When the grid goes down, your backup power kicks in automatically. No action needed.</p>
+      <h3 class="step-title">Earn Money</h3>
+      <p class="step-desc">When the grid needs help during high-demand events, your battery automatically responds. You get paid $2-5 per event, adding up to $50-200 per year per battery.</p>
+      <div class="step-visual">
+        <p><strong>Grid event alert:</strong> Earn $3.50 by reducing load from 6-8 PM today</p>
+        <p><strong>Total VPP earnings this month:</strong> $18.50</p>
+      </div>
     </div>
+  </div>
+</section>
+
+<!-- PRICING SECTION -->
+<section class="pricing-section fade-up" id="pricing">
+  <div class="section-header">
+    <div class="section-label">Product Options</div>
+    <h2 class="section-title">Choose Your Power Level</h2>
+    <p class="section-subtitle">All systems include smart AI controller and lifetime software updates</p>
+  </div>
+
+  <div class="pricing-grid">
+    <!-- Starter Pack -->
+    <div class="pricing-card">
+      <div class="pricing-header">
+        <div class="pricing-name">Starter Pack</div>
+        <div class="pricing-tagline">Perfect for Beginners</div>
+        <div class="pricing-price"><sup>$</sup>99</div>
+      </div>
+
+      <div class="pricing-features">
+        <h4>Included:</h4>
+        <ul>
+          <li>0.5 kWh LFP battery module</li>
+          <li>Smart plug controller</li>
+          <li>Basic AI energy optimization</li>
+          <li>Mobile app access</li>
+          <li>2-year warranty</li>
+        </ul>
+      </div>
+
+      <div class="pricing-bestfor">
+        <h4>Best for:</h4>
+        <ul>
+          <li>1-2 small appliances</li>
+          <li>Coffee maker, kettle, toaster</li>
+          <li>Apartment dwellers testing the concept</li>
+        </ul>
+      </div>
+
+      <div class="pricing-savings">
+        <div class="savings-row">
+          <span class="label">Monthly savings:</span>
+          <span class="amount">$8-12</span>
+        </div>
+        <div class="savings-row">
+          <span class="label">VPP earnings:</span>
+          <span class="amount">$25-50/year</span>
+        </div>
+      </div>
+
+      <div class="pricing-cta">
+        <button class="btn-primary" onclick="openModal()">Pre-Order Starter Pack</button>
+        <div class="pricing-availability">Estimated delivery: Spring 2026</div>
+      </div>
+    </div>
+
+    <!-- Home Pack (Featured) -->
+    <div class="pricing-card featured">
+      <div class="pricing-badge">Most Popular</div>
+      <div class="pricing-header">
+        <div class="pricing-name">Home Pack</div>
+        <div class="pricing-tagline">Best Value for Most Homes</div>
+        <div class="pricing-price"><sup>$</sup>199</div>
+      </div>
+
+      <div class="pricing-features">
+        <h4>Included:</h4>
+        <ul>
+          <li>1 kWh LFP battery module</li>
+          <li>Smart plug controller</li>
+          <li>Advanced AI with multi-device coordination</li>
+          <li>Mobile app access</li>
+          <li>3-year warranty</li>
+          <li>Priority support</li>
+        </ul>
+      </div>
+
+      <div class="pricing-bestfor">
+        <h4>Best for:</h4>
+        <ul>
+          <li>3-4 medium appliances</li>
+          <li>All cooking appliances + more</li>
+          <li>Renters and homeowners</li>
+          <li>Daily meaningful savings</li>
+        </ul>
+      </div>
+
+      <div class="pricing-savings">
+        <div class="savings-row">
+          <span class="label">Monthly savings:</span>
+          <span class="amount">$15-25</span>
+        </div>
+        <div class="savings-row">
+          <span class="label">VPP earnings:</span>
+          <span class="amount">$50-100/year</span>
+        </div>
+      </div>
+
+      <div class="pricing-highlight">
+        Pays for itself in 9-12 months
+      </div>
+
+      <div class="pricing-cta">
+        <button class="btn-primary" onclick="openModal()">Pre-Order Home Pack</button>
+        <div class="pricing-availability">Estimated delivery: Spring 2026</div>
+      </div>
+    </div>
+
+    <!-- Power Pack -->
+    <div class="pricing-card">
+      <div class="pricing-header">
+        <div class="pricing-name">Power Pack</div>
+        <div class="pricing-tagline">Maximum Savings & Backup</div>
+        <div class="pricing-price"><sup>$</sup>299</div>
+      </div>
+
+      <div class="pricing-features">
+        <h4>Included:</h4>
+        <ul>
+          <li>2 kWh LFP battery module</li>
+          <li>Smart plug controller with priority load management</li>
+          <li>Advanced AI with VPP optimization</li>
+          <li>Mobile app access</li>
+          <li>5-year warranty</li>
+          <li>White-glove support</li>
+          <li>Backup power mode</li>
+        </ul>
+      </div>
+
+      <div class="pricing-bestfor">
+        <h4>Best for:</h4>
+        <ul>
+          <li>5-6+ appliances</li>
+          <li>Whole-kitchen electrification</li>
+          <li>Maximum backup resilience</li>
+          <li>Serious savers</li>
+        </ul>
+      </div>
+
+      <div class="pricing-savings">
+        <div class="savings-row">
+          <span class="label">Monthly savings:</span>
+          <span class="amount">$25-35</span>
+        </div>
+        <div class="savings-row">
+          <span class="label">VPP earnings:</span>
+          <span class="amount">$100-200/year</span>
+        </div>
+      </div>
+
+      <div class="pricing-highlight">
+        Pays for itself in 6-9 months
+      </div>
+
+      <div class="pricing-cta">
+        <button class="btn-primary" onclick="openModal()">Pre-Order Power Pack</button>
+        <div class="pricing-availability">Estimated delivery: Spring 2026</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Add-ons Section -->
+  <div class="addons-section">
+    <h3>Boost Your System</h3>
+    <div class="addons-grid">
+      <div class="addon-card">
+        <div class="addon-name">Induction Conversion Kit</div>
+        <div class="addon-price">+$79</div>
+        <p class="addon-desc">Portable induction cooktop compatible with battery packs. Switch to clean electric cooking without landlord approval.</p>
+      </div>
+      <div class="addon-card">
+        <div class="addon-name">Extra Battery Module</div>
+        <div class="addon-price">$120</div>
+        <p class="addon-desc">Additional 1 kWh capacity. Expand any pack's energy storage for longer runtime and bigger savings.</p>
+      </div>
+      <div class="addon-card">
+        <div class="addon-name">Smart Energy Hub</div>
+        <div class="addon-price">+$49</div>
+        <p class="addon-desc">Multi-device coordination hub. Connect up to 10 battery packs for whole-home optimization.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Financing Callout -->
+  <div class="financing-callout">
+    <h3>No Upfront Cost Through Partner Utilities</h3>
+    <p>Live in Santa Clara County, San Jose, or East Bay? You may qualify for zero-cost deployment through your Community Choice Aggregator. Check if your utility has a program.</p>
+    <button class="btn-primary" onclick="openModal()">Check Utility Programs</button>
   </div>
 </section>
 
@@ -416,8 +1041,191 @@
 <section class="cta-section fade-up">
   <h2>Ready to Never Lose Power Again?</h2>
   <p>Join hundreds of early adopters who are taking control of their energy future. Be first in line for exclusive launch discounts.</p>
-  <a href="signup.html" class="btn-primary">Get Early Access Now →</a>
+  <button class="btn-primary" onclick="openModal()">Get Early Access Now →</button>
 </section>
+
+<!-- INTEREST FORM MODAL -->
+<div id="interestModal" class="modal">
+  <div class="modal-content">
+    <button class="modal-close" onclick="closeModal()">&times;</button>
+
+    <div id="modalForm">
+      <div class="modal-header">
+        <h2>Join Our Launch Community</h2>
+        <p>We're currently developing E4H battery systems and will launch in Spring 2026. Stay connected for exclusive early access.</p>
+      </div>
+
+      <form id="interestForm" onsubmit="submitForm(event)">
+        <div class="form-group required">
+          <label>Name</label>
+          <input type="text" name="name" required>
+        </div>
+
+        <div class="form-group required">
+          <label>Email</label>
+          <input type="email" name="email" required>
+        </div>
+
+        <div class="form-group">
+          <label>Phone (optional)</label>
+          <input type="tel" name="phone">
+        </div>
+
+        <div class="form-group required">
+          <label>Zip Code</label>
+          <input type="text" name="zipcode" required>
+        </div>
+
+        <div class="checkbox-group">
+          <label>I'm interested in:</label>
+          <div class="checkbox-item">
+            <input type="checkbox" id="starter" name="interest" value="starter">
+            <label for="starter">Starter Pack ($99)</label>
+          </div>
+          <div class="checkbox-item">
+            <input type="checkbox" id="home" name="interest" value="home">
+            <label for="home">Home Pack ($199)</label>
+          </div>
+          <div class="checkbox-item">
+            <input type="checkbox" id="power" name="interest" value="power">
+            <label for="power">Power Pack ($299)</label>
+          </div>
+          <div class="checkbox-item">
+            <input type="checkbox" id="notsure" name="interest" value="notsure">
+            <label for="notsure">Not sure yet</label>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label>How did you hear about us?</label>
+          <select name="source">
+            <option value="">Select...</option>
+            <option value="web">Web search</option>
+            <option value="social">Social media</option>
+            <option value="word">Word of mouth</option>
+            <option value="news">News article</option>
+            <option value="other">Other</option>
+          </select>
+        </div>
+
+        <div class="checkbox-group">
+          <label>What excites you most about E4H?</label>
+          <div class="checkbox-item">
+            <input type="checkbox" id="bills" name="excited" value="bills">
+            <label for="bills">Lower electricity bills</label>
+          </div>
+          <div class="checkbox-item">
+            <input type="checkbox" id="money" name="excited" value="money">
+            <label for="money">Making money from grid services</label>
+          </div>
+          <div class="checkbox-item">
+            <input type="checkbox" id="backup" name="excited" value="backup">
+            <label for="backup">Blackout backup power</label>
+          </div>
+          <div class="checkbox-item">
+            <input type="checkbox" id="portable" name="excited" value="portable">
+            <label for="portable">Portable/renter-friendly</label>
+          </div>
+          <div class="checkbox-item">
+            <input type="checkbox" id="cooking" name="excited" value="cooking">
+            <label for="cooking">Clean cooking upgrade</label>
+          </div>
+          <div class="checkbox-item">
+            <input type="checkbox" id="environment" name="excited" value="environment">
+            <label for="environment">Environmental impact</label>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label>Anything else you'd like us to know?</label>
+          <textarea name="comments"></textarea>
+        </div>
+
+        <div class="checkbox-group">
+          <div class="checkbox-item">
+            <input type="checkbox" id="updates" name="updates">
+            <label for="updates">I'd like updates on pilot programs in my area</label>
+          </div>
+          <div class="checkbox-item">
+            <input type="checkbox" id="tips" name="tips">
+            <label for="tips">Send me energy-saving tips while I wait</label>
+          </div>
+        </div>
+
+        <button type="submit" class="btn-primary" style="width: 100%; margin-top: 1.5rem;">Count Me In!</button>
+      </form>
+    </div>
+
+    <div id="modalSuccess" class="modal-success">
+      <div class="icon">✓</div>
+      <h3>You're on the list!</h3>
+      <p>Check your email for next steps. We'll keep you updated on our progress and notify you when pre-orders open.</p>
+      <p style="margin-top: 1.5rem;"><strong>Estimated launch:</strong> Spring 2026</p>
+      <button class="btn-primary" onclick="closeModal()" style="margin-top: 2rem;">Close</button>
+    </div>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-content">
+    <div class="footer-column">
+      <div class="logo" style="color: #fff; margin-bottom: 1rem;">E4<span>H</span> Energy</div>
+      <p>Making every appliance smarter, cheaper, and cleaner</p>
+      <div class="social-links">
+        <a href="#" aria-label="Twitter">𝕏</a>
+        <a href="#" aria-label="LinkedIn">in</a>
+        <a href="#" aria-label="Instagram">📷</a>
+      </div>
+    </div>
+
+    <div class="footer-column">
+      <h3>Company</h3>
+      <ul>
+        <li><a href="#how-it-works">How It Works</a></li>
+        <li><a href="#benefits">Benefits</a></li>
+        <li><a href="#pricing">Pricing</a></li>
+        <li><a href="calculator.html">Calculator</a></li>
+        <li><a href="#" onclick="openModal(); return false;">Contact Us</a></li>
+      </ul>
+    </div>
+
+    <div class="footer-column">
+      <h3>Resources</h3>
+      <ul>
+        <li><a href="calculator.html">Savings Calculator</a></li>
+        <li><a href="#">FAQs</a></li>
+        <li><a href="#">Blog (Coming Soon)</a></li>
+        <li><a href="#">Partner Utilities</a></li>
+      </ul>
+    </div>
+
+    <div class="footer-column">
+      <h3>Stay Connected</h3>
+      <p>Get energy-saving tips and launch updates</p>
+      <div class="footer-signup">
+        <input type="email" placeholder="Your email">
+        <button>Subscribe</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="footer-bottom">
+    <div class="footer-disclaimer">
+      <h4>⚠️ IMPORTANT DISCLAIMER</h4>
+      <p>E4H battery systems are currently in development and not yet available for purchase. All product specifications, pricing, and savings estimates are based on prototypes and projections. This website is for informational purposes only to gauge market interest. We are working on proof-of-concept and expect to launch pilot programs in Spring 2026. Actual product features and performance may vary.</p>
+    </div>
+
+    <div class="footer-legal">
+      <div>© 2026 E4H Integrated Energy Systems. All rights reserved.</div>
+      <div>
+        <a href="#">Privacy Policy</a>
+        <a href="#">Terms of Service</a>
+        <a href="#">Cookie Settings</a>
+      </div>
+    </div>
+  </div>
+</footer>
 
 <script>
   // Navbar scroll effect
@@ -441,9 +1249,59 @@
 
   document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
 
-  // Interactive product bubble click
-  document.querySelector('.product-bubble').addEventListener('click', () => {
-    window.location.href = 'signup.html';
+  // Calculator widget
+  const slider = document.getElementById('applianceSlider');
+  const countDisplay = document.getElementById('applianceCount');
+  const savingsDisplay = document.getElementById('savingsAmount');
+
+  const savingsData = {
+    1: '$8-12', 2: '$12-18', 3: '$16-26', 4: '$20-32', 5: '$24-38',
+    6: '$28-42', 7: '$32-48', 8: '$35-52', 9: '$38-56', 10: '$42-60'
+  };
+
+  slider.addEventListener('input', (e) => {
+    const value = e.target.value;
+    countDisplay.textContent = value;
+    savingsDisplay.textContent = savingsData[value];
+  });
+
+  // Modal functions
+  function openModal() {
+    document.getElementById('interestModal').classList.add('active');
+    document.body.style.overflow = 'hidden';
+  }
+
+  function closeModal() {
+    document.getElementById('interestModal').classList.remove('active');
+    document.body.style.overflow = '';
+    // Reset form
+    document.getElementById('modalForm').style.display = 'block';
+    document.getElementById('modalSuccess').classList.remove('active');
+    document.getElementById('interestForm').reset();
+  }
+
+  function submitForm(e) {
+    e.preventDefault();
+    // Show success message
+    document.getElementById('modalForm').style.display = 'none';
+    document.getElementById('modalSuccess').classList.add('active');
+
+    // In production, you would send this data to your backend
+    console.log('Form submitted:', new FormData(e.target));
+  }
+
+  // Close modal on outside click
+  document.getElementById('interestModal').addEventListener('click', (e) => {
+    if (e.target.id === 'interestModal') {
+      closeModal();
+    }
+  });
+
+  // Close modal on escape key
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') {
+      closeModal();
+    }
   });
 </script>
 </body>
