@@ -3,104 +3,448 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>E4H Integrated Energy Systems | Power for Everyone</title>
+<title>E4H Energy | Power That Never Quits</title>
 <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&display=swap" rel="stylesheet">
 <style>
   :root {
-    --navy: #0B1D3A; --navy-light: #132B52; --amber: #F5A623; --amber-light: #FFC857;
+    --primary: #2D6F5E; --primary-light: #3D8F7E; --accent: #E87461; --accent-light: #FF9B88;
     --green: #2ECC71; --green-soft: #D5F5E3; --off-white: #F7F5F0; --warm-gray: #E8E4DD;
     --text-dark: #1A1A1A; --text-mid: #555555; --text-light: #888888;
-    --card-shadow: 0 8px 40px rgba(11,29,58,0.08);
+    --card-shadow: 0 8px 40px rgba(45,111,94,0.08);
   }
 
   * { margin: 0; padding: 0; box-sizing: border-box; }
   html { scroll-behavior: smooth; }
   body { font-family: 'DM Sans', sans-serif; background: var(--off-white); color: var(--text-dark); overflow-x: hidden; }
 
-  nav { position: fixed; top: 0; width: 100%; z-index: 100; padding: 1rem 2.5rem; display: flex; align-items: center; justify-content: space-between; background: rgba(247,245,240,0.85); backdrop-filter: blur(16px); border-bottom: 1px solid rgba(0,0,0,0.04); }
-  .logo { font-family: 'DM Serif Display', serif; font-size: 1.55rem; color: var(--navy); text-decoration: none; }
-  .logo span { color: var(--amber); }
+  nav { position: fixed; top: 0; width: 100%; z-index: 100; padding: 1rem 2.5rem; display: flex; align-items: center; justify-content: space-between; background: rgba(247,245,240,0.95); backdrop-filter: blur(16px); border-bottom: 1px solid rgba(0,0,0,0.04); transition: 0.3s; }
+  nav.scrolled { box-shadow: 0 2px 20px rgba(45,111,94,0.06); }
+  .logo { font-family: 'DM Serif Display', serif; font-size: 1.55rem; color: var(--primary); text-decoration: none; transition: 0.3s; }
+  .logo:hover { transform: scale(1.05); }
+  .logo span { color: var(--accent); }
 
-  .btn-primary { display: inline-block; background: var(--navy); color: #fff; padding: 0.8rem 1.8rem; border-radius: 8px; font-weight: 600; text-decoration: none; transition: 0.3s; }
-  .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 4px 15px rgba(11,29,58,0.2); }
+  .btn-primary { display: inline-block; background: var(--primary); color: #fff; padding: 0.8rem 1.8rem; border-radius: 8px; font-weight: 600; text-decoration: none; transition: all 0.3s ease; box-shadow: 0 2px 8px rgba(45,111,94,0.15); }
+  .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 6px 20px rgba(45,111,94,0.25); background: var(--primary-light); }
+  .btn-primary:active { transform: translateY(0); }
 
-  .hero { padding: 10rem 2.5rem 5rem; max-width: 1200px; margin: 0 auto; display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: center; min-height: 90vh; }
-  .hero-text h1 { font-family: 'DM Serif Display', serif; font-size: clamp(2.5rem, 5vw, 3.8rem); line-height: 1.1; color: var(--navy); margin-bottom: 1.5rem; }
-  .hero-text h1 em { font-style: italic; color: var(--amber); }
-  .subtitle { font-size: 1.15rem; color: var(--text-mid); line-height: 1.6; margin-bottom: 2.5rem; }
+  .btn-secondary { display: inline-block; background: transparent; color: var(--primary); padding: 0.8rem 1.8rem; border: 2px solid var(--primary); border-radius: 8px; font-weight: 600; text-decoration: none; transition: all 0.3s ease; }
+  .btn-secondary:hover { background: var(--primary); color: #fff; transform: translateY(-2px); box-shadow: 0 6px 20px rgba(45,111,94,0.2); }
 
-  /* CIRCULAR IMAGE LOGIC */
+  /* HERO SECTION */
+  .hero { padding: 10rem 2.5rem 6rem; max-width: 1200px; margin: 0 auto; display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: center; min-height: 95vh; }
+  .hero-text h1 { font-family: 'DM Serif Display', serif; font-size: clamp(2.8rem, 5.5vw, 4.2rem); line-height: 1.1; color: var(--primary); margin-bottom: 1.5rem; }
+  .hero-text h1 em { font-style: italic; color: var(--accent); }
+  .tagline { font-size: 1.25rem; color: var(--accent); font-weight: 700; margin-bottom: 1rem; letter-spacing: 0.5px; text-transform: uppercase; }
+  .subtitle { font-size: 1.2rem; color: var(--text-mid); line-height: 1.65; margin-bottom: 2.5rem; }
+  .hero-cta { display: flex; gap: 1rem; flex-wrap: wrap; align-items: center; }
+
+  /* CIRCULAR IMAGE WITH INTERACTIVE ELEMENTS */
   .hero-visual { position: relative; display: flex; justify-content: center; align-items: center; }
   .product-bubble {
     position: relative;
-    width: 500px;
-    height: 500px;
+    width: 510px;
+    height: 510px;
     border-radius: 50%;
-    background: #fff;
-    padding: 10px; /* Border spacing */
-    box-shadow: var(--card-shadow);
+    background: linear-gradient(135deg, #fff 0%, #f8f8f8 100%);
+    padding: 10px;
+    box-shadow: var(--card-shadow), 0 0 0 1px rgba(45,111,94,0.04);
     animation: floatMain 6s ease-in-out infinite;
     display: flex;
     align-items: center;
     justify-content: center;
+    cursor: pointer;
+    transition: transform 0.3s ease;
   }
+  .product-bubble:hover { transform: scale(1.02) translateY(-10px); }
   .product-image {
     width: 100%;
     height: 100%;
-    border-radius: 50%; /* 50% radius like requested */
-    object-fit: cover; /* Ensures it fills the circle */
+    border-radius: 50%;
+    object-fit: cover;
+    display: block;
+    transition: 0.3s;
+  }
+  .product-bubble:hover .product-image { filter: brightness(1.05); }
+
+  .float-badge {
+    position: absolute;
+    background: #fff;
+    border-radius: 16px;
+    padding: 0.85rem 1.2rem;
+    box-shadow: 0 10px 40px rgba(45,111,94,0.12);
+    display: flex;
+    align-items: center;
+    gap: 0.7rem;
+    font-size: 0.85rem;
+    font-weight: 600;
+    z-index: 10;
+    animation: floatBadge 5s ease-in-out infinite;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    border: 1px solid rgba(0,0,0,0.04);
+    text-decoration: none;
+    color: var(--text-dark);
+  }
+  .float-badge:hover { transform: translateY(-5px) scale(1.05); box-shadow: 0 15px 50px rgba(45,111,94,0.18); }
+  .float-badge .icon { width: 36px; height: 36px; border-radius: 10px; display: flex; align-items: center; justify-content: center; font-size: 1.1rem; }
+
+  .badge-1 { top: 5%; right: -8%; animation-delay: 0s; }
+  .badge-1 .icon { background: linear-gradient(135deg, var(--green-soft) 0%, #B8E8CC 100%); }
+  .badge-2 { bottom: 15%; left: -12%; animation-delay: 1.5s; }
+  .badge-2 .icon { background: linear-gradient(135deg, #FFE8D6 0%, #FFD4A3 100%); }
+  .badge-3 { bottom: -5%; right: 10%; animation-delay: 3s; }
+  .badge-3 .icon { background: linear-gradient(135deg, #E8DAEF 0%, #D4BEE4 100%); }
+
+  @keyframes floatMain { 0%, 100% { transform: translateY(0) rotate(0deg); } 50% { transform: translateY(-25px) rotate(2deg); } }
+  @keyframes floatBadge { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-12px); } }
+
+  /* SECTION STYLING */
+  section { padding: 5rem 2.5rem; max-width: 1200px; margin: 0 auto; }
+  .section-header { text-align: center; margin-bottom: 4rem; }
+  .section-label { font-size: 0.85rem; font-weight: 700; color: var(--accent); text-transform: uppercase; letter-spacing: 1.5px; margin-bottom: 1rem; }
+  .section-title { font-family: 'DM Serif Display', serif; font-size: clamp(2rem, 4vw, 3rem); color: var(--primary); margin-bottom: 1rem; line-height: 1.2; }
+  .section-subtitle { font-size: 1.1rem; color: var(--text-mid); max-width: 700px; margin: 0 auto; line-height: 1.6; }
+
+  /* PROBLEM SECTION */
+  .problem-section { background: linear-gradient(135deg, #f9f9f9 0%, #fff 100%); border-radius: 32px; padding: 4rem 3rem; margin: 3rem auto; box-shadow: var(--card-shadow); }
+  .problem-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 2rem; margin-top: 3rem; }
+  .problem-card {
+    text-align: left;
+    padding: 3rem 2.5rem;
+    border-radius: 20px;
+    background: #fff;
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    cursor: pointer;
+    border: 2px solid transparent;
+    box-shadow: 0 4px 20px rgba(45,111,94,0.06);
+    text-decoration: none;
+    color: inherit;
     display: block;
   }
+  .problem-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 20px 60px rgba(45,111,94,0.15);
+    border-color: var(--accent-light);
+  }
+  .problem-icon { font-size: 3.5rem; margin-bottom: 1.5rem; filter: grayscale(0.2); transition: 0.3s; }
+  .problem-card:hover .problem-icon { filter: grayscale(0); transform: scale(1.15) rotate(-5deg); }
+  .problem-title { font-weight: 700; font-size: 1.3rem; color: var(--primary); margin-bottom: 1rem; }
+  .problem-desc { font-size: 1rem; color: var(--text-mid); line-height: 1.6; }
 
-  .float-badge { position: absolute; background: #fff; border-radius: 14px; padding: 0.75rem 1.1rem; box-shadow: var(--card-shadow); display: flex; align-items: center; gap: 0.6rem; font-size: 0.82rem; font-weight: 600; z-index: 10; animation: floatBadge 5s ease-in-out infinite; }
-  .float-badge .icon { width: 32px; height: 32px; border-radius: 8px; display: flex; align-items: center; justify-content: center; }
-  
-  .badge-1 { top: 5%; right: -5%; animation-delay: 0s; }
-  .badge-1 .icon { background: var(--green-soft); }
-  .badge-2 { bottom: 15%; left: -10%; animation-delay: 1.5s; }
-  .badge-2 .icon { background: #FFF3D6; }
-  .badge-3 { bottom: -5%; right: 10%; animation-delay: 3s; }
-  .badge-3 .icon { background: #E8DAEF; }
+  /* FEATURES SECTION */
+  .features-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 2rem; margin-top: 3rem; }
+  .feature-card {
+    background: #fff;
+    padding: 2.5rem 2rem;
+    border-radius: 20px;
+    box-shadow: var(--card-shadow);
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    border: 2px solid transparent;
+    position: relative;
+    overflow: hidden;
+  }
+  .feature-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 4px;
+    background: linear-gradient(90deg, var(--accent) 0%, var(--accent-light) 100%);
+    transform: scaleX(0);
+    transition: transform 0.4s ease;
+  }
+  .feature-card:hover::before { transform: scaleX(1); }
+  .feature-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 20px 60px rgba(45,111,94,0.15);
+    border-color: var(--accent-light);
+  }
+  .feature-icon {
+    width: 64px;
+    height: 64px;
+    background: linear-gradient(135deg, var(--accent-light) 0%, var(--accent) 100%);
+    border-radius: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 2rem;
+    margin-bottom: 1.5rem;
+    transition: 0.3s;
+  }
+  .feature-card:hover .feature-icon { transform: rotate(5deg) scale(1.1); }
+  .feature-title { font-size: 1.4rem; font-weight: 700; color: var(--primary); margin-bottom: 1rem; }
+  .feature-desc { font-size: 1rem; color: var(--text-mid); line-height: 1.6; margin-bottom: 1.5rem; }
+  .feature-benefit { display: flex; align-items: center; gap: 0.5rem; font-size: 0.9rem; color: var(--green); font-weight: 600; }
 
-  @keyframes floatMain { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-20px); } }
-  @keyframes floatBadge { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-10px); } }
+  /* HOW IT WORKS SECTION */
+  .how-it-works { background: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 100%); color: #fff; border-radius: 32px; padding: 5rem 3rem; margin: 3rem auto; }
+  .how-it-works .section-label { color: var(--accent-light); }
+  .how-it-works .section-title { color: #fff; }
+  .how-it-works .section-subtitle { color: rgba(255,255,255,0.8); }
+  .steps-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 2.5rem; margin-top: 3rem; }
+  .step-card {
+    background: rgba(255,255,255,0.08);
+    backdrop-filter: blur(10px);
+    padding: 2.5rem 2rem;
+    border-radius: 20px;
+    border: 1px solid rgba(255,255,255,0.1);
+    transition: all 0.3s ease;
+    position: relative;
+  }
+  .step-card:hover {
+    background: rgba(255,255,255,0.12);
+    transform: translateY(-8px);
+    box-shadow: 0 12px 40px rgba(0,0,0,0.2);
+  }
+  .step-number {
+    position: absolute;
+    top: -15px;
+    left: 2rem;
+    width: 50px;
+    height: 50px;
+    background: var(--accent);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 700;
+    font-size: 1.3rem;
+    color: #fff;
+    box-shadow: 0 4px 20px rgba(232,116,97,0.4);
+  }
+  .step-title { font-size: 1.3rem; font-weight: 700; margin: 2rem 0 1rem; }
+  .step-desc { color: rgba(255,255,255,0.85); line-height: 1.6; }
 
-  .fade-up { opacity: 0; transform: translateY(30px); transition: 0.8s ease-out; }
+  /* CTA SECTION */
+  .cta-section {
+    background: linear-gradient(135deg, var(--primary) 0%, #245c4f 100%);
+    color: #fff;
+    text-align: center;
+    padding: 5rem 2.5rem;
+    border-radius: 32px;
+    margin: 3rem auto;
+    position: relative;
+    overflow: hidden;
+  }
+  .cta-section::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    right: -20%;
+    width: 500px;
+    height: 500px;
+    background: radial-gradient(circle, rgba(232,116,97,0.15) 0%, transparent 70%);
+    border-radius: 50%;
+  }
+  .cta-section h2 { font-family: 'DM Serif Display', serif; font-size: clamp(2.2rem, 4vw, 3.2rem); margin-bottom: 1.5rem; position: relative; z-index: 1; }
+  .cta-section p { font-size: 1.2rem; color: rgba(255,255,255,0.9); margin-bottom: 2.5rem; max-width: 600px; margin-left: auto; margin-right: auto; position: relative; z-index: 1; }
+  .cta-section .btn-primary {
+    background: var(--accent);
+    color: #fff;
+    padding: 1.2rem 3rem;
+    font-size: 1.1rem;
+    box-shadow: 0 8px 30px rgba(232,116,97,0.3);
+    position: relative;
+    z-index: 1;
+  }
+  .cta-section .btn-primary:hover {
+    background: var(--accent-light);
+    transform: translateY(-4px);
+    box-shadow: 0 12px 40px rgba(232,116,97,0.4);
+  }
+
+  /* ANIMATIONS */
+  .fade-up { opacity: 0; transform: translateY(40px); transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1); }
   .fade-up.visible { opacity: 1; transform: translateY(0); }
+  .fade-in { opacity: 0; transition: opacity 0.8s ease; }
+  .fade-in.visible { opacity: 1; }
 
+  /* RESPONSIVE */
   @media (max-width: 900px) {
-    .hero { grid-template-columns: 1fr; text-align: center; }
-    .product-bubble { width: 300px; height: 300px; margin: 0 auto; }
+    .hero { grid-template-columns: 1fr; text-align: center; padding: 8rem 1.5rem 4rem; }
+    .hero-cta { justify-content: center; }
+    .product-bubble { width: 420px; height: 420px; margin: 0 auto; }
+    .float-badge { font-size: 0.7rem; padding: 0.6rem 0.8rem; }
+    .problem-grid { grid-template-columns: 1fr; }
+    section { padding: 3rem 1.5rem; }
+    .problem-section, .how-it-works, .cta-section { padding: 3rem 1.5rem; }
   }
 </style>
 </head>
 <body>
-<nav>
+<nav id="navbar">
   <a href="#" class="logo">E4<span>H</span> Energy</a>
   <a href="signup.html" class="btn-primary">Join Waitlist</a>
 </nav>
 
+<!-- HERO SECTION -->
 <section class="hero">
   <div class="hero-text fade-up">
+    <div class="tagline">Energy Independence for Everyone</div>
     <h1>Power that stays on when the grid <em>doesn't.</em></h1>
     <p class="subtitle">Smart appliances with built-in battery backup. Cook, stay cool, and keep the lights on through every outage—no landlord permission needed.</p>
-    <a href="signup.html" class="btn-primary" style="padding: 1.2rem 2.5rem;">Sign Up for Early Access →</a>
+    <div class="hero-cta">
+      <a href="signup.html" class="btn-primary" style="padding: 1.2rem 2.5rem;">Get Early Access →</a>
+      <a href="#how-it-works" class="btn-secondary">See How It Works</a>
+    </div>
   </div>
   <div class="hero-visual fade-up">
     <div class="product-bubble">
-      <img src="combo.png" alt="E4H System" class="product-image">
-      <div class="float-badge badge-1"><div class="icon">⚡</div><div><div style="font-size:0.7rem; opacity:0.6;">Backup</div><div>4-8h Power</div></div></div>
-      <div class="float-badge badge-2"><div class="icon">💰</div><div><div style="font-size:0.7rem; opacity:0.6;">Savings</div><div>$200+/yr</div></div></div>
-      <div class="float-badge badge-3"><div class="icon">📦</div><div><div style="font-size:0.7rem; opacity:0.6;">Portable</div><div>Take it with you</div></div></div>
+      <img src="combo.png" alt="E4H Energy System" class="product-image">
+      <a href="outages.html" class="float-badge badge-1">
+        <div class="icon">⚡</div>
+        <div><div style="font-size:0.7rem; opacity:0.7;">Backup Power</div><div>4-8 Hours</div></div>
+      </a>
+      <a href="savings.html" class="float-badge badge-2">
+        <div class="icon">💰</div>
+        <div><div style="font-size:0.7rem; opacity:0.7;">Save Annually</div><div>$200+/year</div></div>
+      </a>
+      <a href="portable.html" class="float-badge badge-3">
+        <div class="icon">📦</div>
+        <div><div style="font-size:0.7rem; opacity:0.7;">100% Portable</div><div>Move Anytime</div></div>
+      </a>
     </div>
   </div>
 </section>
 
+<!-- PROBLEM SECTION -->
+<section class="problem-section fade-up">
+  <div class="section-header">
+    <div class="section-label">Your Power Challenges</div>
+    <h2 class="section-title">Tired of Being Left in the Dark?</h2>
+    <p class="section-subtitle">We understand the frustrations of unreliable power and rising energy costs. You deserve better.</p>
+  </div>
+  <div class="problem-grid">
+    <a href="outages.html" class="problem-card">
+      <div class="problem-icon">🌩️</div>
+      <h3 class="problem-title">Frequent Outages</h3>
+      <p class="problem-desc">Grid failures leave you vulnerable. Food spoils, comfort disappears, work stops.</p>
+    </a>
+    <a href="savings.html" class="problem-card">
+      <div class="problem-icon">💸</div>
+      <h3 class="problem-title">Rising Energy Bills</h3>
+      <p class="problem-desc">Peak-time rates drain your wallet. You need control over your energy costs.</p>
+    </a>
+    <a href="portable.html" class="problem-card">
+      <div class="problem-icon">🏘️</div>
+      <h3 class="problem-title">Renting Restrictions</h3>
+      <p class="problem-desc">Can't install permanent solar? Stuck with the landlord's choices? Not anymore.</p>
+    </a>
+    <a href="installation.html" class="problem-card">
+      <div class="problem-icon">🔧</div>
+      <h3 class="problem-title">Complex Installations</h3>
+      <p class="problem-desc">Traditional backup systems require permits, contractors, and thousands upfront.</p>
+    </a>
+  </div>
+</section>
+
+<!-- FEATURES SECTION -->
+<section class="fade-up">
+  <div class="section-header">
+    <div class="section-label">What Makes Us Different</div>
+    <h2 class="section-title">Power Solutions Built for Your Life</h2>
+    <p class="section-subtitle">Smart appliances with integrated battery backup—no installation, no landlord approval, just plug in and go.</p>
+  </div>
+  <div class="features-grid">
+    <div class="feature-card">
+      <div class="feature-icon">⚡</div>
+      <h3 class="feature-title">Built-In Battery Backup</h3>
+      <p class="feature-desc">Keep cooking, cooling, and powering your essentials for 4-8 hours during outages. Seamless transition—you won't even notice.</p>
+      <div class="feature-benefit">✓ Zero downtime during grid failures</div>
+    </div>
+    <div class="feature-card">
+      <div class="feature-icon">💰</div>
+      <h3 class="feature-title">Smart Energy Savings</h3>
+      <p class="feature-desc">Automatically shift energy use to off-peak hours. Save $200+ annually on electricity without changing your lifestyle.</p>
+      <div class="feature-benefit">✓ Reduce bills by up to 30%</div>
+    </div>
+    <div class="feature-card">
+      <div class="feature-icon">🎯</div>
+      <h3 class="feature-title">No Installation Required</h3>
+      <p class="feature-desc">Plug-and-play design. Perfect for renters and homeowners alike. Take it with you when you move.</p>
+      <div class="feature-benefit">✓ No landlord permission needed</div>
+    </div>
+    <div class="feature-card">
+      <div class="feature-icon">📱</div>
+      <h3 class="feature-title">Smart App Control</h3>
+      <p class="feature-desc">Monitor energy usage, track savings, and get outage alerts. Control everything from your phone.</p>
+      <div class="feature-benefit">✓ Real-time insights & notifications</div>
+    </div>
+    <div class="feature-card">
+      <div class="feature-icon">🌱</div>
+      <h3 class="feature-title">Eco-Friendly Power</h3>
+      <p class="feature-desc">Reduce your carbon footprint while saving money. Use stored clean energy during peak grid demand.</p>
+      <div class="feature-benefit">✓ Lower emissions, greener future</div>
+    </div>
+    <div class="feature-card">
+      <div class="feature-icon">🔒</div>
+      <h3 class="feature-title">Energy Independence</h3>
+      <p class="feature-desc">Stop being at the mercy of the grid. Store power when rates are low, use it when you need it.</p>
+      <div class="feature-benefit">✓ Take control of your power</div>
+    </div>
+  </div>
+</section>
+
+<!-- HOW IT WORKS SECTION -->
+<section class="how-it-works fade-up" id="how-it-works">
+  <div class="section-header">
+    <div class="section-label">Simple Setup</div>
+    <h2 class="section-title">Get Started in Minutes</h2>
+    <p class="section-subtitle">No electricians, no permits, no hassle. Just three simple steps to energy independence.</p>
+  </div>
+  <div class="steps-grid">
+    <div class="step-card">
+      <div class="step-number">1</div>
+      <h3 class="step-title">Plug It In</h3>
+      <p class="step-desc">Simply plug your E4H appliance into any standard outlet. It works like any regular appliance—but smarter.</p>
+    </div>
+    <div class="step-card">
+      <div class="step-number">2</div>
+      <h3 class="step-title">Connect the App</h3>
+      <p class="step-desc">Download the E4H app and connect your device. Customize settings, track savings, and monitor your energy.</p>
+    </div>
+    <div class="step-card">
+      <div class="step-number">3</div>
+      <h3 class="step-title">Enjoy Reliable Power</h3>
+      <p class="step-desc">Use your appliances normally. When the grid goes down, your backup power kicks in automatically. No action needed.</p>
+    </div>
+  </div>
+</section>
+
+<!-- FINAL CTA SECTION -->
+<section class="cta-section fade-up">
+  <h2>Ready to Never Lose Power Again?</h2>
+  <p>Join hundreds of early adopters who are taking control of their energy future. Be first in line for exclusive launch discounts.</p>
+  <a href="signup.html" class="btn-primary">Get Early Access Now →</a>
+</section>
+
 <script>
+  // Navbar scroll effect
+  window.addEventListener('scroll', () => {
+    const navbar = document.getElementById('navbar');
+    if (window.scrollY > 50) {
+      navbar.classList.add('scrolled');
+    } else {
+      navbar.classList.remove('scrolled');
+    }
+  });
+
+  // Intersection Observer for fade-up animations
   const observer = new IntersectionObserver((entries) => {
-    entries.forEach(entry => { if (entry.isIntersecting) entry.target.classList.add('visible'); });
-  }, { threshold: 0.1 });
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+      }
+    });
+  }, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
+
   document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
+
+  // Interactive product bubble click
+  document.querySelector('.product-bubble').addEventListener('click', () => {
+    window.location.href = 'signup.html';
+  });
 </script>
 </body>
 </html>
