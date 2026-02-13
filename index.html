@@ -129,8 +129,8 @@
   .appliance:hover { transform: scale(1.15) rotate(-5deg); box-shadow: 0 15px 50px rgba(45,111,94,0.25); }
 
   .appliance-1 { top: calc(10% - 50px); right: calc(15% + 100px); animation-delay: 0s; }
-  .appliance-2 { top: 55%; left: calc(5% + 50px); animation-delay: 2s; }
-  .appliance-3 { bottom: 10%; right: calc(20% - 50px); animation-delay: 4s; }
+  .appliance-2 { top: 55%; left: calc(5% - 50px); animation-delay: 2s; }
+  .appliance-3 { bottom: 10%; right: calc(20% - 150px); animation-delay: 4s; }
 
   /* Connection Lines */
   .connection-line {
@@ -196,7 +196,7 @@
   .problem-icon { font-size: 3.5rem; margin-bottom: 1.5rem; filter: grayscale(0.2); transition: 0.3s; }
   .problem-card:hover .problem-icon { filter: grayscale(0); transform: scale(1.15) rotate(-5deg); }
   .problem-title { font-weight: 700; font-size: 1.3rem; color: var(--primary); margin-bottom: 1rem; }
-  .problem-desc { font-size: 0.95rem; color: var(--text-mid); line-height: 1.5; margin-bottom: 1rem; }
+  .problem-desc { font-size: 1rem; color: var(--text-mid); line-height: 1.6; margin-bottom: 1.5rem; }
 
   /* Problem Image */
   .problem-image {
@@ -318,6 +318,21 @@
   .step-title { font-size: 1.3rem; font-weight: 700; margin: 2rem 0 1rem; }
   .step-desc { color: rgba(255,255,255,0.85); line-height: 1.6; margin-bottom: 1.5rem; }
   .step-visual { background: rgba(255,255,255,0.05); padding: 1rem; border-radius: 12px; font-size: 0.85rem; }
+
+  /* Step Image */
+  .step-image {
+    width: 100%;
+    height: 180px;
+    object-fit: cover;
+    border-radius: 16px;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+    margin-bottom: 1.5rem;
+    transition: all 0.3s ease;
+  }
+  .step-card:hover .step-image {
+    box-shadow: 0 8px 30px rgba(0,0,0,0.4);
+    transform: scale(1.02);
+  }
 
   /* PRICING SECTION */
   .pricing-section { padding: 5rem 2.5rem; max-width: 1400px; margin: 0 auto; }
@@ -628,6 +643,7 @@
     .feature-card { padding: 2rem 1.5rem; }
 
     .steps-grid { grid-template-columns: 1fr; }
+    .step-image { height: 150px; }
 
     .pricing-grid { grid-template-columns: 1fr; }
     .pricing-card.featured { transform: scale(1); }
@@ -652,7 +668,7 @@
     .battery-pack { width: 100px; height: 130px; }
     .appliance { width: 60px; height: 60px; font-size: 1.8rem; }
     .section-title { font-size: 1.5rem; }
-    .problem-image { height: 120px; }
+    .step-image { height: 120px; }
   }
 </style>
 </head>
@@ -758,21 +774,55 @@
   </div>
   <div class="problem-grid">
     <div class="problem-card">
-      <img src="tou.png" alt="Time of Use Rates" class="problem-image">
+      <div class="problem-icon">📊</div>
       <h3 class="problem-title">Peak Hour Penalty</h3>
-      <p class="problem-desc">Paying 3-4x more during 4-9 PM peak hours. Average household wastes $200+/year.</p>
+      <p class="problem-desc">Every time you cook dinner, run the dishwasher, or charge devices between 4-9 PM, you're paying $0.45-0.60 per kWh instead of $0.15.</p>
+      <div class="rate-chart">
+        <div class="rate-bar">
+          <div class="bar bar-green">$0.15</div>
+          <span>Off-peak (11PM-7AM)</span>
+        </div>
+        <div class="rate-bar">
+          <div class="bar bar-yellow">$0.28</div>
+          <span>Mid-peak (7AM-4PM)</span>
+        </div>
+        <div class="rate-bar">
+          <div class="bar bar-red">$0.45-0.60</div>
+          <span>Peak (4-9PM)</span>
+        </div>
+      </div>
     </div>
 
     <div class="problem-card">
-      <img src="appliances.png" alt="Smart Appliances" class="problem-image">
+      <div class="problem-icon">🏠</div>
       <h3 class="problem-title">The Renter Trap</h3>
-      <p class="problem-desc">Can't upgrade appliances without landlord approval. E4H works with what you have.</p>
+      <p class="problem-desc">Landlords won't upgrade your appliances. Traditional efficiency programs require building modifications you can't make.</p>
+      <div class="comparison-visual">
+        <div class="comparison-item negative">
+          <div class="comparison-amount negative">❌</div>
+          <div class="comparison-label">Old Inefficient<br>Appliances</div>
+        </div>
+        <div class="comparison-item positive">
+          <div class="comparison-amount positive">✓</div>
+          <div class="comparison-label">E4H Battery Pack<br>No Permission Needed</div>
+        </div>
+      </div>
     </div>
 
     <div class="problem-card">
-      <img src="solar.png" alt="Solar Integration" class="problem-image">
-      <h3 class="problem-title">Wasted Solar Energy</h3>
-      <p class="problem-desc">Grid-connected appliances miss cheap solar hours. E4H stores & uses solar intelligently.</p>
+      <div class="problem-icon">⚡</div>
+      <h3 class="problem-title">Wasted Energy Potential</h3>
+      <p class="problem-desc">Your appliances can't talk to the grid. They miss opportunities to charge cheap and discharge expensive, leaving hundreds of dollars on the table.</p>
+      <div class="comparison-visual">
+        <div class="comparison-item negative">
+          <div class="comparison-amount negative">-$200</div>
+          <div class="comparison-label">Missed Savings/Year</div>
+        </div>
+        <div class="comparison-item positive">
+          <div class="comparison-amount positive">+$250</div>
+          <div class="comparison-label">With E4H System</div>
+        </div>
+      </div>
     </div>
   </div>
   <div class="section-footer">
@@ -837,33 +887,21 @@
   <div class="steps-grid">
     <div class="step-card">
       <div class="step-number">1</div>
+      <img src="appliances.png" alt="Plug and Play Appliances" class="step-image">
       <h3 class="step-title">Plug It In</h3>
-      <p class="step-desc">Simply plug your E4H appliance into any standard outlet. It works like any regular appliance—but smarter. Takes 2 minutes, no tools, no landlord permission.</p>
-      <div class="step-visual">
-        <p><strong>✓ Universal 120V/240V compatibility</strong></p>
-        <p>Works with: kettles, air fryers, coffee makers, slow cookers, rice cookers, toaster ovens, electric grills, portable heaters</p>
-      </div>
+      <p class="step-desc">Plug into any outlet. Works with kettles, air fryers, coffee makers, and more. No tools, no permission needed.</p>
     </div>
     <div class="step-card">
       <div class="step-number">2</div>
+      <img src="tou.png" alt="Time of Use Optimization" class="step-image">
       <h3 class="step-title">Smart Charging Happens Automatically</h3>
-      <p class="step-desc">Our AI learns your schedule and local electricity rates. It charges the battery during cheap off-peak hours (usually 11 PM-7 AM) and uses stored power during expensive peak times.</p>
-      <div class="step-visual">
-        <p><strong>What makes it smart:</strong></p>
-        <p>• Real-time utility rate monitoring<br>
-        • Weather forecast integration<br>
-        • Usage pattern learning<br>
-        • Automatic grid event participation</p>
-      </div>
+      <p class="step-desc">AI charges during cheap off-peak hours, uses stored power during expensive peak times. Automatic savings, zero effort.</p>
     </div>
     <div class="step-card">
       <div class="step-number">3</div>
+      <img src="solar.png" alt="Earn Money from Grid" class="step-image">
       <h3 class="step-title">Earn Money</h3>
-      <p class="step-desc">When the grid needs help during high-demand events, your battery automatically responds. You get paid $2-5 per event, adding up to $50-200 per year per battery.</p>
-      <div class="step-visual">
-        <p><strong>Grid event alert:</strong> Earn $3.50 by reducing load from 6-8 PM today</p>
-        <p><strong>Total VPP earnings this month:</strong> $18.50</p>
-      </div>
+      <p class="step-desc">Battery responds to grid events automatically. Earn $2-5 per event, $50-200 per year. Payments as bill credits.</p>
     </div>
   </div>
 </section>
