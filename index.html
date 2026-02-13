@@ -20,11 +20,12 @@
   nav { position: fixed; top: 0; width: 100%; z-index: 100; padding: 1rem 2.5rem; display: flex; align-items: center; justify-content: space-between; background: rgba(247,245,240,0.85); backdrop-filter: blur(16px); border-bottom: 1px solid rgba(0,0,0,0.04); }
   .logo { font-family: 'DM Serif Display', serif; font-size: 1.55rem; color: var(--navy); text-decoration: none; }
   .logo span { color: var(--amber); }
+  .nav-contact { font-size: 0.9rem; color: var(--text-mid); }
 
   .btn-primary { display: inline-block; background: var(--navy); color: #fff; padding: 0.8rem 1.8rem; border-radius: 8px; font-weight: 600; text-decoration: none; transition: 0.3s; }
   .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 4px 15px rgba(11,29,58,0.2); }
 
-  .hero { padding: 10rem 2.5rem 5rem; max-width: 1200px; margin: 0 auto; display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: center; min-height: 90vh; }
+  .hero { padding: 10rem 2.5rem 3rem; max-width: 1200px; margin: 0 auto; display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: center; min-height: 85vh; }
   .hero-text h1 { font-family: 'DM Serif Display', serif; font-size: clamp(2.5rem, 5vw, 3.8rem); line-height: 1.1; color: var(--navy); margin-bottom: 1.5rem; }
   .hero-text h1 em { font-style: italic; color: var(--amber); }
   .subtitle { font-size: 1.15rem; color: var(--text-mid); line-height: 1.6; margin-bottom: 2.5rem; }
@@ -37,7 +38,7 @@
     height: 500px;
     border-radius: 50%;
     background: #fff;
-    padding: 10px; /* Border spacing */
+    padding: 10px;
     box-shadow: var(--card-shadow);
     animation: floatMain 6s ease-in-out infinite;
     display: flex;
@@ -47,20 +48,43 @@
   .product-image {
     width: 100%;
     height: 100%;
-    border-radius: 50%; /* 50% radius like requested */
-    object-fit: cover; /* Ensures it fills the circle */
+    border-radius: 50%;
+    object-fit: cover;
     display: block;
   }
 
-  .float-badge { position: absolute; background: #fff; border-radius: 14px; padding: 0.75rem 1.1rem; box-shadow: var(--card-shadow); display: flex; align-items: center; gap: 0.6rem; font-size: 0.82rem; font-weight: 600; z-index: 10; animation: floatBadge 5s ease-in-out infinite; }
-  .float-badge .icon { width: 32px; height: 32px; border-radius: 8px; display: flex; align-items: center; justify-content: center; }
-  
-  .badge-1 { top: 5%; right: -5%; animation-delay: 0s; }
+  .float-badge {
+    position: absolute;
+    background: #fff;
+    border-radius: 14px;
+    padding: 0.85rem 1.2rem;
+    box-shadow: var(--card-shadow);
+    display: flex;
+    align-items: center;
+    gap: 0.7rem;
+    font-size: 0.85rem;
+    font-weight: 600;
+    z-index: 10;
+    animation: floatBadge 5s ease-in-out infinite;
+    white-space: nowrap;
+  }
+  .float-badge .icon {
+    width: 36px;
+    height: 36px;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.2rem;
+  }
+  .badge-content { display: flex; flex-direction: column; }
+  .badge-label { font-size: 0.7rem; opacity: 0.6; text-transform: uppercase; letter-spacing: 0.5px; }
+  .badge-value { font-size: 0.95rem; }
+
+  .badge-1 { top: 10%; right: -8%; animation-delay: 0s; }
   .badge-1 .icon { background: var(--green-soft); }
-  .badge-2 { bottom: 15%; left: -10%; animation-delay: 1.5s; }
-  .badge-2 .icon { background: #FFF3D6; }
-  .badge-3 { bottom: -5%; right: 10%; animation-delay: 3s; }
-  .badge-3 .icon { background: #E8DAEF; }
+  .badge-2 { bottom: 10%; left: -12%; animation-delay: 1.5s; }
+  .badge-2 .icon { background: #FFE8CC; }
 
   @keyframes floatMain { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-20px); } }
   @keyframes floatBadge { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-10px); } }
@@ -68,33 +92,65 @@
   .fade-up { opacity: 0; transform: translateY(30px); transition: 0.8s ease-out; }
   .fade-up.visible { opacity: 1; transform: translateY(0); }
 
+  footer {
+    padding: 2rem 2.5rem;
+    text-align: center;
+    color: var(--text-mid);
+    font-size: 0.9rem;
+    border-top: 1px solid rgba(0,0,0,0.06);
+    margin-top: 2rem;
+  }
+  footer a { color: var(--navy); text-decoration: none; font-weight: 600; }
+  footer a:hover { color: var(--amber); }
+
   @media (max-width: 900px) {
-    .hero { grid-template-columns: 1fr; text-align: center; }
-    .product-bubble { width: 300px; height: 300px; margin: 0 auto; }
+    nav { flex-direction: column; gap: 0.5rem; padding: 1rem; }
+    .nav-contact { font-size: 0.8rem; }
+    .hero { grid-template-columns: 1fr; text-align: center; padding: 8rem 1.5rem 2rem; }
+    .product-bubble { width: 320px; height: 320px; margin: 0 auto; }
+    .float-badge { padding: 0.65rem 0.9rem; font-size: 0.75rem; }
+    .badge-1 { top: 5%; right: -5%; }
+    .badge-2 { bottom: 5%; left: -8%; }
   }
 </style>
 </head>
 <body>
 <nav>
   <a href="#" class="logo">E4<span>H</span> Energy</a>
-  <a href="signup.html" class="btn-primary">Join Waitlist</a>
+  <div class="nav-contact">Contact: <a href="mailto:agao8@stanford.edu" style="color: var(--navy); text-decoration: none; font-weight: 600;">agao8@stanford.edu</a></div>
 </nav>
 
 <section class="hero">
   <div class="hero-text fade-up">
     <h1>Power that stays on when the grid <em>doesn't.</em></h1>
-    <p class="subtitle">Smart appliances with built-in battery backup. Cook, stay cool, and keep the lights on through every outage—no landlord permission needed.</p>
-    <a href="signup.html" class="btn-primary" style="padding: 1.2rem 2.5rem;">Sign Up for Early Access →</a>
+    <p class="subtitle">Smart appliances with built-in battery backup. Reliable energy independence for everyone.</p>
+    <a href="signup.html" class="btn-primary" style="padding: 1.2rem 2.5rem;">Join Waitlist →</a>
   </div>
   <div class="hero-visual fade-up">
     <div class="product-bubble">
-      <img src="combo.png" alt="E4H System" class="product-image">
-      <div class="float-badge badge-1"><div class="icon">⚡</div><div><div style="font-size:0.7rem; opacity:0.6;">Backup</div><div>4-8h Power</div></div></div>
-      <div class="float-badge badge-2"><div class="icon">💰</div><div><div style="font-size:0.7rem; opacity:0.6;">Savings</div><div>$200+/yr</div></div></div>
-      <div class="float-badge badge-3"><div class="icon">📦</div><div><div style="font-size:0.7rem; opacity:0.6;">Portable</div><div>Take it with you</div></div></div>
+      <img src="combo.png" alt="E4H Smart Battery System" class="product-image">
+      <div class="float-badge badge-1">
+        <div class="icon">⚡</div>
+        <div class="badge-content">
+          <div class="badge-label">Power Backup</div>
+          <div class="badge-value">4-8 Hours</div>
+        </div>
+      </div>
+      <div class="float-badge badge-2">
+        <div class="icon">🔋</div>
+        <div class="badge-content">
+          <div class="badge-label">Portable</div>
+          <div class="badge-value">Take Anywhere</div>
+        </div>
+      </div>
     </div>
   </div>
 </section>
+
+<footer>
+  <p>E4H Integrated Energy Systems</p>
+  <p style="margin-top: 0.5rem;">Contact: Almanzo Gao | <a href="mailto:agao8@stanford.edu">agao8@stanford.edu</a></p>
+</footer>
 
 <script>
   const observer = new IntersectionObserver((entries) => {
