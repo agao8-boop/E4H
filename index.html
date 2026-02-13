@@ -645,7 +645,7 @@
     </div>
 
     <div class="hero-cta">
-      <a href="#" class="btn-primary" style="padding: 1.2rem 2.5rem;" onclick="openModal(); return false;">Get Early Access →</a>
+      <a href="#" class="btn-primary" style="padding: 1.2rem 2.5rem;" onclick="openModal(); return false;">I'm Interested to Know More →</a>
       <a href="#how-it-works" class="btn-secondary">See How It Works</a>
     </div>
   </div>
@@ -897,8 +897,7 @@
       </div>
 
       <div class="pricing-cta">
-        <button class="btn-primary" onclick="openModal()">Pre-Order Starter Pack</button>
-        <div class="pricing-availability">Estimated delivery: Spring 2026</div>
+        <button class="btn-primary" onclick="openModal()">I'm Interested</button>
       </div>
     </div>
 
@@ -949,8 +948,7 @@
       </div>
 
       <div class="pricing-cta">
-        <button class="btn-primary" onclick="openModal()">Pre-Order Home Pack</button>
-        <div class="pricing-availability">Estimated delivery: Spring 2026</div>
+        <button class="btn-primary" onclick="openModal()">I'm Interested</button>
       </div>
     </div>
 
@@ -1001,8 +999,7 @@
       </div>
 
       <div class="pricing-cta">
-        <button class="btn-primary" onclick="openModal()">Pre-Order Power Pack</button>
-        <div class="pricing-availability">Estimated delivery: Spring 2026</div>
+        <button class="btn-primary" onclick="openModal()">I'm Interested</button>
       </div>
     </div>
   </div>
@@ -1028,20 +1025,13 @@
       </div>
     </div>
   </div>
-
-  <!-- Financing Callout -->
-  <div class="financing-callout">
-    <h3>No Upfront Cost Through Partner Utilities</h3>
-    <p>Live in Santa Clara County, San Jose, or East Bay? You may qualify for zero-cost deployment through your Community Choice Aggregator. Check if your utility has a program.</p>
-    <button class="btn-primary" onclick="openModal()">Check Utility Programs</button>
-  </div>
 </section>
 
 <!-- FINAL CTA SECTION -->
 <section class="cta-section fade-up">
   <h2>Ready to Never Lose Power Again?</h2>
   <p>Join hundreds of early adopters who are taking control of their energy future. Be first in line for exclusive launch discounts.</p>
-  <button class="btn-primary" onclick="openModal()">Get Early Access Now →</button>
+  <button class="btn-primary" onclick="openModal()">I'm Interested to Know More →</button>
 </section>
 
 <!-- INTEREST FORM MODAL -->
@@ -1052,7 +1042,7 @@
     <div id="modalForm">
       <div class="modal-header">
         <h2>Join Our Launch Community</h2>
-        <p>We're currently developing E4H battery systems and will launch in Spring 2026. Stay connected for exclusive early access.</p>
+        <p>We're currently developing E4H battery systems. Stay connected for exclusive early access.</p>
       </div>
 
       <form id="interestForm" onsubmit="submitForm(event)">
@@ -1159,8 +1149,7 @@
     <div id="modalSuccess" class="modal-success">
       <div class="icon">✓</div>
       <h3>You're on the list!</h3>
-      <p>Check your email for next steps. We'll keep you updated on our progress and notify you when pre-orders open.</p>
-      <p style="margin-top: 1.5rem;"><strong>Estimated launch:</strong> Spring 2026</p>
+      <p>Check your email for next steps. We'll keep you updated on our progress.</p>
       <button class="btn-primary" onclick="closeModal()" style="margin-top: 2rem;">Close</button>
     </div>
   </div>
@@ -1282,12 +1271,22 @@
 
   function submitForm(e) {
     e.preventDefault();
-    // Show success message
-    document.getElementById('modalForm').style.display = 'none';
-    document.getElementById('modalSuccess').classList.add('active');
 
-    // In production, you would send this data to your backend
-    console.log('Form submitted:', new FormData(e.target));
+    const scriptURL = 'https://script.google.com/macros/s/AKfycbxOqfFuqTr0tcxawTEDb49uqD4f8waVV7fY2uMZBAFBNUwkFw9nNrAl4ZG54QhsqWwM2A/exec';
+
+    fetch(scriptURL, {
+      method: 'POST',
+      body: new FormData(e.target),
+      mode: 'no-cors'
+    })
+    .then(() => {
+      document.getElementById('modalForm').style.display = 'none';
+      document.getElementById('modalSuccess').classList.add('active');
+    })
+    .catch(error => {
+      alert('Error submitting form. Please try again.');
+      console.error('Error:', error);
+    });
   }
 
   // Close modal on outside click
