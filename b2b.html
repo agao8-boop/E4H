@@ -1,0 +1,571 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>B2B Partnership | E4H Energy</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --navy: #0B1D3A;
+    --navy-light: #132B52;
+    --amber: #F5A623;
+    --off-white: #F7F5F0;
+    --warm-gray: #F1EDE7;
+    --text-mid: #555555;
+    --card-shadow: 0 8px 40px rgba(11,29,58,0.08);
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--off-white);
+    color: var(--navy);
+    line-height: 1.6;
+  }
+
+  /* Navigation */
+  nav {
+    padding: 2rem 4rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 1400px;
+    margin: 0 auto;
+  }
+
+  .logo {
+    font-family: 'DM Serif Display', serif;
+    font-size: 1.55rem;
+    color: var(--navy);
+    text-decoration: none;
+  }
+
+  .logo span { color: var(--amber); }
+
+  .nav-links {
+    display: flex;
+    gap: 2.5rem;
+    align-items: center;
+  }
+
+  .nav-links a {
+    text-decoration: none;
+    color: var(--text-mid);
+    font-weight: 500;
+    transition: color 0.3s;
+  }
+
+  .nav-links a:hover {
+    color: var(--navy);
+  }
+
+  /* Hero Section */
+  .hero {
+    text-align: center;
+    padding: 4rem 2rem;
+    max-width: 1000px;
+    margin: 0 auto;
+  }
+
+  .hero h1 {
+    font-family: 'DM Serif Display', serif;
+    font-size: 3.5rem;
+    color: var(--navy);
+    margin-bottom: 1.5rem;
+    line-height: 1.2;
+  }
+
+  .hero .subtitle {
+    font-size: 1.25rem;
+    color: var(--text-mid);
+    margin-bottom: 2rem;
+    max-width: 700px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  /* Main Content */
+  .container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 2rem 4rem;
+  }
+
+  .section {
+    margin-bottom: 5rem;
+  }
+
+  .section-title {
+    font-family: 'DM Serif Display', serif;
+    font-size: 2.5rem;
+    color: var(--navy);
+    margin-bottom: 1.5rem;
+    text-align: center;
+  }
+
+  .section-intro {
+    font-size: 1.1rem;
+    color: var(--text-mid);
+    text-align: center;
+    max-width: 800px;
+    margin: 0 auto 3rem;
+  }
+
+  /* Partnership Cards */
+  .partnership-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 2rem;
+    margin-bottom: 3rem;
+  }
+
+  .partnership-card {
+    background: white;
+    padding: 2.5rem;
+    border-radius: 20px;
+    box-shadow: var(--card-shadow);
+    transition: transform 0.3s;
+  }
+
+  .partnership-card:hover {
+    transform: translateY(-5px);
+  }
+
+  .partnership-card h3 {
+    font-family: 'DM Serif Display', serif;
+    font-size: 1.8rem;
+    color: var(--navy);
+    margin-bottom: 1rem;
+  }
+
+  .partnership-card p {
+    color: var(--text-mid);
+    margin-bottom: 1.5rem;
+    font-size: 1rem;
+  }
+
+  .partnership-card ul {
+    list-style: none;
+    padding: 0;
+  }
+
+  .partnership-card li {
+    padding: 0.5rem 0;
+    color: var(--text-mid);
+    position: relative;
+    padding-left: 1.5rem;
+  }
+
+  .partnership-card li:before {
+    content: "✓";
+    position: absolute;
+    left: 0;
+    color: var(--amber);
+    font-weight: bold;
+  }
+
+  /* Payment Models */
+  .payment-models {
+    background: white;
+    padding: 3rem;
+    border-radius: 24px;
+    box-shadow: var(--card-shadow);
+  }
+
+  .payment-model {
+    margin-bottom: 3rem;
+    padding-bottom: 3rem;
+    border-bottom: 2px solid var(--warm-gray);
+  }
+
+  .payment-model:last-child {
+    margin-bottom: 0;
+    padding-bottom: 0;
+    border-bottom: none;
+  }
+
+  .payment-model h3 {
+    font-family: 'DM Serif Display', serif;
+    font-size: 2rem;
+    color: var(--navy);
+    margin-bottom: 1rem;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+  }
+
+  .model-tag {
+    background: var(--amber);
+    color: white;
+    font-size: 0.7rem;
+    font-weight: 700;
+    padding: 0.3rem 0.8rem;
+    border-radius: 20px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+
+  .payment-model h4 {
+    color: var(--navy);
+    font-size: 1.2rem;
+    margin: 1.5rem 0 0.8rem;
+  }
+
+  .payment-model p {
+    color: var(--text-mid);
+    margin-bottom: 1rem;
+    line-height: 1.8;
+  }
+
+  .payment-model ul {
+    list-style: none;
+    padding: 0;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 1rem;
+  }
+
+  .payment-model li {
+    padding: 0.8rem 1rem;
+    background: var(--warm-gray);
+    border-radius: 12px;
+    color: var(--navy);
+    position: relative;
+    padding-left: 2.5rem;
+  }
+
+  .payment-model li:before {
+    content: "→";
+    position: absolute;
+    left: 1rem;
+    color: var(--amber);
+    font-weight: bold;
+  }
+
+  /* CTA Section */
+  .cta-section {
+    text-align: center;
+    background: var(--navy);
+    color: white;
+    padding: 4rem 2rem;
+    border-radius: 24px;
+    margin-top: 4rem;
+  }
+
+  .cta-section h2 {
+    font-family: 'DM Serif Display', serif;
+    font-size: 2.5rem;
+    margin-bottom: 1rem;
+  }
+
+  .cta-section p {
+    font-size: 1.2rem;
+    margin-bottom: 2rem;
+    opacity: 0.9;
+  }
+
+  .btn-primary {
+    background: var(--amber);
+    color: white;
+    padding: 1rem 2.5rem;
+    border-radius: 12px;
+    text-decoration: none;
+    font-weight: 700;
+    display: inline-block;
+    transition: transform 0.3s, box-shadow 0.3s;
+    border: none;
+    cursor: pointer;
+    font-size: 1.1rem;
+  }
+
+  .btn-primary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(245,166,35,0.3);
+  }
+
+  /* Footer */
+  footer {
+    text-align: center;
+    padding: 3rem 2rem;
+    color: var(--text-mid);
+    font-size: 0.9rem;
+  }
+
+  footer a {
+    color: var(--navy);
+    text-decoration: none;
+    font-weight: 600;
+  }
+
+  /* Responsive */
+  @media (max-width: 900px) {
+    nav {
+      padding: 1.5rem 2rem;
+      flex-direction: column;
+      gap: 1.5rem;
+    }
+
+    .nav-links {
+      flex-direction: column;
+      gap: 1rem;
+    }
+
+    .hero h1 {
+      font-size: 2.5rem;
+    }
+
+    .section-title {
+      font-size: 2rem;
+    }
+
+    .partnership-grid {
+      grid-template-columns: 1fr;
+    }
+
+    .payment-models {
+      padding: 2rem;
+    }
+  }
+
+  @media (max-width: 480px) {
+    .hero h1 {
+      font-size: 2rem;
+    }
+
+    .hero .subtitle {
+      font-size: 1rem;
+    }
+
+    .partnership-card {
+      padding: 1.5rem;
+    }
+
+    .payment-models {
+      padding: 1.5rem;
+    }
+
+    .payment-model h3 {
+      font-size: 1.5rem;
+      flex-direction: column;
+      align-items: flex-start;
+    }
+  }
+</style>
+</head>
+<body>
+
+<!-- Navigation -->
+<nav>
+  <a href="index.html" class="logo">E4<span>H</span> Energy</a>
+  <div class="nav-links">
+    <a href="index.html">Home</a>
+    <a href="index.html#how-it-works">How It Works</a>
+    <a href="index.html#pricing">Pricing</a>
+    <a href="calculator.html">Calculator</a>
+    <a href="b2b.html" style="color: var(--navy);">B2B Partnership</a>
+  </div>
+</nav>
+
+<!-- Hero Section -->
+<section class="hero">
+  <h1>Partner with E4H Energy</h1>
+  <p class="subtitle">Powering communities through flexible, scalable energy solutions. Join us in building local energy resilience with partnerships designed for impact.</p>
+</section>
+
+<!-- Main Content -->
+<div class="container">
+
+  <!-- Partnership Types -->
+  <section class="section">
+    <h2 class="section-title">Partnership Opportunities</h2>
+    <p class="section-intro">We work with forward-thinking organizations to deliver clean, reliable energy solutions at scale. Whether you're a community choice aggregator, local government, or manufacturing partner, we have flexible models to fit your needs.</p>
+
+    <div class="partnership-grid">
+
+      <!-- CCA Partnership -->
+      <div class="partnership-card">
+        <h3>Community Choice Aggregators (CCAs)</h3>
+        <p>Partner with E4H to provide your community members with accessible, behind-the-meter energy storage solutions that complement your clean energy procurement.</p>
+        <ul>
+          <li>Bulk procurement discounts for members</li>
+          <li>Co-branded customer programs</li>
+          <li>Local job creation & training</li>
+          <li>Grid load reduction benefits</li>
+          <li>Demand response integration</li>
+          <li>Data sharing agreements</li>
+        </ul>
+      </div>
+
+      <!-- Local Government -->
+      <div class="partnership-card">
+        <h3>Local Government</h3>
+        <p>Deploy E4H energy solutions across municipal facilities, affordable housing, and community resilience centers to strengthen local infrastructure.</p>
+        <ul>
+          <li>Municipal facility deployments</li>
+          <li>Affordable housing programs</li>
+          <li>Emergency preparedness hubs</li>
+          <li>Grant funding assistance</li>
+          <li>Public education campaigns</li>
+          <li>Workforce development programs</li>
+        </ul>
+      </div>
+
+      <!-- Vertical Integration -->
+      <div class="partnership-card">
+        <h3>Vertical Integration Partners</h3>
+        <p>Integrate E4H technology into your existing manufacturing, distribution, or service offerings to expand your product portfolio and market reach.</p>
+        <ul>
+          <li>White-label opportunities</li>
+          <li>Supply chain integration</li>
+          <li>Co-manufacturing agreements</li>
+          <li>Distribution partnerships</li>
+          <li>Joint product development</li>
+          <li>Technology licensing</li>
+        </ul>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- Flexible Payment Models -->
+  <section class="section">
+    <h2 class="section-title">Flexible Financing Options</h2>
+    <p class="section-intro">We understand that different customers have different needs. Our flexible payment models make energy resilience accessible to everyone, from individual homeowners to large organizations.</p>
+
+    <div class="payment-models">
+
+      <!-- Lease Model -->
+      <div class="payment-model">
+        <h3>Lease Model <span class="model-tag">Popular</span></h3>
+        <p>Spread the cost over time with our flexible leasing options. Perfect for customers who want immediate energy resilience without a large upfront investment.</p>
+
+        <h4>How It Works:</h4>
+        <ul>
+          <li>No upfront purchase required</li>
+          <li>Monthly payment plans (12, 24, 36, 48 months)</li>
+          <li>Maintenance & support included</li>
+          <li>Option to purchase at end of term</li>
+          <li>Upgrade path to newer models</li>
+          <li>Tax benefits for businesses</li>
+        </ul>
+
+        <h4>Best For:</h4>
+        <p>Homeowners, small businesses, and organizations that want predictable monthly costs and the flexibility to upgrade over time.</p>
+      </div>
+
+      <!-- Pay-As-You-Go (PAYGo) -->
+      <div class="payment-model">
+        <h3>Pay-As-You-Go (PAYGo) <span class="model-tag">Most Flexible</span></h3>
+        <p>Pay for your energy storage based on actual usage and savings. This performance-based model aligns our success with yours, making energy resilience accessible to everyone.</p>
+
+        <h4>How It Works:</h4>
+        <ul>
+          <li>Zero upfront cost</li>
+          <li>Pay based on energy savings</li>
+          <li>Built-in metering & monitoring</li>
+          <li>Remote management included</li>
+          <li>Cancel or own after minimum term</li>
+          <li>Scales with your usage</li>
+        </ul>
+
+        <h4>Best For:</h4>
+        <p>Renters, income-qualified households, and customers who want to try before they buy with zero initial investment.</p>
+      </div>
+
+      <!-- Bulk/Fleet Pricing -->
+      <div class="payment-model">
+        <h3>Bulk & Fleet Procurement</h3>
+        <p>Organizations purchasing multiple units benefit from volume discounts, streamlined deployment, and centralized management tools.</p>
+
+        <h4>How It Works:</h4>
+        <ul>
+          <li>Volume-based pricing tiers</li>
+          <li>Coordinated installation schedules</li>
+          <li>Fleet management dashboard</li>
+          <li>Aggregated demand response</li>
+          <li>Custom financing structures</li>
+          <li>Dedicated account management</li>
+        </ul>
+
+        <h4>Best For:</h4>
+        <p>CCAs, housing authorities, property management companies, and municipalities deploying across multiple locations.</p>
+      </div>
+
+      <!-- Power Purchase Agreement (PPA) -->
+      <div class="payment-model">
+        <h3>Power Purchase Agreement (PPA)</h3>
+        <p>A third-party ownership model where we own and maintain the equipment while you purchase the energy services at a predetermined rate.</p>
+
+        <h4>How It Works:</h4>
+        <ul>
+          <li>E4H owns & maintains equipment</li>
+          <li>Customer pays per kWh delivered</li>
+          <li>Fixed rate for contract term</li>
+          <li>20-25 year agreements typical</li>
+          <li>All maintenance included</li>
+          <li>Performance guarantees</li>
+        </ul>
+
+        <h4>Best For:</h4>
+        <p>Non-profit organizations, municipal facilities, and commercial properties seeking predictable energy costs without capital expenditure.</p>
+      </div>
+
+      <!-- Community Solar + Storage Model -->
+      <div class="payment-model">
+        <h3>Community Solar + Storage Model</h3>
+        <p>Combine community solar subscriptions with shared battery storage for maximum savings and resilience at the neighborhood level.</p>
+
+        <h4>How It Works:</h4>
+        <ul>
+          <li>Shared solar + storage infrastructure</li>
+          <li>Virtual net metering credits</li>
+          <li>Proportional cost allocation</li>
+          <li>Community resilience hub option</li>
+          <li>Subscription-based access</li>
+          <li>Scalable for any community size</li>
+        </ul>
+
+        <h4>Best For:</h4>
+        <p>Apartment complexes, homeowners associations, and communities where individual installations aren't feasible.</p>
+      </div>
+
+      <!-- Grant & Incentive Assistance -->
+      <div class="payment-model">
+        <h3>Grant & Incentive Assistance</h3>
+        <p>We help partners navigate and access available grants, rebates, and incentive programs to reduce total project costs.</p>
+
+        <h4>Available Programs:</h4>
+        <ul>
+          <li>Federal ITC (30% tax credit)</li>
+          <li>State rebate programs</li>
+          <li>Utility demand response incentives</li>
+          <li>Low-income solar programs (SASH, DAC-SASH)</li>
+          <li>Energy resilience grants</li>
+          <li>SGIP (Self-Generation Incentive Program)</li>
+        </ul>
+
+        <h4>Our Support:</h4>
+        <p>Full grant writing assistance, application management, compliance documentation, and incentive claim processing.</p>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- CTA Section -->
+  <div class="cta-section">
+    <h2>Ready to Partner?</h2>
+    <p>Let's discuss how E4H can help you deliver energy resilience to your community or customers.</p>
+    <a href="index.html#interest-modal" class="btn-primary">Start the Conversation →</a>
+  </div>
+
+</div>
+
+<!-- Footer -->
+<footer>
+  <p>&copy; 2026 E4H Energy. Delivery dates later in 2026. | <a href="index.html">Return to Home</a></p>
+</footer>
+
+</body>
+</html>

@@ -680,6 +680,7 @@
     <a href="#benefits">Benefits</a>
     <a href="#pricing">Pricing</a>
     <a href="calculator.html">Calculator</a>
+    <a href="b2b.html">B2B Partnership</a>
   </div>
   <div style="display: flex; gap: 1rem; align-items: center;">
     <a href="#" class="btn-secondary" onclick="openContactModal(); return false;">Contact Us</a>
@@ -1086,6 +1087,20 @@
         <div class="form-group required">
           <label>Zip Code</label>
           <input type="text" name="zipcode" required>
+        </div>
+
+        <div class="form-group required">
+          <label>I am a:</label>
+          <div style="display: flex; flex-direction: column; gap: 0.8rem; margin-top: 0.5rem;">
+            <label style="display: flex; align-items: center; padding: 0.8rem; border: 2px solid #E8E4DD; border-radius: 8px; cursor: pointer; transition: 0.2s;">
+              <input type="radio" name="user_type" value="Individual Customer" required style="margin-right: 0.8rem; width: 18px; height: 18px; accent-color: var(--navy);">
+              <span style="font-weight: 500;">Individual Customer</span>
+            </label>
+            <label style="display: flex; align-items: center; padding: 0.8rem; border: 2px solid #E8E4DD; border-radius: 8px; cursor: pointer; transition: 0.2s;">
+              <input type="radio" name="user_type" value="B2B/Organization" required style="margin-right: 0.8rem; width: 18px; height: 18px; accent-color: var(--navy);">
+              <span style="font-weight: 500;">B2B / Organization</span>
+            </label>
+          </div>
         </div>
 
         <div class="checkbox-group">
