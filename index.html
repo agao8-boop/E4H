@@ -128,9 +128,9 @@
   }
   .appliance:hover { transform: scale(1.15) rotate(-5deg); box-shadow: 0 15px 50px rgba(45,111,94,0.25); }
 
-  .appliance-1 { top: 10%; right: 15%; animation-delay: 0s; }
-  .appliance-2 { top: 55%; left: 5%; animation-delay: 2s; }
-  .appliance-3 { bottom: 10%; right: 20%; animation-delay: 4s; }
+  .appliance-1 { top: calc(10% - 50px); right: 15%; animation-delay: 0s; }
+  .appliance-2 { top: 55%; left: calc(5% + 50px); animation-delay: 2s; }
+  .appliance-3 { bottom: 10%; right: calc(20% - 50px); animation-delay: 4s; }
 
   /* Connection Lines */
   .connection-line {
@@ -613,6 +613,7 @@
     <a href="calculator.html">Calculator</a>
   </div>
   <div style="display: flex; gap: 1rem; align-items: center;">
+    <a href="#" class="btn-secondary" onclick="openContactModal(); return false;">Contact Us</a>
     <a href="#" class="btn-primary" onclick="openModal(); return false;">I'm Interested</a>
   </div>
 </nav>
@@ -1155,17 +1156,33 @@
   </div>
 </div>
 
+<!-- CONTACT MODAL -->
+<div id="contactModal" class="modal">
+  <div class="modal-content" style="max-width: 500px;">
+    <button class="modal-close" onclick="closeContactModal()">&times;</button>
+
+    <div style="text-align: center; padding: 2rem 1rem;">
+      <h2 style="font-family: 'DM Serif Display', serif; font-size: 2rem; color: var(--primary); margin-bottom: 2rem;">Contact Us</h2>
+
+      <div style="background: var(--warm-gray); padding: 2rem; border-radius: 16px; margin-bottom: 1.5rem;">
+        <p style="font-size: 1.1rem; font-weight: 600; color: var(--text-dark); margin-bottom: 0.5rem;">Almanzo Gao</p>
+        <p style="font-size: 1.2rem; color: var(--primary); font-weight: 600; margin-bottom: 1.5rem;" id="emailAddress">agao8@stanford.edu</p>
+        <button class="btn-primary" onclick="copyEmail()" style="padding: 0.8rem 2rem;">
+          <span id="copyButtonText">Copy Email Address</span>
+        </button>
+      </div>
+
+      <p style="font-size: 0.9rem; color: var(--text-mid);">Feel free to reach out with any questions or feedback!</p>
+    </div>
+  </div>
+</div>
+
 <!-- FOOTER -->
 <footer>
   <div class="footer-content">
     <div class="footer-column">
       <div class="logo" style="color: #fff; margin-bottom: 1rem;">E4<span>H</span> Energy</div>
       <p>Making every appliance smarter, cheaper, and cleaner</p>
-      <div class="social-links">
-        <a href="#" aria-label="Twitter">𝕏</a>
-        <a href="#" aria-label="LinkedIn">in</a>
-        <a href="#" aria-label="Instagram">📷</a>
-      </div>
     </div>
 
     <div class="footer-column">
@@ -1202,7 +1219,7 @@
   <div class="footer-bottom">
     <div class="footer-disclaimer">
       <h4>⚠️ IMPORTANT DISCLAIMER</h4>
-      <p>E4H battery systems are currently in development and not yet available for purchase. All product specifications, pricing, and savings estimates are based on prototypes and projections. This website is for informational purposes only to gauge market interest. We are working on proof-of-concept and expect to launch pilot programs in Spring 2026. Actual product features and performance may vary.</p>
+      <p>E4H battery systems are currently in development and not yet available for purchase. All product specifications, pricing, and savings estimates are based on prototypes and projections. This website is for informational purposes only to gauge market interest. We are working on proof-of-concept and expect to launch pilot programs later in 2026. Actual product features and performance may vary.</p>
     </div>
 
     <div class="footer-legal">
@@ -1289,6 +1306,30 @@
     });
   }
 
+  // Contact modal functions
+  function openContactModal() {
+    document.getElementById('contactModal').classList.add('active');
+    document.body.style.overflow = 'hidden';
+  }
+
+  function closeContactModal() {
+    document.getElementById('contactModal').classList.remove('active');
+    document.body.style.overflow = '';
+  }
+
+  function copyEmail() {
+    const email = 'agao8@stanford.edu';
+    navigator.clipboard.writeText(email).then(() => {
+      const button = document.getElementById('copyButtonText');
+      button.textContent = '✓ Copied!';
+      setTimeout(() => {
+        button.textContent = 'Copy Email Address';
+      }, 2000);
+    }).catch(err => {
+      alert('Failed to copy email. Please copy manually: agao8@stanford.edu');
+    });
+  }
+
   // Close modal on outside click
   document.getElementById('interestModal').addEventListener('click', (e) => {
     if (e.target.id === 'interestModal') {
@@ -1296,10 +1337,17 @@
     }
   });
 
+  document.getElementById('contactModal').addEventListener('click', (e) => {
+    if (e.target.id === 'contactModal') {
+      closeContactModal();
+    }
+  });
+
   // Close modal on escape key
   document.addEventListener('keydown', (e) => {
     if (e.key === 'Escape') {
       closeModal();
+      closeContactModal();
     }
   });
 </script>
