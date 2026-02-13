@@ -23,8 +23,26 @@
   .nav-contact { font-size: 0.9rem; color: var(--text-mid); }
   .nav-contact a { color: var(--primary); text-decoration: none; font-weight: 600; }
   .nav-contact a:hover { color: var(--accent); }
+  .btn-contact { display: inline-block; background: var(--primary); color: #fff; padding: 0.6rem 1.4rem; border-radius: 6px; font-weight: 600; text-decoration: none; transition: all 0.3s ease; border: none; cursor: pointer; font-size: 0.9rem; margin-left: 0.5rem; }
+  .btn-contact:hover { background: var(--primary-light); }
   .btn-primary { display: inline-block; background: var(--primary); color: #fff; padding: 0.8rem 1.8rem; border-radius: 8px; font-weight: 600; text-decoration: none; transition: all 0.3s ease; box-shadow: 0 2px 8px rgba(45,111,94,0.15); border: none; cursor: pointer; }
   .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 6px 20px rgba(45,111,94,0.25); background: var(--primary-light); }
+
+  /* CONTACT POPUP MODAL */
+  .modal { display: none; position: fixed; z-index: 1000; left: 0; top: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.5); backdrop-filter: blur(4px); }
+  .modal.show { display: flex; align-items: center; justify-content: center; }
+  .modal-content { background: #fff; padding: 2.5rem; border-radius: 20px; max-width: 400px; width: 90%; box-shadow: 0 20px 60px rgba(45,111,94,0.3); animation: modalSlideIn 0.3s ease-out; }
+  @keyframes modalSlideIn { from { transform: translateY(-50px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
+  .modal-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.5rem; }
+  .modal-title { font-family: 'DM Serif Display', serif; font-size: 1.8rem; color: var(--primary); }
+  .modal-close { background: none; border: none; font-size: 2rem; color: var(--text-mid); cursor: pointer; transition: 0.2s; }
+  .modal-close:hover { color: var(--accent); transform: rotate(90deg); }
+  .email-box { display: flex; align-items: center; gap: 1rem; background: var(--off-white); padding: 1rem 1.5rem; border-radius: 12px; margin: 1.5rem 0; }
+  .email-text { flex: 1; font-size: 1.1rem; color: var(--primary); font-weight: 600; }
+  .copy-btn { background: var(--primary); color: #fff; border: none; padding: 0.6rem 1.2rem; border-radius: 8px; cursor: pointer; font-weight: 600; transition: 0.3s; display: flex; align-items: center; gap: 0.5rem; font-size: 0.9rem; }
+  .copy-btn:hover { background: var(--primary-light); transform: scale(1.05); }
+  .copy-btn.copied { background: var(--green); }
+  .copy-icon { font-size: 1.2rem; }
 
   /* HERO SECTION */
   .hero { padding: 10rem 2.5rem 6rem; max-width: 1200px; margin: 0 auto; display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: center; min-height: 90vh; }
@@ -192,7 +210,9 @@
 <body>
 <nav id="navbar">
   <a href="#" class="logo">E4<span>H</span> Energy</a>
-  <div class="nav-contact">Contact: <a href="mailto:agao8@stanford.edu">agao8@stanford.edu</a></div>
+  <div style="display: flex; align-items: center; gap: 1rem;">
+    <button class="btn-contact" onclick="openContactModal()">Contact Us</button>
+  </div>
 </nav>
 
 <!-- HERO SECTION -->
@@ -200,7 +220,7 @@
   <div class="hero-text fade-up">
     <h1>Power that stays on when the grid <em>doesn't.</em></h1>
     <p class="subtitle">Universal battery packs that plug into your existing appliances. Reliable energy independence for everyone.</p>
-    <a href="signup.html" class="btn-primary" style="padding: 1.2rem 2.5rem;">Join Waitlist →</a>
+    <a href="signup.html" class="btn-primary" style="padding: 1.2rem 2.5rem;">I'm Interested →</a>
   </div>
   <div class="hero-visual fade-up">
     <div class="product-illustration">
@@ -232,7 +252,7 @@
 <section class="fade-up" id="benefits">
   <div class="section-header">
     <h2 class="section-title">How E4H Improves Your Daily Life</h2>
-    <p class="section-subtitle">Smart appliances with integrated battery backup—no installation, no landlord approval</p>
+    <p class="section-subtitle">Battery-powered appliances—no installation required</p>
   </div>
   <div class="features-grid">
     <div class="feature-card">
@@ -261,23 +281,72 @@
 <!-- CTA SECTION -->
 <section class="cta-section fade-up">
   <h2>Ready to Take Control of Your Energy?</h2>
-  <p>Join our community to stay updated on launch timelines and be first in line when we're ready.</p>
-  <a href="signup.html" class="btn-primary">Join Waitlist Now →</a>
+  <p>Stay updated on our launch and be first to know when we're ready.</p>
+  <a href="signup.html" class="btn-primary">I'm Interested →</a>
 </section>
 
 <!-- FOOTER -->
 <footer>
   <div class="footer-content">
     <a href="#" class="logo">E4<span>H</span> Energy</a>
-    <p>Making every appliance smarter and more reliable</p>
+    <p>Smart battery systems for everyone</p>
     <div class="footer-contact">
-      <p><strong>Contact:</strong> Almanzo Gao</p>
-      <p><a href="mailto:agao8@stanford.edu">agao8@stanford.edu</a></p>
+      <p>Almanzo Gao | <a href="mailto:agao8@stanford.edu">agao8@stanford.edu</a></p>
     </div>
   </div>
 </footer>
 
+<!-- CONTACT MODAL -->
+<div id="contactModal" class="modal">
+  <div class="modal-content">
+    <div class="modal-header">
+      <h3 class="modal-title">Get in Touch</h3>
+      <button class="modal-close" onclick="closeContactModal()">&times;</button>
+    </div>
+    <p style="color: var(--text-mid); margin-bottom: 1rem;">Feel free to reach out with any questions!</p>
+    <div class="email-box">
+      <span class="email-text">agao8@stanford.edu</span>
+      <button class="copy-btn" id="copyBtn" onclick="copyEmail()">
+        <span class="copy-icon">📋</span>
+        <span id="copyText">Copy</span>
+      </button>
+    </div>
+    <p style="color: var(--text-light); font-size: 0.9rem; text-align: center;">Almanzo Gao</p>
+  </div>
+</div>
+
 <script>
+  // Contact Modal
+  function openContactModal() {
+    document.getElementById('contactModal').classList.add('show');
+  }
+
+  function closeContactModal() {
+    document.getElementById('contactModal').classList.remove('show');
+  }
+
+  function copyEmail() {
+    const email = 'agao8@stanford.edu';
+    navigator.clipboard.writeText(email).then(() => {
+      const copyBtn = document.getElementById('copyBtn');
+      const copyText = document.getElementById('copyText');
+      copyBtn.classList.add('copied');
+      copyText.textContent = 'Copied!';
+      setTimeout(() => {
+        copyBtn.classList.remove('copied');
+        copyText.textContent = 'Copy';
+      }, 2000);
+    });
+  }
+
+  // Close modal when clicking outside
+  window.onclick = function(event) {
+    const modal = document.getElementById('contactModal');
+    if (event.target === modal) {
+      closeContactModal();
+    }
+  }
+
   // Navbar scroll effect
   window.addEventListener('scroll', () => {
     const navbar = document.getElementById('navbar');
