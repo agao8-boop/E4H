@@ -22,7 +22,7 @@
   .logo { font-family: 'DM Serif Display', serif; font-size: 1.55rem; color: var(--primary); text-decoration: none; transition: 0.3s; }
   .logo:hover { transform: scale(1.05); }
   .logo span {
-    background: linear-gradient(135deg, #E88B7B 0%, #F09C89 100%);
+    background: linear-gradient(135deg, #E07563 0%, #E99078 100%);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
@@ -35,7 +35,7 @@
   .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 6px 20px rgba(45,111,94,0.25); background: var(--primary-light); }
   .btn-primary:active { transform: translateY(0); }
 
-  .btn-secondary { display: inline-block; background: transparent; color: var(--primary); padding: 0.8rem 1.8rem; border: 2px solid var(--primary); border-radius: 8px; font-weight: 600; text-decoration: none; transition: all 0.3s ease; }
+  .btn-secondary { display: inline-block; background: transparent; color: var(--primary); padding: calc(0.8rem - 2px) calc(1.8rem - 2px); border: 2px solid var(--primary); border-radius: 8px; font-weight: 600; text-decoration: none; transition: all 0.3s ease; }
   .btn-secondary:hover { background: var(--primary); color: #fff; transform: translateY(-2px); box-shadow: 0 6px 20px rgba(45,111,94,0.2); }
 
   /* HERO SECTION */
@@ -162,8 +162,8 @@
   @keyframes floatAppliance { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-15px); } }
   @keyframes energyFlow { 0%, 100% { opacity: 0.2; } 50% { opacity: 0.6; } }
   @keyframes pulse {
-    0%, 100% { transform: scale(1); box-shadow: 0 6px 25px rgba(232,139,123,0.4); }
-    50% { transform: scale(1.05); box-shadow: 0 8px 35px rgba(232,139,123,0.6); }
+    0%, 100% { transform: scale(1); box-shadow: 0 6px 25px rgba(224,117,99,0.3); }
+    50% { transform: scale(1.05); box-shadow: 0 8px 35px rgba(224,117,99,0.5); }
   }
 
   /* SECTION STYLING */
@@ -614,12 +614,25 @@
   @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
   @keyframes slideUp { from { transform: translateY(50px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
 
+  /* MOBILE MENU */
+  .hamburger { display: none; background: none; border: none; cursor: pointer; padding: 0.5rem; z-index: 101; }
+  .hamburger div { width: 25px; height: 3px; background: var(--primary); margin: 5px 0; transition: 0.3s; border-radius: 2px; }
+  .mobile-sidebar { position: fixed; top: 0; right: -100%; width: 280px; height: 100vh; background: #fff; box-shadow: -4px 0 20px rgba(0,0,0,0.1); transition: right 0.3s ease; z-index: 100; padding: 5rem 2rem 2rem; }
+  .mobile-sidebar.active { right: 0; }
+  .mobile-sidebar a { display: block; padding: 1rem 0; text-decoration: none; color: var(--text-dark); font-weight: 500; border-bottom: 1px solid var(--warm-gray); transition: 0.2s; }
+  .mobile-sidebar a:hover { color: var(--primary); padding-left: 0.5rem; }
+  .mobile-sidebar .btn-primary, .mobile-sidebar .btn-secondary { margin-top: 1rem; text-align: center; padding: 0.8rem 1.5rem; }
+  .sidebar-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.5); z-index: 99; display: none; }
+  .sidebar-overlay.active { display: block; }
+
   /* RESPONSIVE */
   @media (max-width: 900px) {
     nav { padding: 1rem 1.5rem; }
     nav div { gap: 0.5rem; }
     .btn-primary, .btn-secondary { padding: 0.6rem 1.2rem; font-size: 0.9rem; }
     .nav-links { display: none; }
+    .hamburger { display: block; }
+    nav > div:last-child { display: none; }
 
     .hero { grid-template-columns: 1fr; text-align: center; padding: 8rem 1.5rem 4rem; }
     .hero-text h1 { font-size: 2rem; }
@@ -684,7 +697,24 @@
     <a href="#" class="btn-secondary" onclick="openContactModal(); return false;">Contact Us</a>
     <a href="#" class="btn-primary" onclick="openModal(); return false;">I'm Interested</a>
   </div>
+  <button class="hamburger" onclick="toggleMobileMenu()">
+    <div></div>
+    <div></div>
+    <div></div>
+  </button>
 </nav>
+
+<!-- Mobile Sidebar -->
+<div class="sidebar-overlay" onclick="toggleMobileMenu()"></div>
+<div class="mobile-sidebar" id="mobileSidebar">
+  <a href="index.html#how-it-works" onclick="toggleMobileMenu()">How It Works</a>
+  <a href="calculator.html">Calculator</a>
+  <a href="index.html#benefits" onclick="toggleMobileMenu()">Benefits</a>
+  <a href="index.html#pricing" onclick="toggleMobileMenu()">Pricing</a>
+  <a href="b2b.html">B2B Partnership</a>
+  <a href="#" class="btn-secondary" onclick="openContactModal(); toggleMobileMenu(); return false;">Contact Us</a>
+  <a href="#" class="btn-primary" onclick="openModal(); toggleMobileMenu(); return false;">I'm Interested</a>
+</div>
 
 <!-- HERO SECTION -->
 <section class="hero">
@@ -708,7 +738,7 @@
       </div>
       <p style="font-size: 0.8rem; color: var(--text-mid); text-align: center; margin-top: 0.8rem;">Based on Santa Clara County average rates</p>
       <div class="calculator-cta">
-        <a href="calculator.html" style="display: inline-block; background: linear-gradient(135deg, #E88B7B 0%, #F09C89 100%); color: #fff; padding: 1.2rem 2.5rem; border-radius: 12px; font-weight: 700; font-size: 1.1rem; text-decoration: none; box-shadow: 0 6px 25px rgba(232,139,123,0.4); transition: all 0.3s ease; animation: pulse 2s infinite;">✨ Calculate My Full Savings →</a>
+        <a href="calculator.html" style="display: inline-block; background: linear-gradient(135deg, #E07563 0%, #F5DCC8 100%); color: #fff; padding: 1.2rem 2.5rem; border-radius: 12px; font-weight: 700; font-size: 1.1rem; text-decoration: none; box-shadow: 0 6px 25px rgba(224,117,99,0.3); transition: all 0.3s ease; animation: pulse 2s infinite;">✨ Calculate My Full Savings →</a>
       </div>
     </div>
   </div>
@@ -1326,6 +1356,14 @@
       sessionStorage.setItem('e4h_session_id', sessionId);
     }
     return sessionId;
+  }
+
+  // Mobile menu toggle
+  function toggleMobileMenu() {
+    const sidebar = document.getElementById('mobileSidebar');
+    const overlay = document.querySelector('.sidebar-overlay');
+    sidebar.classList.toggle('active');
+    overlay.classList.toggle('active');
   }
 
   // Modal functions

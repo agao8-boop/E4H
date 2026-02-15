@@ -20,13 +20,15 @@
   nav { position: fixed; top: 0; width: 100%; z-index: 100; padding: 1rem 2.5rem; display: flex; align-items: center; justify-content: space-between; background: rgba(247,245,240,0.95); backdrop-filter: blur(16px); border-bottom: 1px solid rgba(0,0,0,0.04); }
   .logo { font-family: 'DM Serif Display', serif; font-size: 1.55rem; color: var(--primary); text-decoration: none; }
   .logo span {
-    background: linear-gradient(135deg, #E88B7B 0%, #F09C89 100%);
+    background: linear-gradient(135deg, #E07563 0%, #E99078 100%);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
   }
   .btn-primary { display: inline-block; background: var(--primary); color: #fff; padding: 0.8rem 1.8rem; border-radius: 8px; font-weight: 600; text-decoration: none; transition: all 0.3s ease; box-shadow: 0 2px 8px rgba(45,111,94,0.15); border: none; cursor: pointer; }
   .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 6px 20px rgba(45,111,94,0.25); background: var(--primary-light); }
+  .btn-secondary { display: inline-block; background: transparent; color: var(--primary); padding: calc(0.8rem - 2px) calc(1.8rem - 2px); border: 2px solid var(--primary); border-radius: 8px; font-weight: 600; text-decoration: none; transition: all 0.3s ease; }
+  .btn-secondary:hover { background: var(--primary); color: #fff; transform: translateY(-2px); box-shadow: 0 6px 20px rgba(45,111,94,0.2); }
 
   .calculator-hero { padding: 8rem 2.5rem 3rem; max-width: 1400px; margin: 0 auto; text-align: center; }
   .calculator-hero h1 { font-family: 'DM Serif Display', serif; font-size: clamp(2.5rem, 5vw, 4rem); color: var(--primary); margin-bottom: 1rem; }
@@ -125,9 +127,26 @@
   .methodology-item h3 { font-size: 1.1rem; color: var(--primary); margin-bottom: 0.8rem; }
   .methodology-item p { font-size: 0.95rem; color: var(--text-mid); line-height: 1.6; }
 
+  /* MOBILE MENU */
+  .hamburger { display: none; background: none; border: none; cursor: pointer; padding: 0.5rem; z-index: 101; }
+  .hamburger div { width: 25px; height: 3px; background: var(--primary); margin: 5px 0; transition: 0.3s; border-radius: 2px; }
+  .mobile-sidebar { position: fixed; top: 0; right: -100%; width: 280px; height: 100vh; background: #fff; box-shadow: -4px 0 20px rgba(0,0,0,0.1); transition: right 0.3s ease; z-index: 100; padding: 5rem 2rem 2rem; overflow-y: auto; }
+  .mobile-sidebar.active { right: 0; }
+  .mobile-sidebar a { display: block; padding: 1rem 0; text-decoration: none; color: var(--text-dark); font-weight: 500; border-bottom: 1px solid var(--warm-gray); transition: 0.2s; }
+  .mobile-sidebar a:hover { color: var(--primary); padding-left: 0.5rem; }
+  .mobile-sidebar .btn-primary, .mobile-sidebar .btn-secondary { margin-top: 1rem; text-align: center; padding: 0.8rem 1.5rem; }
+  .sidebar-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.5); z-index: 99; display: none; }
+  .sidebar-overlay.active { display: block; }
+
   @media (max-width: 1000px) {
     .calculator-container { grid-template-columns: 1fr; }
     .results-panel { position: static; }
+  }
+
+  @media (max-width: 900px) {
+    nav > div:nth-child(2) { display: none; }
+    nav > div:nth-child(3) { display: none; }
+    .hamburger { display: block; }
   }
 
   /* FOOTER STYLES */
@@ -162,8 +181,28 @@
     <a href="index.html#pricing" style="text-decoration: none; color: var(--text-dark); font-weight: 500; transition: 0.3s;">Pricing</a>
     <a href="b2b.html" style="text-decoration: none; color: var(--text-dark); font-weight: 500; transition: 0.3s;">B2B Partnership</a>
   </div>
-  <a href="signup.html" class="btn-primary">I'm Interested</a>
+  <div style="display: flex; gap: 1rem; align-items: center;">
+    <a href="mailto:contact@e4henergy.com" class="btn-secondary">Contact Us</a>
+    <a href="signup.html" class="btn-primary">I'm Interested</a>
+  </div>
+  <button class="hamburger" onclick="toggleMobileMenu()">
+    <div></div>
+    <div></div>
+    <div></div>
+  </button>
 </nav>
+
+<!-- Mobile Sidebar -->
+<div class="sidebar-overlay" onclick="toggleMobileMenu()"></div>
+<div class="mobile-sidebar" id="mobileSidebar">
+  <a href="index.html#how-it-works" onclick="toggleMobileMenu()">How It Works</a>
+  <a href="calculator.html" onclick="toggleMobileMenu()">Calculator</a>
+  <a href="index.html#benefits" onclick="toggleMobileMenu()">Benefits</a>
+  <a href="index.html#pricing" onclick="toggleMobileMenu()">Pricing</a>
+  <a href="b2b.html">B2B Partnership</a>
+  <a href="mailto:contact@e4henergy.com" class="btn-secondary">Contact Us</a>
+  <a href="signup.html" class="btn-primary">I'm Interested</a>
+</div>
 
 <div class="calculator-hero">
   <h1>Calculate Your Savings</h1>
@@ -439,6 +478,14 @@
 </div>
 
 <script>
+  // Mobile menu toggle
+  function toggleMobileMenu() {
+    const sidebar = document.getElementById('mobileSidebar');
+    const overlay = document.querySelector('.sidebar-overlay');
+    sidebar.classList.toggle('active');
+    overlay.classList.toggle('active');
+  }
+
   // Rate structures for different utilities (simplified)
   const rateStructures = {
     'svce': { offPeak: 0.15, midPeak: 0.28, peak: 0.52 },
