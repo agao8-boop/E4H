@@ -19,14 +19,9 @@
 
   nav { position: fixed; top: 0; width: 100%; z-index: 100; padding: 1rem 2.5rem; display: flex; align-items: center; justify-content: space-between; background: rgba(247,245,240,0.95); backdrop-filter: blur(16px); border-bottom: 1px solid rgba(0,0,0,0.04); transition: 0.3s; }
   nav.scrolled { box-shadow: 0 2px 20px rgba(45,111,94,0.06); }
-  .logo { font-family: 'DM Serif Display', serif; font-size: 1.55rem; color: var(--primary); text-decoration: none; transition: 0.3s; cursor: pointer; }
+  .logo { font-family: 'DM Serif Display', serif; font-size: 1.55rem; color: var(--primary); text-decoration: none; transition: 0.3s; }
   .logo:hover { transform: scale(1.05); }
-  .logo span {
-    background: linear-gradient(135deg, #FF6B9D 0%, #FFA500 100%);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
-  }
+  .logo span { color: var(--accent); }
   .nav-links { display: flex; gap: 2rem; align-items: center; }
   .nav-links a { color: var(--text-dark); text-decoration: none; font-weight: 500; transition: 0.3s; }
   .nav-links a:hover { color: var(--primary); }
@@ -679,12 +674,12 @@
 </head>
 <body>
 <nav id="navbar">
-  <a href="index.html" class="logo">E4<span>H</span> Energy</a>
+  <a href="#" class="logo">E4<span>H</span> Energy</a>
   <div class="nav-links">
-    <a href="index.html#how-it-works">How It Works</a>
+    <a href="#how-it-works">How It Works</a>
+    <a href="#benefits">Benefits</a>
+    <a href="#pricing">Pricing</a>
     <a href="calculator.html">Calculator</a>
-    <a href="index.html#benefits">Benefits</a>
-    <a href="index.html#pricing">Pricing</a>
     <a href="b2b.html">B2B Partnership</a>
   </div>
   <div style="display: flex; gap: 1rem; align-items: center;">
@@ -716,7 +711,7 @@
       </div>
       <p style="font-size: 0.8rem; color: var(--text-mid); text-align: center; margin-top: 0.8rem;">Based on Santa Clara County average rates</p>
       <div class="calculator-cta">
-        <a href="calculator.html" style="display: inline-block; background: linear-gradient(135deg, var(--accent) 0%, var(--accent-light) 100%); color: #fff; padding: 1rem 2rem; border-radius: 12px; font-weight: 700; font-size: 1.05rem; text-decoration: none; box-shadow: 0 4px 15px rgba(232,116,97,0.3); transition: all 0.3s ease; margin-top: 0.5rem;">✨ Calculate My Full Savings →</a>
+        <a href="calculator.html">Calculate My Full Savings →</a>
       </div>
     </div>
 
@@ -1241,9 +1236,9 @@
       <h3>Resources</h3>
       <ul>
         <li><a href="calculator.html">Savings Calculator</a></li>
-        <li><a href="#">FAQs (Coming Soon)</a></li>
+        <li><a href="#">FAQs</a></li>
         <li><a href="#">Blog (Coming Soon)</a></li>
-        <li><a href="#">Partner Utilities (Coming Soon)</a></li>
+        <li><a href="#">Partner Utilities</a></li>
       </ul>
     </div>
 
@@ -1251,10 +1246,9 @@
       <h3>Stay Connected</h3>
       <p>Get energy-saving tips and launch updates</p>
       <div class="footer-signup">
-        <input type="email" id="footerEmail" placeholder="Your email">
-        <button onclick="subscribeNewsletter()">Subscribe</button>
+        <input type="email" placeholder="Your email">
+        <button>Subscribe</button>
       </div>
-      <p id="subscribeMessage" style="font-size: 0.85rem; margin-top: 0.5rem; opacity: 0.9; display: none;"></p>
     </div>
   </div>
 
@@ -1267,9 +1261,9 @@
     <div class="footer-legal">
       <div>© 2026 E4H Integrated Energy Systems. All rights reserved.</div>
       <div>
-        <a href="privacy.html">Privacy Policy</a>
-        <a href="terms.html">Terms of Service</a>
-        <a href="cookies.html">Cookie Settings</a>
+        <a href="#">Privacy Policy</a>
+        <a href="#">Terms of Service</a>
+        <a href="#">Cookie Settings</a>
       </div>
     </div>
   </div>
@@ -1391,60 +1385,6 @@
       closeModal();
       closeContactModal();
     }
-  });
-
-  // Newsletter subscription function
-  function subscribeNewsletter() {
-    const email = document.getElementById('footerEmail').value;
-    const messageEl = document.getElementById('subscribeMessage');
-
-    if (!email || !email.includes('@')) {
-      messageEl.style.display = 'block';
-      messageEl.style.color = '#E74C3C';
-      messageEl.textContent = 'Please enter a valid email address';
-      return;
-    }
-
-    const scriptURL = 'https://script.google.com/macros/s/AKfycbxOqfFuqTr0tcxawTEDb49uqD4f8waVV7fY2uMZBAFBNUwkFw9nNrAl4ZG54QhsqWwM2A/exec';
-    const formData = new FormData();
-    formData.append('email', email);
-    formData.append('subscription_type', 'newsletter');
-
-    fetch(scriptURL, {
-      method: 'POST',
-      body: formData,
-      mode: 'no-cors'
-    })
-    .then(() => {
-      messageEl.style.display = 'block';
-      messageEl.style.color = var(--green);
-      messageEl.textContent = '✓ Successfully subscribed!';
-      document.getElementById('footerEmail').value = '';
-    })
-    .catch(error => {
-      messageEl.style.display = 'block';
-      messageEl.style.color = '#E74C3C';
-      messageEl.textContent = 'Error subscribing. Please try again.';
-    });
-  }
-
-  // Track Quick Savings Preview interactions
-  slider.addEventListener('change', (e) => {
-    const value = e.target.value;
-    const savings = savingsData[value];
-
-    // Track the interaction
-    const scriptURL = 'https://script.google.com/macros/s/AKfycbxOqfFuqTr0tcxawTEDb49uqD4f8waVV7fY2uMZBAFBNUwkFw9nNrAl4ZG54QhsqWwM2A/exec';
-    const formData = new FormData();
-    formData.append('event_type', 'quick_preview');
-    formData.append('appliance_count', value);
-    formData.append('estimated_savings', savings);
-
-    fetch(scriptURL, {
-      method: 'POST',
-      body: formData,
-      mode: 'no-cors'
-    }).catch(() => {}); // Silent fail for tracking
   });
 </script>
 </body>
