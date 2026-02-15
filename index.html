@@ -92,9 +92,9 @@
   .battery-status { font-size: 0.75rem; opacity: 0.9; margin-bottom: 1rem; text-transform: uppercase; letter-spacing: 1px; }
 
   .battery-indicator { background: rgba(255,255,255,0.2); height: 60px; border-radius: 8px; margin-bottom: 0.8rem; overflow: hidden; position: relative; }
-  .battery-level { background: linear-gradient(180deg, var(--green) 0%, #27AE60 100%); height: 100%; width: 85%; border-radius: 8px; animation: pulse 2s ease-in-out infinite; }
+  .battery-level { background: linear-gradient(180deg, var(--green) 0%, #27AE60 100%); height: 100%; width: 85%; border-radius: 8px; display: flex; align-items: center; justify-content: center; position: relative; }
 
-  .battery-capacity { font-size: 0.7rem; opacity: 0.8; margin-top: 0.5rem; }
+  .battery-capacity { font-size: 0.75rem; font-weight: 700; color: #fff; text-shadow: 0 1px 3px rgba(0,0,0,0.3); }
 
   /* Battery Cutaway Overlay */
   .battery-cutaway {
@@ -640,9 +640,13 @@
     .hero-cta { justify-content: center; flex-direction: column; width: 100%; }
     .hero-cta .btn-primary, .hero-cta .btn-secondary { width: 100%; text-align: center; }
 
-    .product-illustration { width: 300px; height: 300px; margin: 2rem auto 0; }
-    .battery-pack { width: 120px; height: 150px; }
-    .battery-logo { font-size: 1.8rem; }
+    .product-illustration { width: 300px; height: 300px; margin: 2rem auto 0; min-height: 300px; }
+    .battery-pack { width: 120px; height: 150px; min-width: 120px; min-height: 150px; }
+    .battery-face { padding: 12px; }
+    .battery-logo { font-size: 1.5rem; margin-bottom: 0.3rem; }
+    .battery-status { font-size: 0.6rem; margin-bottom: 0.6rem; }
+    .battery-indicator { height: 40px; margin-bottom: 0.5rem; }
+    .battery-capacity { font-size: 0.6rem; }
     .appliance { width: 70px; height: 70px; font-size: 2rem; }
     .appliance-popup { font-size: 0.65rem; }
 
@@ -677,7 +681,12 @@
   @media (max-width: 480px) {
     .hero { padding: 7rem 1rem 3rem; }
     .product-illustration { width: 250px; height: 250px; }
-    .battery-pack { width: 100px; height: 130px; }
+    .battery-pack { width: 100px; height: 130px; min-width: 100px; min-height: 130px; }
+    .battery-face { padding: 10px; }
+    .battery-logo { font-size: 1.3rem; }
+    .battery-status { font-size: 0.5rem; margin-bottom: 0.4rem; }
+    .battery-indicator { height: 35px; margin-bottom: 0.3rem; }
+    .battery-capacity { font-size: 0.55rem; }
     .appliance { width: 60px; height: 60px; font-size: 1.8rem; }
     .section-title { font-size: 1.5rem; }
     .step-image { height: 120px; }
@@ -753,9 +762,10 @@
           <div class="battery-logo">E4<span>H</span></div>
           <div class="battery-status">Smart Battery System</div>
           <div class="battery-indicator">
-            <div class="battery-level"></div>
+            <div class="battery-level">
+              <span class="battery-capacity">1 kWh</span>
+            </div>
           </div>
-          <div class="battery-capacity">1 kWh Capacity</div>
         </div>
         <!-- Cutaway View (visible on hover) -->
         <div class="battery-cutaway">
