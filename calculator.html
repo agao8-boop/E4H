@@ -130,11 +130,12 @@
   /* MOBILE MENU */
   .hamburger { display: none; background: none; border: none; cursor: pointer; padding: 0.5rem; z-index: 101; }
   .hamburger div { width: 25px; height: 3px; background: var(--primary); margin: 5px 0; transition: 0.3s; border-radius: 2px; }
-  .mobile-sidebar { position: fixed; top: 0; right: -100%; width: 280px; height: 100vh; background: #fff; box-shadow: -4px 0 20px rgba(0,0,0,0.1); transition: right 0.3s ease; z-index: 100; padding: 5rem 2rem 2rem; overflow-y: auto; }
+  .mobile-sidebar { position: fixed; top: 0; right: -100%; width: 280px; height: 100vh; background: #F7F5F0; box-shadow: -4px 0 20px rgba(0,0,0,0.1); transition: right 0.3s ease; z-index: 100; padding: 5rem 2rem 2rem; overflow-y: auto; }
   .mobile-sidebar.active { right: 0; }
-  .mobile-sidebar a { display: block; padding: 1rem 0; text-decoration: none; color: var(--text-dark); font-weight: 500; border-bottom: 1px solid var(--warm-gray); transition: 0.2s; }
-  .mobile-sidebar a:hover { color: var(--primary); padding-left: 0.5rem; }
-  .mobile-sidebar .btn-primary, .mobile-sidebar .btn-secondary { margin-top: 1rem; text-align: center; padding: 0.8rem 1.5rem; }
+  .mobile-sidebar a { display: block; padding: 1rem 0; text-decoration: none; color: var(--primary); font-weight: 500; border-bottom: 1px solid #E8E4DD; transition: 0.2s; }
+  .mobile-sidebar a:hover { color: var(--primary-light); padding-left: 0.5rem; }
+  .mobile-sidebar .btn-primary { margin-top: 1rem; text-align: center; padding: 0.8rem 1.5rem; border-bottom: none; background: var(--primary); color: rgba(255,255,255,0.9); }
+  .mobile-sidebar .btn-secondary { margin-top: 1rem; text-align: center; padding: 0.8rem 1.5rem; border-bottom: none; }
   .sidebar-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.5); z-index: 99; display: none; }
   .sidebar-overlay.active { display: block; }
 

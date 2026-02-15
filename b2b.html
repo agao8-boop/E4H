@@ -641,11 +641,12 @@
   /* MOBILE MENU */
   .hamburger { display: none; background: none; border: none; cursor: pointer; padding: 0.5rem; z-index: 101; }
   .hamburger div { width: 25px; height: 3px; background: var(--primary); margin: 5px 0; transition: 0.3s; border-radius: 2px; }
-  .mobile-sidebar { position: fixed; top: 0; right: -100%; width: 280px; height: 100vh; background: #fff; box-shadow: -4px 0 20px rgba(0,0,0,0.1); transition: right 0.3s ease; z-index: 100; padding: 5rem 2rem 2rem; }
+  .mobile-sidebar { position: fixed; top: 0; right: -100%; width: 280px; height: 100vh; background: #F7F5F0; box-shadow: -4px 0 20px rgba(0,0,0,0.1); transition: right 0.3s ease; z-index: 100; padding: 5rem 2rem 2rem; }
   .mobile-sidebar.active { right: 0; }
-  .mobile-sidebar a { display: block; padding: 1rem 0; text-decoration: none; color: var(--text-dark); font-weight: 500; border-bottom: 1px solid #E8E4DD; transition: 0.2s; }
-  .mobile-sidebar a:hover { color: var(--primary); padding-left: 0.5rem; }
-  .mobile-sidebar .btn-primary, .mobile-sidebar .btn-secondary { margin-top: 1rem; text-align: center; padding: 0.8rem 1.5rem; }
+  .mobile-sidebar a { display: block; padding: 1rem 0; text-decoration: none; color: var(--primary); font-weight: 500; border-bottom: 1px solid #E8E4DD; transition: 0.2s; }
+  .mobile-sidebar a:hover { color: var(--primary-light); padding-left: 0.5rem; }
+  .mobile-sidebar .btn-primary { margin-top: 1rem; text-align: center; padding: 0.8rem 1.5rem; border-bottom: none; background: var(--primary); color: rgba(255,255,255,0.9); }
+  .mobile-sidebar .btn-secondary { margin-top: 1rem; text-align: center; padding: 0.8rem 1.5rem; border-bottom: none; }
   .sidebar-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.5); z-index: 99; display: none; }
   .sidebar-overlay.active { display: block; }
 
@@ -763,10 +764,10 @@
 <!-- Hero Section -->
 <section class="hero">
   <h1>Partner with E4H Energy</h1>
-  <p class="subtitle">Making clean energy accessible to everyone — especially those who need it most</p>
+  <p class="subtitle">Making clean energy accessible to everyone —<br>especially those who need it most</p>
 
-  <div style="max-width: 900px; margin: 3rem auto; display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; align-items: start;">
-    <div style="background: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 100%); padding: 2.5rem; border-radius: 20px; color: #fff; box-shadow: 0 10px 40px rgba(45,111,94,0.15);">
+  <div style="max-width: 900px; margin: 3rem auto; display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; align-items: stretch;">
+    <div style="background: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 100%); padding: 2.5rem; border-radius: 20px; color: #fff; box-shadow: 0 10px 40px rgba(45,111,94,0.2);">
       <div style="font-size: 2.5rem; margin-bottom: 1rem;">💰</div>
       <h3 style="font-size: 1.6rem; margin-bottom: 1rem; font-family: 'DM Serif Display', serif; text-align: left;">Affordable Pay Programs</h3>
       <ul style="list-style: none; padding: 0; margin: 0; line-height: 2; text-align: left;">
@@ -775,7 +776,7 @@
       </ul>
     </div>
 
-    <div style="background: linear-gradient(135deg, #FF6B9D 0%, #FF8FA0 100%); padding: 2.5rem; border-radius: 20px; color: #fff; box-shadow: 0 10px 40px rgba(255,107,157,0.2);">
+    <div style="background: linear-gradient(135deg, #E07563 0%, #E99078 100%); padding: 2.5rem; border-radius: 20px; color: #fff; box-shadow: 0 10px 40px rgba(224,117,99,0.2);">
       <div style="font-size: 2.5rem; margin-bottom: 1rem;">🔋</div>
       <h3 style="font-size: 1.6rem; margin-bottom: 1rem; font-family: 'DM Serif Display', serif; text-align: left;">Battery Technology</h3>
       <ul style="list-style: none; padding: 0; margin: 0; line-height: 2; text-align: left;">
