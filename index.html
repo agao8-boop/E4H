@@ -22,7 +22,7 @@
   .logo { font-family: 'DM Serif Display', serif; font-size: 1.55rem; color: var(--primary); text-decoration: none; transition: 0.3s; }
   .logo:hover { transform: scale(1.05); }
   .logo span {
-    background: linear-gradient(135deg, #FF6B9D 0%, #FF8FA0 100%);
+    background: linear-gradient(135deg, #E88B7B 0%, #F09C89 100%);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
@@ -39,16 +39,16 @@
   .btn-secondary:hover { background: var(--primary); color: #fff; transform: translateY(-2px); box-shadow: 0 6px 20px rgba(45,111,94,0.2); }
 
   /* HERO SECTION */
-  .hero { padding: 8rem 2.5rem 3rem; max-width: 1200px; margin: 0 auto; display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; align-items: start; min-height: 100vh; }
-  .hero-text h1 { font-family: 'DM Serif Display', serif; font-size: clamp(2.3rem, 5vw, 3.5rem); line-height: 1.1; color: var(--primary); margin-bottom: 1rem; }
+  .hero { padding: 7rem 2.5rem 2rem; max-width: 1200px; margin: 0 auto; display: grid; grid-template-columns: 1fr 1fr; gap: 2.5rem; align-items: start; min-height: 100vh; }
+  .hero-text h1 { font-family: 'DM Serif Display', serif; font-size: clamp(2rem, 5vw, 2.8rem); line-height: 1.2; color: var(--primary); margin-bottom: 0.8rem; }
   .hero-text h1 em { font-style: italic; color: var(--accent); }
   .tagline { font-size: 1rem; color: var(--accent); font-weight: 700; margin-bottom: 0.8rem; letter-spacing: 0.5px; text-transform: uppercase; }
-  .subtitle { font-size: 1.05rem; color: var(--text-mid); line-height: 1.6; margin-bottom: 1.5rem; }
+  .subtitle { font-size: 1rem; color: var(--text-mid); line-height: 1.5; margin-bottom: 1.2rem; }
 
   /* CALCULATOR WIDGET */
-  .calculator-widget { background: linear-gradient(135deg, #fff 0%, #f8f8f8 100%); padding: 1.2rem; border-radius: 16px; box-shadow: var(--card-shadow); margin-bottom: 0; border: 2px solid var(--green-soft); }
-  .calculator-widget h3 { font-size: 0.8rem; color: var(--text-mid); text-transform: uppercase; letter-spacing: 1px; margin-bottom: 0.8rem; font-weight: 600; }
-  .slider-container { margin-bottom: 1.2rem; }
+  .calculator-widget { background: linear-gradient(135deg, #fff 0%, #f8f8f8 100%); padding: 1rem; border-radius: 14px; box-shadow: var(--card-shadow); margin-bottom: 0; border: 2px solid var(--green-soft); }
+  .calculator-widget h3 { font-size: 0.75rem; color: var(--text-mid); text-transform: uppercase; letter-spacing: 1px; margin-bottom: 0.7rem; font-weight: 600; }
+  .slider-container { margin-bottom: 1rem; }
   .slider-label { display: flex; justify-content: space-between; margin-bottom: 0.5rem; font-size: 0.9rem; color: var(--text-dark); font-weight: 600; }
   .slider { width: 100%; height: 8px; border-radius: 4px; background: var(--warm-gray); outline: none; -webkit-appearance: none; }
   .slider::-webkit-slider-thumb { -webkit-appearance: none; appearance: none; width: 24px; height: 24px; border-radius: 50%; background: var(--primary); cursor: pointer; box-shadow: 0 2px 8px rgba(45,111,94,0.3); transition: 0.2s; }
@@ -138,17 +138,7 @@
   .appliance-3 { bottom: 40%; left: 0%; animation-delay: 4s; }
   
   /* Connection Lines */
-  .connection-line {
-    position: absolute;
-    height: 2px;
-    background: linear-gradient(90deg, var(--primary) 0%, transparent 100%);
-    transform-origin: left;
-    opacity: 0.4;
-    animation: energyFlow 2s ease-in-out infinite;
-  }
-  .line-1 { top: 28%; left: 50%; width: 150px; transform: rotate(-25deg); }
-  .line-2 { top: 50%; left: 25%; width: 120px; transform: rotate(15deg); }
-  .line-3 { bottom: 28%; left: 50%; width: 130px; transform: rotate(25deg); }
+  /* Connection lines removed - cleaner look */
 
   /* Appliance Popup */
   .appliance-popup {
@@ -172,8 +162,8 @@
   @keyframes floatAppliance { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-15px); } }
   @keyframes energyFlow { 0%, 100% { opacity: 0.2; } 50% { opacity: 0.6; } }
   @keyframes pulse {
-    0%, 100% { transform: scale(1); box-shadow: 0 6px 25px rgba(255,107,157,0.4); }
-    50% { transform: scale(1.05); box-shadow: 0 8px 35px rgba(255,107,157,0.6); }
+    0%, 100% { transform: scale(1); box-shadow: 0 6px 25px rgba(232,139,123,0.4); }
+    50% { transform: scale(1.05); box-shadow: 0 8px 35px rgba(232,139,123,0.6); }
   }
 
   /* SECTION STYLING */
@@ -699,8 +689,7 @@
 <!-- HERO SECTION -->
 <section class="hero">
   <div class="hero-text fade-up">
-    <div class="tagline">Stop Overpaying for Electricity</div>
-    <h1>Stop Overpaying for Electricity. Start <em>Making Money</em> From It.</h1>
+    <h1>Start <em>Making Money</em> From Your Electricity</h1>
     <p class="subtitle">Universal battery packs that plug into your existing appliances, automatically saving you money every day</p>
 
     <!-- Calculator Widget -->
@@ -719,7 +708,7 @@
       </div>
       <p style="font-size: 0.8rem; color: var(--text-mid); text-align: center; margin-top: 0.8rem;">Based on Santa Clara County average rates</p>
       <div class="calculator-cta">
-        <a href="calculator.html" style="display: inline-block; background: linear-gradient(135deg, #FF6B9D 0%, #FF8FA0 100%); color: #fff; padding: 1.2rem 2.5rem; border-radius: 12px; font-weight: 700; font-size: 1.1rem; text-decoration: none; box-shadow: 0 6px 25px rgba(255,107,157,0.4); transition: all 0.3s ease; animation: pulse 2s infinite;">✨ Calculate My Full Savings →</a>
+        <a href="calculator.html" style="display: inline-block; background: linear-gradient(135deg, #E88B7B 0%, #F09C89 100%); color: #fff; padding: 1.2rem 2.5rem; border-radius: 12px; font-weight: 700; font-size: 1.1rem; text-decoration: none; box-shadow: 0 6px 25px rgba(232,139,123,0.4); transition: all 0.3s ease; animation: pulse 2s infinite;">✨ Calculate My Full Savings →</a>
       </div>
     </div>
   </div>
@@ -760,11 +749,6 @@
         💡
         <div class="appliance-popup">Works with Any Appliance</div>
       </div>
-
-      <!-- Connection Lines -->
-      <div class="connection-line line-1"></div>
-      <div class="connection-line line-2"></div>
-      <div class="connection-line line-3"></div>
     </div>
   </div>
 </section>
@@ -1227,11 +1211,11 @@
     <div class="footer-column">
       <h3>Company</h3>
       <ul>
-        <li><a href="#how-it-works">How It Works</a></li>
-        <li><a href="#benefits">Benefits</a></li>
-        <li><a href="#pricing">Pricing</a></li>
+        <li><a href="index.html#how-it-works">How It Works</a></li>
+        <li><a href="index.html#benefits">Benefits</a></li>
+        <li><a href="index.html#pricing">Pricing</a></li>
         <li><a href="calculator.html">Calculator</a></li>
-        <li><a href="#" onclick="openModal(); return false;">Contact Us</a></li>
+        <li><a href="b2b.html">B2B Partnership</a></li>
       </ul>
     </div>
 
