@@ -21,7 +21,12 @@
   nav.scrolled { box-shadow: 0 2px 20px rgba(45,111,94,0.06); }
   .logo { font-family: 'DM Serif Display', serif; font-size: 1.55rem; color: var(--primary); text-decoration: none; transition: 0.3s; }
   .logo:hover { transform: scale(1.05); }
-  .logo span { color: var(--accent); }
+  .logo span {
+    background: linear-gradient(135deg, #FF6B9D 0%, #FFA500 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
   .nav-links { display: flex; gap: 2rem; align-items: center; }
   .nav-links a { color: var(--text-dark); text-decoration: none; font-weight: 500; transition: 0.3s; }
   .nav-links a:hover { color: var(--primary); }
@@ -166,7 +171,10 @@
 
   @keyframes floatAppliance { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-15px); } }
   @keyframes energyFlow { 0%, 100% { opacity: 0.2; } 50% { opacity: 0.6; } }
-  @keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.8; } }
+  @keyframes pulse {
+    0%, 100% { transform: scale(1); box-shadow: 0 6px 25px rgba(255,107,157,0.4); }
+    50% { transform: scale(1.05); box-shadow: 0 8px 35px rgba(255,107,157,0.6); }
+  }
 
   /* SECTION STYLING */
   section { padding: 5rem 2.5rem; max-width: 1200px; margin: 0 auto; }
@@ -674,12 +682,12 @@
 </head>
 <body>
 <nav id="navbar">
-  <a href="#" class="logo">E4<span>H</span> Energy</a>
+  <a href="index.html" class="logo">E4<span>H</span> Energy</a>
   <div class="nav-links">
-    <a href="#how-it-works">How It Works</a>
-    <a href="#benefits">Benefits</a>
-    <a href="#pricing">Pricing</a>
+    <a href="index.html#how-it-works">How It Works</a>
     <a href="calculator.html">Calculator</a>
+    <a href="index.html#benefits">Benefits</a>
+    <a href="index.html#pricing">Pricing</a>
     <a href="b2b.html">B2B Partnership</a>
   </div>
   <div style="display: flex; gap: 1rem; align-items: center;">
@@ -711,7 +719,7 @@
       </div>
       <p style="font-size: 0.8rem; color: var(--text-mid); text-align: center; margin-top: 0.8rem;">Based on Santa Clara County average rates</p>
       <div class="calculator-cta">
-        <a href="calculator.html">Calculate My Full Savings →</a>
+        <a href="calculator.html" style="display: inline-block; background: linear-gradient(135deg, #FF6B9D 0%, #FFA500 100%); color: #fff; padding: 1.2rem 2.5rem; border-radius: 12px; font-weight: 700; font-size: 1.1rem; text-decoration: none; box-shadow: 0 6px 25px rgba(255,107,157,0.4); transition: all 0.3s ease; animation: pulse 2s infinite;">✨ Calculate My Full Savings →</a>
       </div>
     </div>
 
@@ -1236,9 +1244,9 @@
       <h3>Resources</h3>
       <ul>
         <li><a href="calculator.html">Savings Calculator</a></li>
-        <li><a href="#">FAQs</a></li>
+        <li><a href="#">FAQs (Coming Soon)</a></li>
         <li><a href="#">Blog (Coming Soon)</a></li>
-        <li><a href="#">Partner Utilities</a></li>
+        <li><a href="#">Partner Utilities (Coming Soon)</a></li>
       </ul>
     </div>
 
@@ -1246,9 +1254,10 @@
       <h3>Stay Connected</h3>
       <p>Get energy-saving tips and launch updates</p>
       <div class="footer-signup">
-        <input type="email" placeholder="Your email">
-        <button>Subscribe</button>
+        <input type="email" id="footerEmail" placeholder="Your email">
+        <button onclick="subscribeNewsletter()">Subscribe</button>
       </div>
+      <p id="subscribeMessage" style="font-size: 0.85rem; margin-top: 0.5rem; opacity: 0.9; display: none;"></p>
     </div>
   </div>
 
@@ -1261,9 +1270,9 @@
     <div class="footer-legal">
       <div>© 2026 E4H Integrated Energy Systems. All rights reserved.</div>
       <div>
-        <a href="#">Privacy Policy</a>
-        <a href="#">Terms of Service</a>
-        <a href="#">Cookie Settings</a>
+        <a href="#">Privacy Policy (Coming Soon)</a>
+        <a href="#">Terms of Service (Coming Soon)</a>
+        <a href="#">Cookie Settings (Coming Soon)</a>
       </div>
     </div>
   </div>
@@ -1301,11 +1310,44 @@
     6: '$28-42', 7: '$32-48', 8: '$35-52', 9: '$38-56', 10: '$42-60'
   };
 
+  let trackingTimeout;
   slider.addEventListener('input', (e) => {
     const value = e.target.value;
     countDisplay.textContent = value;
     savingsDisplay.textContent = savingsData[value];
+
+    // Track savings preview interaction (debounced to avoid too many requests)
+    clearTimeout(trackingTimeout);
+    trackingTimeout = setTimeout(() => {
+      trackSavingsPreview(value, savingsData[value]);
+    }, 1000); // Wait 1 second after user stops sliding
   });
+
+  // Track savings preview function
+  function trackSavingsPreview(applianceCount, estimatedSavings) {
+    const scriptURL = 'https://script.google.com/macros/s/AKfycbxOqfFuqTr0tcxawTEDb49uqD4f8waVV7fY2uMZBAFBNUwkFw9nNrAl4ZG54QhsqWwM2A/exec';
+    const formData = new FormData();
+    formData.append('tracking_type', 'savings_preview');
+    formData.append('user_session', getSessionId());
+    formData.append('appliance_count', applianceCount);
+    formData.append('estimated_savings', estimatedSavings);
+
+    fetch(scriptURL, {
+      method: 'POST',
+      body: formData,
+      mode: 'no-cors'
+    }).catch(err => console.log('Tracking error:', err));
+  }
+
+  // Generate or retrieve session ID
+  function getSessionId() {
+    let sessionId = sessionStorage.getItem('e4h_session_id');
+    if (!sessionId) {
+      sessionId = 'session_' + Date.now() + '_' + Math.random().toString(36).substr(2, 9);
+      sessionStorage.setItem('e4h_session_id', sessionId);
+    }
+    return sessionId;
+  }
 
   // Modal functions
   function openModal() {
@@ -1386,6 +1428,41 @@
       closeContactModal();
     }
   });
+
+  // Newsletter subscription function
+  function subscribeNewsletter() {
+    const email = document.getElementById('footerEmail').value;
+    const messageEl = document.getElementById('subscribeMessage');
+    const scriptURL = 'https://script.google.com/macros/s/AKfycbxOqfFuqTr0tcxawTEDb49uqD4f8waVV7fY2uMZBAFBNUwkFw9nNrAl4ZG54QhsqWwM2A/exec';
+
+    if (!email || !email.includes('@')) {
+      messageEl.style.display = 'block';
+      messageEl.style.color = '#E74C3C';
+      messageEl.textContent = 'Please enter a valid email address';
+      return;
+    }
+
+    const formData = new FormData();
+    formData.append('email', email);
+    formData.append('newsletter', 'yes');
+
+    fetch(scriptURL, {
+      method: 'POST',
+      body: formData,
+      mode: 'no-cors'
+    })
+    .then(() => {
+      messageEl.style.display = 'block';
+      messageEl.style.color = '#2ECC71';
+      messageEl.textContent = '✓ Thanks for subscribing!';
+      document.getElementById('footerEmail').value = '';
+    })
+    .catch(error => {
+      messageEl.style.display = 'block';
+      messageEl.style.color = '#E74C3C';
+      messageEl.textContent = 'Error. Please try again.';
+    });
+  }
 </script>
 </body>
 </html>

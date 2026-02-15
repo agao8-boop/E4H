@@ -19,7 +19,12 @@
 
   nav { position: fixed; top: 0; width: 100%; z-index: 100; padding: 1rem 2.5rem; display: flex; align-items: center; justify-content: space-between; background: rgba(247,245,240,0.95); backdrop-filter: blur(16px); border-bottom: 1px solid rgba(0,0,0,0.04); }
   .logo { font-family: 'DM Serif Display', serif; font-size: 1.55rem; color: var(--primary); text-decoration: none; }
-  .logo span { color: var(--accent); }
+  .logo span {
+    background: linear-gradient(135deg, #FF6B9D 0%, #FFA500 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
   .btn-primary { display: inline-block; background: var(--primary); color: #fff; padding: 0.8rem 1.8rem; border-radius: 8px; font-weight: 600; text-decoration: none; transition: all 0.3s ease; box-shadow: 0 2px 8px rgba(45,111,94,0.15); border: none; cursor: pointer; }
   .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 6px 20px rgba(45,111,94,0.25); background: var(--primary-light); }
 
@@ -124,12 +129,40 @@
     .calculator-container { grid-template-columns: 1fr; }
     .results-panel { position: static; }
   }
+
+  /* FOOTER STYLES */
+  footer { background: var(--primary); color: #fff; padding: 4rem 2.5rem 2rem; }
+  .footer-content { max-width: 1200px; margin: 0 auto; display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 3rem; margin-bottom: 3rem; }
+  .footer-column h3 { font-size: 1.2rem; margin-bottom: 1.5rem; font-weight: 700; }
+  .footer-column p { font-size: 0.95rem; line-height: 1.6; opacity: 0.9; margin-bottom: 1rem; }
+  .footer-column ul { list-style: none; }
+  .footer-column ul li { margin-bottom: 0.8rem; }
+  .footer-column ul li a { color: #fff; text-decoration: none; opacity: 0.9; transition: 0.3s; }
+  .footer-column ul li a:hover { opacity: 1; text-decoration: underline; }
+  .footer-signup { display: flex; gap: 0.5rem; margin-top: 1rem; }
+  .footer-signup input { flex: 1; padding: 0.8rem; border: none; border-radius: 8px; font-size: 0.9rem; }
+  .footer-signup button { padding: 0.8rem 1.5rem; background: var(--accent); border: none; border-radius: 8px; color: #fff; font-weight: 600; cursor: pointer; transition: 0.3s; }
+  .footer-signup button:hover { background: var(--accent-light); }
+  .footer-bottom { max-width: 1200px; margin: 0 auto; padding-top: 2rem; border-top: 1px solid rgba(255,255,255,0.2); }
+  .footer-disclaimer { background: rgba(232,116,97,0.2); padding: 1.5rem; border-radius: 12px; margin-bottom: 2rem; border-left: 4px solid var(--accent); }
+  .footer-disclaimer h4 { font-size: 0.9rem; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 0.8rem; display: flex; align-items: center; gap: 0.5rem; }
+  .footer-disclaimer p { font-size: 0.85rem; line-height: 1.6; opacity: 0.95; }
+  .footer-legal { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem; font-size: 0.85rem; opacity: 0.8; }
+  .footer-legal a { color: #fff; text-decoration: none; margin-left: 1.5rem; }
+  .footer-legal a:hover { text-decoration: underline; }
 </style>
 </head>
 <body>
-<nav>
+<nav style="display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap;">
   <a href="index.html" class="logo">E4<span>H</span> Energy</a>
-  <a href="index.html#pricing" class="btn-primary">Back to Home</a>
+  <div style="display: flex; gap: 2rem; align-items: center; flex-wrap: wrap;">
+    <a href="index.html#how-it-works" style="text-decoration: none; color: var(--text-dark); font-weight: 500; transition: 0.3s;">How It Works</a>
+    <a href="calculator.html" style="text-decoration: none; color: var(--primary); font-weight: 600; transition: 0.3s;">Calculator</a>
+    <a href="index.html#benefits" style="text-decoration: none; color: var(--text-dark); font-weight: 500; transition: 0.3s;">Benefits</a>
+    <a href="index.html#pricing" style="text-decoration: none; color: var(--text-dark); font-weight: 500; transition: 0.3s;">Pricing</a>
+    <a href="b2b.html" style="text-decoration: none; color: var(--text-dark); font-weight: 500; transition: 0.3s;">B2B Partnership</a>
+  </div>
+  <a href="signup.html" class="btn-primary">I'm Interested</a>
 </nav>
 
 <div class="calculator-hero">
@@ -355,7 +388,7 @@
     </div>
 
     <div class="results-cta">
-      <a href="index.html#pricing" class="btn-primary">Get Your E4H System →</a>
+      <a href="signup.html" class="btn-primary">Join the Waitlist →</a>
       <button class="btn-primary" style="margin-top: 1rem; background: rgba(255,255,255,0.2);" onclick="window.print()">Save Results (PDF)</button>
     </div>
   </div>
@@ -367,33 +400,39 @@
     <h2>How We Calculate This</h2>
     <div class="methodology-grid">
       <div class="methodology-item">
-        <h3>📊 Local Rate Structure</h3>
-        <p>We use real-time electricity rates from your utility provider. California's time-of-use rates typically range from $0.15/kWh (off-peak) to $0.60/kWh (peak), with significant savings potential during evening hours.</p>
+        <h3>📊 Rate Structure</h3>
+        <p style="font-size: 1.3rem; font-weight: 700; color: var(--primary); margin: 0.5rem 0;">$0.15 → $0.60/kWh</p>
+        <p style="font-size: 0.85rem; margin: 0;">Off-peak to peak pricing</p>
       </div>
 
       <div class="methodology-item">
-        <h3>⚡ Appliance Power Use</h3>
-        <p>Based on EPA and DOE data for typical appliance power consumption. We calculate energy usage in kilowatt-hours (kWh) by multiplying wattage by usage time, accounting for your actual usage patterns.</p>
+        <h3>⚡ Energy Formula</h3>
+        <p style="font-size: 1.1rem; font-weight: 600; color: var(--text-dark); margin: 0.5rem 0;">kWh = (Watts × Hours) ÷ 1000</p>
+        <p style="font-size: 0.85rem; margin: 0;">Based on EPA/DOE data</p>
       </div>
 
       <div class="methodology-item">
-        <h3>💰 VPP Revenue</h3>
-        <p>Virtual Power Plant (VPP) earnings based on current California demand response programs like Flex Alert and utility-specific programs. Payments typically range from $2-5 per event, with 15-40 events per year.</p>
+        <h3>💰 VPP Earnings</h3>
+        <p style="font-size: 1.3rem; font-weight: 700; color: var(--primary); margin: 0.5rem 0;">$2-5 × 15-40 events</p>
+        <p style="font-size: 0.85rem; margin: 0;">California DR programs</p>
       </div>
 
       <div class="methodology-item">
-        <h3>🔋 Battery Efficiency</h3>
-        <p>Our calculations assume 90% round-trip battery efficiency (industry standard for LFP batteries). This accounts for energy losses during charging and discharging cycles.</p>
+        <h3>🔋 Efficiency</h3>
+        <p style="font-size: 1.3rem; font-weight: 700; color: var(--primary); margin: 0.5rem 0;">90% round-trip</p>
+        <p style="font-size: 0.85rem; margin: 0;">LFP battery standard</p>
       </div>
 
       <div class="methodology-item">
-        <h3>📈 Usage Modeling</h3>
-        <p>We model your appliance usage across different time periods, calculating cost savings by shifting energy use from peak to off-peak hours through intelligent battery charge/discharge cycles.</p>
+        <h3>📈 Savings</h3>
+        <p style="font-size: 1.1rem; font-weight: 600; color: var(--text-dark); margin: 0.5rem 0;">(Peak rate - Off-peak) × kWh</p>
+        <p style="font-size: 0.85rem; margin: 0;">Time-shift optimization</p>
       </div>
 
       <div class="methodology-item">
-        <h3>🌱 Carbon Calculations</h3>
-        <p>CO₂ savings calculated based on California's grid carbon intensity (~200g CO₂/kWh) and the reduction in peak demand, which typically relies more heavily on fossil fuel generation.</p>
+        <h3>🌱 Carbon Impact</h3>
+        <p style="font-size: 1.3rem; font-weight: 700; color: var(--primary); margin: 0.5rem 0;">~200g CO₂/kWh</p>
+        <p style="font-size: 0.85rem; margin: 0;">CA grid intensity</p>
       </div>
     </div>
   </div>
@@ -509,10 +548,157 @@
     document.getElementById('paybackPeriod').textContent = payback;
     document.getElementById('co2Saved').textContent = `${co2Saved} kg`;
     document.getElementById('treesEquiv').textContent = `${treesEquiv} trees planted`;
+
+    // Track calculator usage
+    trackCalculatorUsage({
+      appliancesCount: appliances.length,
+      totalKwh: totalDailyKwh.toFixed(2),
+      morningUsage: Math.round(morning * 100),
+      afternoonUsage: Math.round(afternoon * 100),
+      eveningUsage: Math.round(evening * 100),
+      nightUsage: Math.round(night * 100),
+      utility: utility,
+      monthlySavings: Math.round(totalMonthly),
+      vppEarnings: vppMonthly,
+      recommendedSystem: recommendedSystem,
+      systemPrice: systemPrice,
+      paybackPeriod: payback
+    });
+  }
+
+  // Track calculator usage
+  function trackCalculatorUsage(data) {
+    const scriptURL = 'https://script.google.com/macros/s/AKfycbxOqfFuqTr0tcxawTEDb49uqD4f8waVV7fY2uMZBAFBNUwkFw9nNrAl4ZG54QhsqWwM2A/exec';
+    const formData = new FormData();
+    formData.append('tracking_type', 'calculator');
+    formData.append('user_session', getSessionId());
+    formData.append('appliances_count', data.appliancesCount);
+    formData.append('total_kwh', data.totalKwh);
+    formData.append('morning_usage', data.morningUsage);
+    formData.append('afternoon_usage', data.afternoonUsage);
+    formData.append('evening_usage', data.eveningUsage);
+    formData.append('night_usage', data.nightUsage);
+    formData.append('utility', data.utility);
+    formData.append('monthly_savings', data.monthlySavings);
+    formData.append('vpp_earnings', data.vppEarnings);
+    formData.append('recommended_system', data.recommendedSystem);
+    formData.append('system_price', data.systemPrice);
+    formData.append('payback_period', data.paybackPeriod);
+
+    fetch(scriptURL, {
+      method: 'POST',
+      body: formData,
+      mode: 'no-cors'
+    }).catch(err => console.log('Tracking error:', err));
+  }
+
+  // Generate or retrieve session ID
+  function getSessionId() {
+    let sessionId = sessionStorage.getItem('e4h_session_id');
+    if (!sessionId) {
+      sessionId = 'session_' + Date.now() + '_' + Math.random().toString(36).substr(2, 9);
+      sessionStorage.setItem('e4h_session_id', sessionId);
+    }
+    return sessionId;
   }
 
   // Initial calculation
   calculateSavings();
 </script>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-content">
+    <div class="footer-column">
+      <div class="logo" style="color: #fff; margin-bottom: 1rem;">E4<span>H</span> Energy</div>
+      <p>Making every appliance smarter, cheaper, and cleaner</p>
+    </div>
+
+    <div class="footer-column">
+      <h3>Company</h3>
+      <ul>
+        <li><a href="index.html#how-it-works">How It Works</a></li>
+        <li><a href="index.html#benefits">Benefits</a></li>
+        <li><a href="index.html#pricing">Pricing</a></li>
+        <li><a href="calculator.html">Calculator</a></li>
+        <li><a href="b2b.html">B2B Partnership</a></li>
+      </ul>
+    </div>
+
+    <div class="footer-column">
+      <h3>Resources</h3>
+      <ul>
+        <li><a href="calculator.html">Savings Calculator</a></li>
+        <li><a href="#">FAQs (Coming Soon)</a></li>
+        <li><a href="#">Blog (Coming Soon)</a></li>
+        <li><a href="#">Partner Utilities (Coming Soon)</a></li>
+      </ul>
+    </div>
+
+    <div class="footer-column">
+      <h3>Stay Connected</h3>
+      <p>Get energy-saving tips and launch updates</p>
+      <div class="footer-signup">
+        <input type="email" id="footerEmail" placeholder="Your email">
+        <button onclick="subscribeNewsletter()">Subscribe</button>
+      </div>
+      <p id="subscribeMessage" style="font-size: 0.85rem; margin-top: 0.5rem; opacity: 0.9; display: none;"></p>
+    </div>
+  </div>
+
+  <div class="footer-bottom">
+    <div class="footer-disclaimer">
+      <h4>⚠️ IMPORTANT DISCLAIMER</h4>
+      <p>E4H battery systems are currently in development and not yet available for purchase. All product specifications, pricing, and savings estimates are based on prototypes and projections. This website is for informational purposes only to gauge market interest. We are working on proof-of-concept and expect to launch pilot programs later in 2026. Actual product features and performance may vary.</p>
+    </div>
+
+    <div class="footer-legal">
+      <div>© 2026 E4H Integrated Energy Systems. All rights reserved.</div>
+      <div>
+        <a href="#">Privacy Policy (Coming Soon)</a>
+        <a href="#">Terms of Service (Coming Soon)</a>
+        <a href="#">Cookie Settings (Coming Soon)</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script>
+  // Newsletter subscription function
+  function subscribeNewsletter() {
+    const email = document.getElementById('footerEmail').value;
+    const messageEl = document.getElementById('subscribeMessage');
+    const scriptURL = 'https://script.google.com/macros/s/AKfycbxOqfFuqTr0tcxawTEDb49uqD4f8waVV7fY2uMZBAFBNUwkFw9nNrAl4ZG54QhsqWwM2A/exec';
+
+    if (!email || !email.includes('@')) {
+      messageEl.style.display = 'block';
+      messageEl.style.color = '#E74C3C';
+      messageEl.textContent = 'Please enter a valid email address';
+      return;
+    }
+
+    const formData = new FormData();
+    formData.append('email', email);
+    formData.append('newsletter', 'yes');
+
+    fetch(scriptURL, {
+      method: 'POST',
+      body: formData,
+      mode: 'no-cors'
+    })
+    .then(() => {
+      messageEl.style.display = 'block';
+      messageEl.style.color = '#2ECC71';
+      messageEl.textContent = '✓ Thanks for subscribing!';
+      document.getElementById('footerEmail').value = '';
+    })
+    .catch(error => {
+      messageEl.style.display = 'block';
+      messageEl.style.color = '#E74C3C';
+      messageEl.textContent = 'Error. Please try again.';
+    });
+  }
+</script>
+
 </body>
 </html>

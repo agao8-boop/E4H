@@ -50,7 +50,12 @@
   }
 
   .logo:hover { transform: scale(1.05); }
-  .logo span { color: var(--accent); }
+  .logo span {
+    background: linear-gradient(135deg, #FF6B9D 0%, #FFA500 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
 
   .nav-links {
     display: flex;
@@ -712,11 +717,11 @@
 <nav>
   <a href="index.html" class="logo">E4<span>H</span> Energy</a>
   <div class="nav-links">
-    <a href="index.html">Home</a>
     <a href="index.html#how-it-works">How It Works</a>
-    <a href="index.html#pricing">Pricing</a>
     <a href="calculator.html">Calculator</a>
-    <a href="b2b.html" style="color: var(--primary);">B2B Partnership</a>
+    <a href="index.html#benefits">Benefits</a>
+    <a href="index.html#pricing">Pricing</a>
+    <a href="b2b.html" style="color: var(--primary); font-weight: 600;">B2B Partnership</a>
   </div>
   <div style="display: flex; gap: 1rem; align-items: center;">
     <a href="#" class="btn-secondary" onclick="openContactModal(); return false;">Contact Us</a>
@@ -727,7 +732,33 @@
 <!-- Hero Section -->
 <section class="hero">
   <h1>Partner with E4H Energy</h1>
-  <p class="subtitle">Powering communities through flexible, scalable energy solutions. Join us in building local energy resilience with partnerships designed for impact.</p>
+  <p class="subtitle">Making clean energy accessible to everyone — especially those who need it most</p>
+
+  <div style="max-width: 900px; margin: 3rem auto; display: grid; grid-template-columns: 1fr 1fr; gap: 2rem;">
+    <div style="background: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 100%); padding: 2.5rem; border-radius: 20px; color: #fff; box-shadow: 0 10px 40px rgba(45,111,94,0.15);">
+      <div style="font-size: 2.5rem; margin-bottom: 1rem;">💰</div>
+      <h3 style="font-size: 1.6rem; margin-bottom: 1rem; font-family: 'DM Serif Display', serif;">Accessible Financial Model</h3>
+      <ul style="list-style: none; padding: 0; margin: 0; line-height: 2;">
+        <li style="display: flex; align-items: center; gap: 0.5rem;"><span style="color: var(--accent-light);">✓</span> No upfront costs — lease or pay-as-you-go</li>
+        <li style="display: flex; align-items: center; gap: 0.5rem;"><span style="color: var(--accent-light);">✓</span> Designed for lower-moderate income households</li>
+        <li style="display: flex; align-items: center; gap: 0.5rem;"><span style="color: var(--accent-light);">✓</span> Renter-friendly portable systems</li>
+        <li style="display: flex; align-items: center; gap: 0.5rem;"><span style="color: var(--accent-light);">✓</span> Global South deployment ready</li>
+      </ul>
+    </div>
+
+    <div style="background: linear-gradient(135deg, #FF6B9D 0%, #FFA500 100%); padding: 2.5rem; border-radius: 20px; color: #fff; box-shadow: 0 10px 40px rgba(255,107,157,0.2);">
+      <div style="font-size: 2.5rem; margin-bottom: 1rem;">🚀</div>
+      <h3 style="font-size: 1.6rem; margin-bottom: 1rem; font-family: 'DM Serif Display', serif;">Comprehensive Services</h3>
+      <ul style="list-style: none; padding: 0; margin: 0; line-height: 2;">
+        <li style="display: flex; align-items: center; gap: 0.5rem;"><span style="color: rgba(255,255,255,0.9);">✓</span> Plug-and-play installation</li>
+        <li style="display: flex; align-items: center; gap: 0.5rem;"><span style="color: rgba(255,255,255,0.9);">✓</span> AI-powered energy optimization</li>
+        <li style="display: flex; align-items: center; gap: 0.5rem;"><span style="color: rgba(255,255,255,0.9);">✓</span> VPP earnings for customers</li>
+        <li style="display: flex; align-items: center; gap: 0.5rem;"><span style="color: rgba(255,255,255,0.9);">✓</span> Community-scale deployment</li>
+      </ul>
+    </div>
+  </div>
+
+  <p style="font-size: 1.15rem; color: var(--text-mid); max-width: 800px; margin: 2rem auto 0;">Partner with us to bring affordable, flexible energy storage to underserved communities — no credit checks, no home ownership required, no complex installations.</p>
 </section>
 
 <!-- Main Content -->
@@ -1088,9 +1119,9 @@
       <h3>Resources</h3>
       <ul>
         <li><a href="calculator.html">Savings Calculator</a></li>
-        <li><a href="#">FAQs</a></li>
+        <li><a href="#">FAQs (Coming Soon)</a></li>
         <li><a href="#">Blog (Coming Soon)</a></li>
-        <li><a href="#">Partner Utilities</a></li>
+        <li><a href="#">Partner Utilities (Coming Soon)</a></li>
       </ul>
     </div>
 
@@ -1098,9 +1129,10 @@
       <h3>Stay Connected</h3>
       <p>Get energy-saving tips and launch updates</p>
       <div class="footer-signup">
-        <input type="email" placeholder="Your email">
-        <button>Subscribe</button>
+        <input type="email" id="footerEmail" placeholder="Your email">
+        <button onclick="subscribeNewsletter()">Subscribe</button>
       </div>
+      <p id="subscribeMessage" style="font-size: 0.85rem; margin-top: 0.5rem; opacity: 0.9; display: none;"></p>
     </div>
   </div>
 
@@ -1113,9 +1145,9 @@
     <div class="footer-legal">
       <div>© 2026 E4H Integrated Energy Systems. All rights reserved.</div>
       <div>
-        <a href="#">Privacy Policy</a>
-        <a href="#">Terms of Service</a>
-        <a href="#">Cookie Settings</a>
+        <a href="#">Privacy Policy (Coming Soon)</a>
+        <a href="#">Terms of Service (Coming Soon)</a>
+        <a href="#">Cookie Settings (Coming Soon)</a>
       </div>
     </div>
   </div>
@@ -1193,6 +1225,41 @@
       closeContactModal();
     }
   });
+
+  // Newsletter subscription function
+  function subscribeNewsletter() {
+    const email = document.getElementById('footerEmail').value;
+    const messageEl = document.getElementById('subscribeMessage');
+    const scriptURL = 'https://script.google.com/macros/s/AKfycbxOqfFuqTr0tcxawTEDb49uqD4f8waVV7fY2uMZBAFBNUwkFw9nNrAl4ZG54QhsqWwM2A/exec';
+
+    if (!email || !email.includes('@')) {
+      messageEl.style.display = 'block';
+      messageEl.style.color = '#E74C3C';
+      messageEl.textContent = 'Please enter a valid email address';
+      return;
+    }
+
+    const formData = new FormData();
+    formData.append('email', email);
+    formData.append('newsletter', 'yes');
+
+    fetch(scriptURL, {
+      method: 'POST',
+      body: formData,
+      mode: 'no-cors'
+    })
+    .then(() => {
+      messageEl.style.display = 'block';
+      messageEl.style.color = '#2ECC71';
+      messageEl.textContent = '✓ Thanks for subscribing!';
+      document.getElementById('footerEmail').value = '';
+    })
+    .catch(error => {
+      messageEl.style.display = 'block';
+      messageEl.style.color = '#E74C3C';
+      messageEl.textContent = 'Error. Please try again.';
+    });
+  }
 </script>
 
 </body>
