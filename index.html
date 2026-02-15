@@ -22,7 +22,7 @@
   .logo { font-family: 'DM Serif Display', serif; font-size: 1.55rem; color: var(--primary); text-decoration: none; transition: 0.3s; }
   .logo:hover { transform: scale(1.05); }
   .logo span {
-    background: linear-gradient(135deg, #FF6B9D 0%, #FFA500 100%);
+    background: linear-gradient(135deg, #FF6B9D 0%, #FF8FA0 100%);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
@@ -39,38 +39,38 @@
   .btn-secondary:hover { background: var(--primary); color: #fff; transform: translateY(-2px); box-shadow: 0 6px 20px rgba(45,111,94,0.2); }
 
   /* HERO SECTION */
-  .hero { padding: 10rem 2.5rem 6rem; max-width: 1200px; margin: 0 auto; display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: center; min-height: 95vh; }
-  .hero-text h1 { font-family: 'DM Serif Display', serif; font-size: clamp(2.5rem, 5vw, 3.8rem); line-height: 1.1; color: var(--primary); margin-bottom: 1.5rem; }
+  .hero { padding: 8rem 2.5rem 3rem; max-width: 1200px; margin: 0 auto; display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; align-items: start; min-height: 100vh; }
+  .hero-text h1 { font-family: 'DM Serif Display', serif; font-size: clamp(2.3rem, 5vw, 3.5rem); line-height: 1.1; color: var(--primary); margin-bottom: 1rem; }
   .hero-text h1 em { font-style: italic; color: var(--accent); }
-  .tagline { font-size: 1.1rem; color: var(--accent); font-weight: 700; margin-bottom: 1rem; letter-spacing: 0.5px; text-transform: uppercase; }
-  .subtitle { font-size: 1.15rem; color: var(--text-mid); line-height: 1.65; margin-bottom: 2rem; }
+  .tagline { font-size: 1rem; color: var(--accent); font-weight: 700; margin-bottom: 0.8rem; letter-spacing: 0.5px; text-transform: uppercase; }
+  .subtitle { font-size: 1.05rem; color: var(--text-mid); line-height: 1.6; margin-bottom: 1.5rem; }
 
   /* CALCULATOR WIDGET */
-  .calculator-widget { background: linear-gradient(135deg, #fff 0%, #f8f8f8 100%); padding: 1.5rem; border-radius: 16px; box-shadow: var(--card-shadow); margin-bottom: 2rem; border: 2px solid var(--green-soft); }
-  .calculator-widget h3 { font-size: 0.85rem; color: var(--text-mid); text-transform: uppercase; letter-spacing: 1px; margin-bottom: 1rem; font-weight: 600; }
-  .slider-container { margin-bottom: 1.5rem; }
+  .calculator-widget { background: linear-gradient(135deg, #fff 0%, #f8f8f8 100%); padding: 1.2rem; border-radius: 16px; box-shadow: var(--card-shadow); margin-bottom: 0; border: 2px solid var(--green-soft); }
+  .calculator-widget h3 { font-size: 0.8rem; color: var(--text-mid); text-transform: uppercase; letter-spacing: 1px; margin-bottom: 0.8rem; font-weight: 600; }
+  .slider-container { margin-bottom: 1.2rem; }
   .slider-label { display: flex; justify-content: space-between; margin-bottom: 0.5rem; font-size: 0.9rem; color: var(--text-dark); font-weight: 600; }
   .slider { width: 100%; height: 8px; border-radius: 4px; background: var(--warm-gray); outline: none; -webkit-appearance: none; }
   .slider::-webkit-slider-thumb { -webkit-appearance: none; appearance: none; width: 24px; height: 24px; border-radius: 50%; background: var(--primary); cursor: pointer; box-shadow: 0 2px 8px rgba(45,111,94,0.3); transition: 0.2s; }
   .slider::-webkit-slider-thumb:hover { transform: scale(1.15); background: var(--primary-light); }
   .slider::-moz-range-thumb { width: 24px; height: 24px; border-radius: 50%; background: var(--primary); cursor: pointer; box-shadow: 0 2px 8px rgba(45,111,94,0.3); border: none; }
-  .savings-display { background: var(--green-soft); padding: 1.2rem; border-radius: 12px; text-align: center; }
-  .savings-display .amount { font-size: 2rem; font-weight: 700; color: var(--green); margin-bottom: 0.3rem; }
-  .savings-display .label { font-size: 0.85rem; color: var(--text-mid); }
-  .calculator-cta { text-align: center; margin-top: 1rem; }
+  .savings-display { background: var(--green-soft); padding: 1rem; border-radius: 12px; text-align: center; }
+  .savings-display .amount { font-size: 1.8rem; font-weight: 700; color: var(--green); margin-bottom: 0.3rem; }
+  .savings-display .label { font-size: 0.8rem; color: var(--text-mid); }
+  .calculator-cta { text-align: center; margin-top: 0.8rem; }
   .calculator-cta a { font-size: 0.9rem; color: var(--primary); text-decoration: none; font-weight: 600; }
   .calculator-cta a:hover { text-decoration: underline; }
 
   .hero-cta { display: flex; gap: 1rem; flex-wrap: wrap; align-items: center; }
 
   /* HERO VISUAL - ILLUSTRATION */
-  .hero-visual { position: relative; display: flex; justify-content: center; align-items: center; }
-  .product-illustration { position: relative; width: 500px; height: 500px; }
+  .hero-visual { position: relative; display: flex; justify-content: center; align-items: flex-start; padding-top: 2rem; }
+  .product-illustration { position: relative; width: 450px; height: 450px; }
 
   /* Battery Pack - Center */
   .battery-pack {
     position: absolute;
-    top: 50%;
+    top: 40%;
     left: 50%;
     transform: translate(-50%, -50%);
     width: 180px;
@@ -719,13 +719,8 @@
       </div>
       <p style="font-size: 0.8rem; color: var(--text-mid); text-align: center; margin-top: 0.8rem;">Based on Santa Clara County average rates</p>
       <div class="calculator-cta">
-        <a href="calculator.html" style="display: inline-block; background: linear-gradient(135deg, #FF6B9D 0%, #FFA500 100%); color: #fff; padding: 1.2rem 2.5rem; border-radius: 12px; font-weight: 700; font-size: 1.1rem; text-decoration: none; box-shadow: 0 6px 25px rgba(255,107,157,0.4); transition: all 0.3s ease; animation: pulse 2s infinite;">✨ Calculate My Full Savings →</a>
+        <a href="calculator.html" style="display: inline-block; background: linear-gradient(135deg, #FF6B9D 0%, #FF8FA0 100%); color: #fff; padding: 1.2rem 2.5rem; border-radius: 12px; font-weight: 700; font-size: 1.1rem; text-decoration: none; box-shadow: 0 6px 25px rgba(255,107,157,0.4); transition: all 0.3s ease; animation: pulse 2s infinite;">✨ Calculate My Full Savings →</a>
       </div>
-    </div>
-
-    <div class="hero-cta">
-      <a href="#" class="btn-primary" style="padding: 1.2rem 2.5rem;" onclick="openModal(); return false;">I'm Interested to Know More →</a>
-      <a href="#how-it-works" class="btn-secondary">See How It Works</a>
     </div>
   </div>
 
