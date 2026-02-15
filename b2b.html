@@ -50,7 +50,12 @@
   }
 
   .logo:hover { transform: scale(1.05); }
-  .logo span { color: var(--accent); }
+  .logo span {
+    background: linear-gradient(135deg, #E07563 0%, #E99078 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
 
   .nav-links {
     display: flex;
@@ -79,15 +84,17 @@
     text-decoration: none;
     transition: all 0.3s ease;
     box-shadow: 0 2px 8px rgba(45,111,94,0.15);
-    border: none;
+    border: 2px solid var(--primary);
     cursor: pointer;
     font-size: 1rem;
+    box-sizing: border-box;
   }
 
   .btn-primary:hover {
     transform: translateY(-2px);
     box-shadow: 0 6px 20px rgba(45,111,94,0.25);
     background: var(--primary-light);
+    border-color: var(--primary-light);
   }
 
   .btn-secondary {
@@ -102,6 +109,7 @@
     transition: all 0.3s ease;
     cursor: pointer;
     font-size: 1rem;
+    box-sizing: border-box;
   }
 
   .btn-secondary:hover {
@@ -633,6 +641,18 @@
     color: #fff;
   }
 
+  /* MOBILE MENU */
+  .hamburger { display: none; background: none; border: none; cursor: pointer; padding: 0.5rem; z-index: 101; }
+  .hamburger div { width: 25px; height: 3px; background: var(--primary); margin: 5px 0; transition: 0.3s; border-radius: 2px; }
+  .mobile-sidebar { position: fixed; top: 0; right: -100%; width: 280px; height: 100vh; background: #F7F5F0; box-shadow: -4px 0 20px rgba(0,0,0,0.1); transition: right 0.3s ease; z-index: 100; padding: 5rem 2rem 2rem; }
+  .mobile-sidebar.active { right: 0; }
+  .mobile-sidebar a { display: block; padding: 1rem 0; text-decoration: none; color: var(--primary); font-weight: 500; border-bottom: 1px solid #E8E4DD; transition: 0.2s; }
+  .mobile-sidebar a:hover { color: var(--primary-light); padding-left: 0.5rem; }
+  .mobile-sidebar .btn-primary { margin-top: 1rem; text-align: center; padding: 0.8rem 1.5rem; border-bottom: none; background: var(--primary); color: rgba(255,255,255,0.9); }
+  .mobile-sidebar .btn-secondary { margin-top: 1rem; text-align: center; padding: 0.8rem 1.5rem; border-bottom: none; }
+  .sidebar-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.5); z-index: 99; display: none; }
+  .sidebar-overlay.active { display: block; }
+
   /* Responsive */
   @media (max-width: 900px) {
     nav {
@@ -642,6 +662,9 @@
     .nav-links {
       display: none;
     }
+
+    .hamburger { display: block; }
+    nav > div:last-child { display: none; }
 
     .hero {
       padding: 8rem 1.5rem 3rem;
@@ -712,22 +735,61 @@
 <nav>
   <a href="index.html" class="logo">E4<span>H</span> Energy</a>
   <div class="nav-links">
-    <a href="index.html">Home</a>
     <a href="index.html#how-it-works">How It Works</a>
-    <a href="index.html#pricing">Pricing</a>
     <a href="calculator.html">Calculator</a>
-    <a href="b2b.html" style="color: var(--primary);">B2B Partnership</a>
+    <a href="index.html#benefits">Benefits</a>
+    <a href="index.html#pricing">Pricing</a>
+    <a href="b2b.html" style="color: var(--primary); font-weight: 600;">B2B Partnership</a>
   </div>
   <div style="display: flex; gap: 1rem; align-items: center;">
     <a href="#" class="btn-secondary" onclick="openContactModal(); return false;">Contact Us</a>
     <a href="#" class="btn-primary" onclick="openModal(); return false;">I'm Interested</a>
   </div>
+  <button class="hamburger" onclick="toggleMobileMenu()">
+    <div></div>
+    <div></div>
+    <div></div>
+  </button>
 </nav>
+
+<!-- Mobile Sidebar -->
+<div class="sidebar-overlay" onclick="toggleMobileMenu()"></div>
+<div class="mobile-sidebar" id="mobileSidebar">
+  <a href="index.html#how-it-works" onclick="toggleMobileMenu()">How It Works</a>
+  <a href="calculator.html">Calculator</a>
+  <a href="index.html#benefits" onclick="toggleMobileMenu()">Benefits</a>
+  <a href="index.html#pricing" onclick="toggleMobileMenu()">Pricing</a>
+  <a href="b2b.html" onclick="toggleMobileMenu()">B2B Partnership</a>
+  <a href="#" class="btn-secondary" onclick="openContactModal(); toggleMobileMenu(); return false;">Contact Us</a>
+  <a href="#" class="btn-primary" onclick="openModal(); toggleMobileMenu(); return false;">I'm Interested</a>
+</div>
 
 <!-- Hero Section -->
 <section class="hero">
   <h1>Partner with E4H Energy</h1>
-  <p class="subtitle">Powering communities through flexible, scalable energy solutions. Join us in building local energy resilience with partnerships designed for impact.</p>
+  <p class="subtitle">Making clean energy accessible to everyone —<br>especially those who need it most</p>
+
+  <div style="max-width: 900px; margin: 3rem auto; display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; align-items: stretch;">
+    <div style="background: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 100%); padding: 2.5rem; border-radius: 20px; color: #fff; box-shadow: 0 10px 40px rgba(45,111,94,0.2);">
+      <div style="font-size: 2.5rem; margin-bottom: 1rem;">💰</div>
+      <h3 style="font-size: 1.6rem; margin-bottom: 1rem; font-family: 'DM Serif Display', serif; text-align: left;">Affordable Pay Programs</h3>
+      <ul style="list-style: none; padding: 0; margin: 0; line-height: 2; text-align: left;">
+        <li style="display: flex; align-items: flex-start; gap: 0.5rem;"><span style="color: var(--accent-light); flex-shrink: 0;">✓</span> <span>Lower-moderate income households & renters</span></li>
+        <li style="display: flex; align-items: flex-start; gap: 0.5rem;"><span style="color: var(--accent-light); flex-shrink: 0;">✓</span> <span>No upfront costs, flexible financing</span></li>
+      </ul>
+    </div>
+
+    <div style="background: linear-gradient(135deg, #E07563 0%, #E99078 100%); padding: 2.5rem; border-radius: 20px; color: #fff; box-shadow: 0 10px 40px rgba(224,117,99,0.2);">
+      <div style="font-size: 2.5rem; margin-bottom: 1rem;">🔋</div>
+      <h3 style="font-size: 1.6rem; margin-bottom: 1rem; font-family: 'DM Serif Display', serif; text-align: left;">Battery Technology</h3>
+      <ul style="list-style: none; padding: 0; margin: 0; line-height: 2; text-align: left;">
+        <li style="display: flex; align-items: flex-start; gap: 0.5rem;"><span style="color: rgba(255,255,255,0.9); flex-shrink: 0;">✓</span> <span>AI-powered energy optimization</span></li>
+        <li style="display: flex; align-items: flex-start; gap: 0.5rem;"><span style="color: rgba(255,255,255,0.9); flex-shrink: 0;">✓</span> <span>Plug-and-play installation</span></li>
+      </ul>
+    </div>
+  </div>
+
+  <p style="font-size: 1.15rem; color: var(--text-mid); max-width: 800px; margin: 2rem auto 0; text-align: center;">Partner with us to bring affordable, flexible energy storage to underserved communities — no credit checks, no home ownership required.</p>
 </section>
 
 <!-- Main Content -->
@@ -1088,9 +1150,9 @@
       <h3>Resources</h3>
       <ul>
         <li><a href="calculator.html">Savings Calculator</a></li>
-        <li><a href="#">FAQs</a></li>
+        <li><a href="#">FAQs (Coming Soon)</a></li>
         <li><a href="#">Blog (Coming Soon)</a></li>
-        <li><a href="#">Partner Utilities</a></li>
+        <li><a href="#">Partner Utilities (Coming Soon)</a></li>
       </ul>
     </div>
 
@@ -1098,9 +1160,10 @@
       <h3>Stay Connected</h3>
       <p>Get energy-saving tips and launch updates</p>
       <div class="footer-signup">
-        <input type="email" placeholder="Your email">
-        <button>Subscribe</button>
+        <input type="email" id="footerEmail" placeholder="Your email">
+        <button onclick="subscribeNewsletter()">Subscribe</button>
       </div>
+      <p id="subscribeMessage" style="font-size: 0.85rem; margin-top: 0.5rem; opacity: 0.9; display: none;"></p>
     </div>
   </div>
 
@@ -1113,15 +1176,23 @@
     <div class="footer-legal">
       <div>© 2026 E4H Integrated Energy Systems. All rights reserved.</div>
       <div>
-        <a href="#">Privacy Policy</a>
-        <a href="#">Terms of Service</a>
-        <a href="#">Cookie Settings</a>
+        <a href="#">Privacy Policy (Coming Soon)</a>
+        <a href="#">Terms of Service (Coming Soon)</a>
+        <a href="#">Cookie Settings (Coming Soon)</a>
       </div>
     </div>
   </div>
 </footer>
 
 <script>
+  // Mobile menu toggle
+  function toggleMobileMenu() {
+    const sidebar = document.getElementById('mobileSidebar');
+    const overlay = document.querySelector('.sidebar-overlay');
+    sidebar.classList.toggle('active');
+    overlay.classList.toggle('active');
+  }
+
   // Modal functions
   function openModal() {
     document.getElementById('interestModal').classList.add('active');
@@ -1193,6 +1264,41 @@
       closeContactModal();
     }
   });
+
+  // Newsletter subscription function
+  function subscribeNewsletter() {
+    const email = document.getElementById('footerEmail').value;
+    const messageEl = document.getElementById('subscribeMessage');
+    const scriptURL = 'https://script.google.com/macros/s/AKfycbxOqfFuqTr0tcxawTEDb49uqD4f8waVV7fY2uMZBAFBNUwkFw9nNrAl4ZG54QhsqWwM2A/exec';
+
+    if (!email || !email.includes('@')) {
+      messageEl.style.display = 'block';
+      messageEl.style.color = '#E74C3C';
+      messageEl.textContent = 'Please enter a valid email address';
+      return;
+    }
+
+    const formData = new FormData();
+    formData.append('email', email);
+    formData.append('newsletter', 'yes');
+
+    fetch(scriptURL, {
+      method: 'POST',
+      body: formData,
+      mode: 'no-cors'
+    })
+    .then(() => {
+      messageEl.style.display = 'block';
+      messageEl.style.color = '#2ECC71';
+      messageEl.textContent = '✓ Thanks for subscribing!';
+      document.getElementById('footerEmail').value = '';
+    })
+    .catch(error => {
+      messageEl.style.display = 'block';
+      messageEl.style.color = '#E74C3C';
+      messageEl.textContent = 'Error. Please try again.';
+    });
+  }
 </script>
 
 </body>

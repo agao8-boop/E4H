@@ -11,11 +11,12 @@
   nav { padding: 2rem; display: flex; justify-content: space-between; max-width: 1200px; margin: 0 auto; width: 100%; box-sizing: border-box; }
   .logo { font-family: 'DM Serif Display', serif; font-size: 1.55rem; color: var(--navy); text-decoration: none; cursor: pointer; }
   .logo span {
-    background: linear-gradient(135deg, #FF6B9D 0%, #FFA500 100%);
+    background: linear-gradient(135deg, #E07563 0%, #E99078 100%);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
   }
+  .required-star { color: #E07563; margin-left: 4px; }
   .signup-card { background: #fff; width: 100%; max-width: 480px; margin: auto; padding: 3.5rem 2.5rem; border-radius: 24px; box-shadow: var(--card-shadow); text-align: center; box-sizing: border-box; }
   h1 { font-family: 'DM Serif Display', serif; color: var(--navy); font-size: 2.2rem; margin-bottom: 1rem; }
   p { color: var(--text-mid); margin-bottom: 2rem; font-size: 0.95rem; }
@@ -54,23 +55,25 @@
       <input type="hidden" name="url" id="pageUrl">
       
       <div class="input-group">
-        <label class="field-label" for="email">Email Address</label>
+        <label class="field-label" for="email">Email Address<span class="required-star">*</span></label>
         <input type="email" id="email" name="email" placeholder="name@email.com" required>
       </div>
 
       <div class="input-group">
-        <label class="field-label">How will you use E4H?</label>
+        <label class="field-label">How will you use E4H?<span class="required-star">*</span></label>
         <div class="radio-group">
           <label class="radio-option">
-            <input type="radio" name="user_type" value="Individual Customer" checked>
+            <input type="radio" name="user_type" value="Individual Customer" checked required>
             <span>Personal use for my home</span>
           </label>
           <label class="radio-option">
-            <input type="radio" name="user_type" value="Organization/Batch">
+            <input type="radio" name="user_type" value="Organization/Batch" required>
             <span>Organization or batch procurement</span>
           </label>
         </div>
       </div>
+
+      <p style="font-size: 0.85rem; color: var(--text-mid); margin-top: -0.5rem; margin-bottom: 1.5rem;"><span class="required-star">*</span> Required fields</p>
 
       <button type="submit" id="submitBtn" class="btn-submit">Get Started →</button>
     </form>
